@@ -2241,3 +2241,363 @@ fieldset.field-type-of-loan select {
 
   cursor: pointer;
 }
+
+
+
+/* BANK DETAILS*/
+/* SALARY BANK SELECTION PANEL */
+
+fieldset.field-salary-bank-selection.panel-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+  background: #ffffff;
+
+  padding: 0 22px 22px !important;
+  margin: 0 0 24px !important;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 18px;
+
+  box-sizing: border-box;
+}
+
+
+/* Header */
+fieldset.field-salary-bank-selection > legend.field-label {
+
+  display: flex;
+  align-items: center;
+
+  width: calc(100% + 44px);
+
+  margin: 0 -22px 18px;
+  padding: 18px 22px;
+
+  background: #dce6ff;
+  border-radius: 16px 16px 0 0;
+
+  font-size: 15px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+
+/* Radio group container */
+fieldset.field-salary-bank-selection .field-salary-bank {
+
+  width: calc(100% - 220px) !important;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+
+/* Hide default radio */
+fieldset.field-salary-bank-selection 
+.field-salary-bank input[type="radio"] {
+
+  position: absolute;
+  opacity: 0;
+}
+
+
+/* Bank icon box */
+fieldset.field-salary-bank-selection 
+.field-salary-bank .radio-wrapper {
+
+  width: 70px;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+
+/* Bank button */
+fieldset.field-salary-bank-selection 
+.field-salary-bank label {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 64px;
+  height: 54px;
+
+  border: 1px solid #e5e9f2;
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+
+  transition: all 0.2s ease;
+}
+
+
+/* Selected bank */
+fieldset.field-salary-bank-selection 
+.field-salary-bank input[type="radio"]:checked 
++ label {
+
+  border: 2px solid #4f63e6;
+  color: #4f63e6;
+}
+
+
+/* Bank names below */
+fieldset.field-salary-bank-selection 
+.field-salary-bank label::after {
+
+  display: block;
+  margin-top: 6px;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  color: #6b7280;
+}
+
+
+/* Other bank dropdown */
+fieldset.field-salary-bank-selection 
+.field-other-bank-name {
+
+  width: 200px !important;
+  position: relative;
+}
+
+
+/* Floating label */
+fieldset.field-salary-bank-selection 
+.field-other-bank-name > label {
+
+  position: absolute;
+  top: -7px;
+  left: 14px;
+
+  background: #fff;
+  padding: 0 6px;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  color: #8b93a3;
+}
+
+
+/* Dropdown */
+fieldset.field-salary-bank-selection 
+.field-other-bank-name select {
+
+  width: 100%;
+  height: 46px;
+
+  border: 1px solid #dfe4ec;
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  padding: 0 14px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  color: #293242;
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  fieldset.field-salary-bank-selection 
+  .field-salary-bank {
+
+    width: 100% !important;
+  }
+
+  fieldset.field-salary-bank-selection 
+  .field-other-bank-name {
+
+    width: 100% !important;
+  }
+
+}
+/* NEXT PANEL*/
+/* INCOME VERIFICATION METHOD PANEL */
+fieldset.field-income-verification-method.panel-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+  background: #fff;
+
+  padding: 0 22px 22px !important;
+  margin: 0 0 24px !important;
+  overflow: hidden;
+
+  font-size: 14px;
+}
+
+/* Header */
+fieldset.field-income-verification-method > legend.field-label {
+  display: block;
+  width: calc(100% + 44px);
+  margin: 0 -22px 20px;
+  padding: 18px 22px;
+
+  background: #eef3ff;
+  border-radius: 16px 16px 0 0;
+
+  color: #1f2937;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Radio group */
+fieldset.field-income-verification-method .field-income-verification-option {
+  display: flex;
+  gap: 18px;
+  width: 100% !important;
+
+  border: 0;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Hide group legend */
+fieldset.field-income-verification-method 
+.field-income-verification-option > legend {
+  display: none;
+}
+
+/* Card wrapper */
+fieldset.field-income-verification-method .radio-wrapper {
+  flex: 1;
+  position: relative;
+
+  min-height: 86px;
+
+  border: 1px solid #dfe4ec;
+  border-radius: 14px;
+  background: #fff;
+
+  padding: 18px 18px 18px 44px;
+  box-sizing: border-box;
+}
+
+/* Radio input */
+fieldset.field-income-verification-method .radio-wrapper input[type="radio"] {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+
+  width: 18px;
+  height: 18px;
+
+  accent-color: #3156e8;
+}
+
+/* Card title */
+fieldset.field-income-verification-method .radio-wrapper label {
+  display: block;
+  margin: 0;
+
+  color: #111827;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Selected card */
+fieldset.field-income-verification-method 
+.radio-wrapper:has(input[type="radio"]:checked) {
+  border: 2px solid #3156e8;
+}
+
+/* Recommended green footer for first option */
+fieldset.field-income-verification-method 
+.radio-wrapper:first-of-type:has(input[type="radio"]:checked)::after {
+  content: "Recommended";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 6px 0;
+  border-radius: 0 0 12px 12px;
+  background: #008765;
+
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Descriptions */
+fieldset.field-income-verification-method 
+.radio-wrapper:nth-of-type(1) label::after {
+  content: "Instant & secure, processed via RBI-regulated partner.";
+}
+
+fieldset.field-income-verification-method 
+.radio-wrapper:nth-of-type(2) label::after {
+  content: "Quick & hassle-free, processed via NetBanking.";
+}
+
+fieldset.field-income-verification-method 
+.radio-wrapper:nth-of-type(3) label::after {
+  content: "Processed via uploading bank statement of the last 6 months.";
+}
+
+fieldset.field-income-verification-method .radio-wrapper label::after {
+  display: block;
+  margin-top: 6px;
+
+  color: #7b8494;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* Continue button */
+.field-continue-button.submit-wrapper {
+  width: auto !important;
+  margin: 0 0 24px !important;
+  padding: 0 !important;
+}
+
+.field-continue-button.submit-wrapper button {
+  width: 180px;
+  height: 44px;
+
+  border: 0;
+  border-radius: 8px;
+  background: #2446db;
+
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  fieldset.field-income-verification-method .field-income-verification-option {
+    flex-direction: column;
+  }
+}
