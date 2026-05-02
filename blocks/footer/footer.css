@@ -18,3 +18,27 @@ footer .footer p {
     padding: 40px 32px 24px;
   }
 }
+/* Main footer styling */
+footer.footer-wrapper {
+    background-color: #0b1f4a;   /* Dark blue */
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-top: 1px solid #dcdcdc;
+
+    position: relative;
+}
+
+/* Add copyright text using CSS */
+footer.footer-wrapper::before {
+    content: "© Copyright HDFC Bank Ltd.";
+    
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 500;
+    
+    font-family: Arial, sans-serif;
+}

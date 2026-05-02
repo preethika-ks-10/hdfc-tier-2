@@ -1,50 +1,145 @@
-function updateBubble(input, element) {
-  const step = input.step || 1;
-  const max = input.max || 0;
-  const min = input.min || 1;
-  const value = input.value || 1;
-  const current = Math.ceil((value - min) / step);
-  const total = Math.ceil((max - min) / step);
-  const bubble = element.querySelector('.range-bubble');
-  // during initial render the width is 0. Hence using a default here.
-  const bubbleWidth = bubble.getBoundingClientRect().width || 31;
-  const left = `${(current / total) * 100}% - ${(current / total) * bubbleWidth}px`;
-  bubble.innerText = `${value}`;
-  const steps = {
-    '--total-steps': Math.ceil((max - min) / step),
-    '--current-steps': Math.ceil((value - min) / step),
-  };
-  const style = Object.entries(steps).map(([varName, varValue]) => `${varName}:${varValue}`).join(';');
-  bubble.style.left = `calc(${left})`;
-  element.setAttribute('style', style);
+/* ===== Step Values ===== */
+const LOAN_STEPS = [50000, 200000, 400000, 600000, 800000, 1000000, 1500000];
+const TENURE_STEPS = [12, 24, 36, 48, 60, 72, 84];
+ 
+/* ===== Formatters ===== */
+function formatINR(value) {
+  return "₹" + Number(value).toLocaleString("en-IN");
 }
-export default async function decorate(fieldDiv, fieldJson) {
-  const input = fieldDiv.querySelector('input');
-  // modify the type in case it is not range.
-  input.type = 'range';
-  input.min = input.min || 1;
-  input.max = input.max || 100;
-  input.step = fieldJson?.properties?.stepValue || 1;
-  // create a wrapper div to provide the min/max and current value
-  const div = document.createElement('div');
-  div.className = 'range-widget-wrapper decorated';
-  input.after(div);
-  const hover = document.createElement('span');
-  hover.className = 'range-bubble';
-  const rangeMinEl = document.createElement('span');
-  rangeMinEl.className = 'range-min';
-  const rangeMaxEl = document.createElement('span');
-  rangeMaxEl.className = 'range-max';
-  rangeMinEl.innerText = `${input.min || 1}`;
-  rangeMaxEl.innerText = `${input.max}`;
-  div.appendChild(hover);
-  // move the input element within the wrapper div
-  div.appendChild(input);
-  div.appendChild(rangeMinEl);
-  div.appendChild(rangeMaxEl);
-  input.addEventListener('input', (e) => {
-    updateBubble(e.target, div);
+ 
+function formatMonths(value) {
+  return Math.round(value) + " months";
+}
+ 
+/* ===== Get interpolated value ===== */
+function getActualValue(input, stepsArray) {
+  const sliderValue = Number(input.value);
+ 
+  const lowerIndex = Math.floor(sliderValue);
+  const upperIndex = Math.ceil(sliderValue);
+ 
+  if (lowerIndex === upperIndex) {
+    return stepsArray[lowerIndex];
+  }
+ 
+  const lowerValue = stepsArray[lowerIndex];
+  const upperValue = stepsArray[upperIndex];
+ 
+  const ratio = sliderValue - lowerIndex;
+ 
+  return lowerValue + (upperValue - lowerValue) * ratio;
+}
+ 
+/* ===== Normalize values ===== */
+function normalizeValue(value, type) {
+  if (type === "loan") {
+    return Math.round(value / 1000) * 1000;
+  }
+  return Math.round(value);
+}
+ 
+/* ===== Update UI ===== */
+function updateUI(input, wrapper, stepsArray, type) {
+  const sliderValue = Number(input.value);
+ 
+  const rawValue = getActualValue(input, stepsArray);
+  const actualValue = normalizeValue(rawValue, type);
+ 
+  const percent = (sliderValue / (stepsArray.length - 1)) * 100;
+ 
+  const valueBox = wrapper.querySelector(".loan-value-box");
+ 
+  if (valueBox) {
+    valueBox.innerText =
+      type === "loan" ? formatINR(actualValue) : formatMonths(actualValue);
+ 
+    valueBox.style.left = percent + "%";
+  }
+ 
+  wrapper.style.setProperty("--percent", percent);
+}
+ 
+/* ===== Click on track ===== */
+function enableTrackClick(wrapper, input, stepsArray) {
+  wrapper.addEventListener("click", (e) => {
+    if (e.target !== input) {
+      const rect = wrapper.getBoundingClientRect();
+      const percent = (e.clientX - rect.left) / rect.width;
+ 
+      const value = percent * (stepsArray.length - 1);
+ 
+      input.value = value;
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+    }
   });
-  updateBubble(input, div);
+}
+ 
+/* ===== Main ===== */
+export default function decorate(fieldDiv) {
+  const input = fieldDiv.querySelector("input");
+  if (!input) return fieldDiv;
+ 
+  /* ✅ FIXED DETECTION */
+  const originalMax = Number(input.getAttribute("max"));
+  const isLoan = originalMax > 100000;
+ 
+  const type = isLoan ? "loan" : "tenure";
+  const stepsArray = isLoan ? LOAN_STEPS : TENURE_STEPS;
+ 
+  /* ===== Slider Setup ===== */
+  input.type = "range";
+  input.min = 0;
+  input.max = stepsArray.length - 1;
+  input.step = 0.01;
+ 
+  const initialValue = Number(input.value || stepsArray[0]);
+  const stepIndex = stepsArray.indexOf(initialValue);
+  input.value = stepIndex >= 0 ? stepIndex : 0;
+ 
+  /* ===== Wrapper ===== */
+  const wrapper = document.createElement("div");
+  wrapper.className = "range-widget-wrapper decorated";
+  input.after(wrapper);
+ 
+  /* ===== Value Box ===== */
+  const valueBox = document.createElement("div");
+  valueBox.className = "loan-value-box";
+  wrapper.appendChild(valueBox);
+ 
+  /* ===== Labels ===== */
+  const labels = document.createElement("div");
+  labels.className = "range-labels";
+ 
+  stepsArray.forEach((val, i) => {
+    const span = document.createElement("span");
+ 
+    span.innerText =
+      type === "loan"
+        ? val === 50000
+          ? "50K"
+          : val / 100000 + "L"
+        : val + "m";
+ 
+    span.style.left = `${(i / (stepsArray.length - 1)) * 100}%`;
+ 
+    span.addEventListener("click", () => {
+      input.value = i;
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+ 
+    labels.appendChild(span);
+  });
+ 
+  wrapper.appendChild(input);
+  wrapper.appendChild(labels);
+ 
+  input.addEventListener("input", () => {
+    updateUI(input, wrapper, stepsArray, type);
+  });
+ 
+  enableTrackClick(wrapper, input, stepsArray);
+ 
+  updateUI(input, wrapper, stepsArray, type);
+ 
   return fieldDiv;
 }

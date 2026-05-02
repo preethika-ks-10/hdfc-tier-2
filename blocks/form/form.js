@@ -581,3 +581,29 @@ export default async function decorate(block) {
     container.replaceWith(form);
   }
 }
+
+/* PAN HIDE AND SHOW SCRIPT*/
+document.addEventListener("change", function (e) {
+
+  if (e.target.name === "pan_card_or_dob_choice") {
+
+    const panField = document.querySelector(".field-pan-card-number");
+    const dobField = document.querySelector(".field-date-of-birth");
+
+    if (!panField || !dobField) return;
+
+    if (e.target.value.toLowerCase().includes("pan")) {
+
+      panField.style.display = "block";
+      dobField.style.display = "none";
+
+    } else {
+
+      panField.style.display = "none";
+      dobField.style.display = "block";
+
+    }
+
+  }
+
+});

@@ -792,3 +792,1452 @@ main div.form-wrapper {
 main .form form select[multiple] {
     height: calc(42px + 50px);
 }
+
+/* FIRST PAGE*/
+main .form form .text-wrapper.field-mobile.field-wrapper {
+  position: relative !important;
+}
+ 
+/* India flag */
+main .form form .text-wrapper.field-mobile.field-wrapper .field-label + input {
+  padding-left: 82px !important;
+}
+ 
+main .form form .text-wrapper.field-mobile.field-wrapper::before {
+  content: "";
+  position: absolute !important;
+  left: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 16px !important;
+  height: 12px !important;
+  z-index: 9999 !important;
+  pointer-events: none !important;
+  background-image: url("https://flagcdn.com/w40/in.png");
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  background-position: center !important;
+  border-radius: 2px;
+}
+ 
+/* +91 */
+main .form form .text-wrapper.field-mobile.field-wrapper::after {
+  content: "+91" !important;
+  position: absolute !important;
+  left: 36px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  color: #6b7280 !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  z-index: 9999 !important;
+  line-height: 1 !important;
+  pointer-events: none !important;
+}
+ 
+/* divider */
+main .form form .text-wrapper.field-mobile.field-wrapper input[name="mobile"] {
+  background-image: linear-gradient(
+    to right,
+    transparent 0,
+    transparent 66px,
+    #d1d5db 66px,
+    #d1d5db 67px,
+    transparent 67px
+  ) !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 100% !important;
+}
+
+
+
+
+
+
+
+
+
+/* MAIN OFFER PANEL */
+/* MAIN OFFER PANEL */
+#panelcontainer-ad67391f5f {
+  width: 980px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: #fff;
+  font-family: Arial, sans-serif;
+}
+
+#panelcontainer-ad67391f5f > legend {
+  display: none !important;
+}
+
+/* first text */
+#text-193d3f4a95 {
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  color: #1f2937 !important;
+  margin: 0 0 18px 0 !important;
+}
+
+#text-193d3f4a95 p {
+  margin: 0 !important;
+}
+
+/* blue offer banner */
+#text-5d7b5cce90 {
+  width: 100% !important;
+  background: #e9fbff;
+  border-radius: 14px;
+  padding: 24px 32px 24px 110px !important;
+  margin: 0 0 38px 0 !important;
+  position: relative;
+  box-sizing: border-box;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  color: #1f2937 !important;
+}
+
+#text-5d7b5cce90::before {
+  content: "💰";
+  position: absolute;
+  left: 34px;
+  top: 16px;
+  font-size: 44px;
+}
+
+#text-5d7b5cce90 p {
+  margin: 0 !important;
+}
+
+/* LEFT SLIDER PANEL */
+#panelcontainer-bd9b2af0ce {
+  width: 470px !important;
+  display: inline-block !important;
+  vertical-align: top;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 70px 0 0 !important;
+}
+
+#panelcontainer-bd9b2af0ce > legend {
+  display: none !important;
+}
+
+#panelcontainer-bd9b2af0ce::before {
+  content: "Enter loan amount & tenure";
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  color: #1f2937;
+  margin-bottom: 34px;
+}
+
+#panelcontainer-bd9b2af0ce .field-loan-amount,
+#panelcontainer-bd9b2af0ce .field-loan-tenure {
+  width: 450px !important;
+  margin: 0 0 46px 0 !important;
+  padding: 0 !important;
+}
+
+#panelcontainer-bd9b2af0ce label {
+  display: block !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: #1f2937 !important;
+  margin: 0 0 28px 0 !important;
+}
+
+#panelcontainer-bd9b2af0ce .range-widget-wrapper {
+  width: 450px !important;
+  height: 50px !important;
+  position: relative !important;
+}
+
+#panelcontainer-bd9b2af0ce .range-bubble {
+  position: absolute !important;
+  top: -62px !important;
+  right: 0 !important;
+  left: auto !important;
+  width: 98px !important;
+  height: 44px !important;
+  line-height: 44px !important;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.08);
+  text-align: center;
+  font-size: 13px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+#panelcontainer-bd9b2af0ce input[type="range"] {
+  width: 450px !important;
+  height: 5px !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background: #ff9824 !important;
+  border-radius: 20px !important;
+  outline: none !important;
+}
+
+#panelcontainer-bd9b2af0ce input[type="range"]::-webkit-slider-thumb {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 22px !important;
+  height: 22px !important;
+  background: #284bdc !important;
+  border: 2px solid #fff !important;
+  border-radius: 50%;
+  box-shadow: 0 2px 7px rgba(0,0,0,.25);
+  margin-top: -8.5px !important;
+}
+
+#panelcontainer-bd9b2af0ce .range-min,
+#panelcontainer-bd9b2af0ce .range-max {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  color: #8f98a8 !important;
+}
+
+/* RIGHT DISPLAY CARD */
+#panelcontainer-2522c08681 {
+  width: 310px !important;
+  height: 310px !important;
+  display: inline-block !important;
+  vertical-align: top !important;
+  background: #fff8e8;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  padding: 24px 24px 72px !important;
+  box-sizing: border-box;
+  border: 0 !important;
+  margin-left: 40px !important;
+}
+
+#panelcontainer-2522c08681 > legend {
+  display: none !important;
+}
+
+#panelcontainer-2522c08681 input {
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+}
+
+#panelcontainer-2522c08681 .field-loandisplay {
+  position: absolute !important;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+}
+
+#panelcontainer-2522c08681 .field-loandisplay label {
+  display: block;
+  font-size: 12px !important;
+  font-weight: 800;
+  color: #1f2937;
+  margin: 0 0 6px 0 !important;
+}
+
+#panelcontainer-2522c08681 .field-loandisplay input {
+  display: block;
+  font-size: 34px !important;
+  font-weight: 800;
+  color: #111827;
+}
+
+#panelcontainer-2522c08681 .field-loandisplay::after {
+  content: "";
+  display: block;
+  border-top: 1px dashed #e5dcc5;
+  margin: 22px 0 20px;
+}
+
+#panelcontainer-2522c08681 .field-emi,
+#panelcontainer-2522c08681 .field-rate,
+#panelcontainer-2522c08681 .field-tax {
+  position: absolute !important;
+  height: 42px !important;
+  overflow: visible !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#panelcontainer-2522c08681 .field-emi {
+  top: 135px !important;
+  left: 24px !important;
+  width: 120px !important;
+}
+
+#panelcontainer-2522c08681 .field-rate {
+  top: 135px !important;
+  left: 170px !important;
+  width: 120px !important;
+}
+
+#panelcontainer-2522c08681 .field-tax {
+  top: 185px !important;
+  left: 24px !important;
+  width: 120px !important;
+}
+
+#panelcontainer-2522c08681 .field-emi::before,
+#panelcontainer-2522c08681 .field-rate::before,
+#panelcontainer-2522c08681 .field-tax::before {
+  content: "";
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 3px;
+  height: 42px !important;
+  background: #ff9f2a;
+}
+
+#panelcontainer-2522c08681 .field-emi label,
+#panelcontainer-2522c08681 .field-rate label,
+#panelcontainer-2522c08681 .field-tax label {
+  display: block !important;
+  margin-left: 14px !important;
+  margin-bottom: 8px !important;
+  font-size: 9px !important;
+  line-height: 1 !important;
+  color: #6b7280 !important;
+}
+
+#panelcontainer-2522c08681 .field-emi input,
+#panelcontainer-2522c08681 .field-rate input,
+#panelcontainer-2522c08681 .field-tax input {
+  display: block !important;
+  margin-left: 14px !important;
+  margin-top: 0 !important;
+  font-size: 13px !important;
+  line-height: 14px !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+}
+
+#panelcontainer-2522c08681::after {
+  content: "ⓘ  The principal offer is subject to credit review, basis which the loan amount may be down-sized or rejected.";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #ff9f2a;
+  color: #fff;
+  font-size: 10px;
+  line-height: 1.35;
+  padding: 13px 22px;
+  box-sizing: border-box;
+}
+
+
+/*ACCORDIAN*/
+
+/* Full Name Display Box */
+
+.field-full-name-pan-display {
+
+  width: 100%;
+
+  background: #e9e6f5;
+
+  border-radius: 12px;
+
+  padding: 14px 18px 14px 28px;
+
+  box-sizing: border-box;
+
+  position: relative;
+
+  margin-bottom: 18px;
+}
+
+
+/* Left vertical line */
+
+.field-full-name-pan-display::before {
+
+  content: "";
+
+  position: absolute;
+
+  left: 14px;
+  top: 14px;
+  bottom: 14px;
+
+  width: 3px;
+
+  background: #7b6dff;
+
+  border-radius: 3px;
+}
+
+
+/* Label */
+
+.field-full-name-pan-display label {
+
+  font-size: 11px;
+
+  color: #7b8494;
+
+  display: block;
+
+  margin-bottom: 4px;
+}
+
+
+/* VALUE TEXT — remove white input look */
+
+.field-full-name-pan-display input {
+
+  border: 0 !important;
+
+  background: transparent !important;
+
+  outline: none !important;
+
+  box-shadow: none !important;
+
+  padding: 0 !important;
+
+  margin: 0 !important;
+
+  height: auto !important;
+
+  width: auto !important;
+
+  display: block;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  color: #293242;
+
+  pointer-events: none;
+}
+/*2nd sub panel*/
+/* Target only this specific panel using its unique class from Screenshot 2026-05-02 152039.png */
+.field-full-name-as-per-pan.panel-wrapper {
+    border: 1px solid #eef2f6;
+    border-radius: 12px;
+    padding: 24px 15px 15px 15px;
+    display: flex;
+    flex-wrap: wrap;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    position: relative;
+    margin-top: 30px;
+}
+
+/* Header styling with the blue tint only for this panel */
+.field-full-name-as-per-pan > .field-label {
+    width: 100%;
+    background-color: #f0f5ff; 
+    margin: -24px -15px 25px -15px;
+    padding: 12px 20px;
+    border-radius: 12px 12px 0 0;
+    font-weight: 600;
+    color: #334155;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eef2f6;
+}
+
+/* Container for individual input groups */
+.field-full-name-as-per-pan .text-wrapper {
+    width: 50%;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative; /* Necessary for label positioning */
+    margin-bottom: 10px;
+}
+
+/* The Boxed Edge Input */
+.field-full-name-as-per-pan .text-wrapper input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 0 15px;
+    font-size: 14px;
+    outline: none;
+    background: transparent;
+    transition: border-color 0.2s;
+}
+
+/* Notch effect for the label sitting on the border */
+.field-full-name-as-per-pan .text-wrapper .field-label {
+    position: absolute;
+    top: 0; /* Aligns with the top border */
+    left: 22px;
+    transform: translateY(-50%); /* Centers label text on the line */
+    background: white; /* Matches container background to 'cut' the border */
+    padding: 0 6px;
+    font-size: 12px;
+    color: #94a3b8;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Plain text note styling */
+.field-full-name-as-per-pan .plain-text-wrapper {
+    width: 50%;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.field-full-name-as-per-pan .plain-text-wrapper p {
+    font-size: 12px;
+    color: #64748b;
+    margin: 0;
+}
+
+/* Focus state for the box */
+.field-full-name-as-per-pan .text-wrapper input:focus {
+    border-color: #3b82f6;
+    border-width: 1.5px;
+}
+/* Increase blue header length */
+.field-full-name-as-per-pan > .field-label,
+.field-full-name-as-per-pan > legend.field-label {
+  width: calc(100% + 30px);
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #dce6ff;
+}
+
+/* Move PAN note slightly up */
+.field-full-name-as-per-pan .field-pan-middle-name-note,
+.field-full-name-as-per-pan .plain-text-wrapper.field-pan-middle-name-note {
+  align-items: flex-start;
+  padding-top: 4px;
+}
+
+.field-full-name-as-per-pan .field-pan-middle-name-note p {
+  margin-top: 0;
+}
+
+/* Make blue header longer and darker like target */
+.field-full-name-as-per-pan > .field-label,
+.field-full-name-as-per-pan > legend.field-label {
+  width: calc(100% + 44px) !important;
+  margin: -24px -22px 24px -22px !important;
+  padding: 16px 22px !important;
+  background-color: #dce6ff !important;
+  border-radius: 12px 12px 0 0;
+}
+
+/* Reduce big empty spacing */
+.field-full-name-as-per-pan .text-wrapper {
+  padding: 8px 10px !important;
+  margin-bottom: 8px !important;
+}
+
+/* Bring right note upward */
+.field-full-name-as-per-pan .field-pan-middle-name-note,
+.field-full-name-as-per-pan .plain-text-wrapper.field-pan-middle-name-note {
+  padding-top: 8px !important;
+  align-items: flex-start !important;
+}
+
+.field-full-name-as-per-pan .field-pan-middle-name-note p {
+  transform: translateY(-14px);
+}
+
+/* Make inputs closer to target */
+.field-full-name-as-per-pan .text-wrapper input {
+  height: 44px !important;
+  border-radius: 9px !important;
+}
+
+/* Keep right column aligned */
+.field-full-name-as-per-pan .field-pan-middle-name,
+.field-full-name-as-per-pan .field-pan-middle-name-note {
+  padding-left: 18px !important;
+}
+
+/* ===========================
+   PERSONAL DETAILS PANEL
+=========================== */
+
+fieldset.field-personal-details.panel-wrapper {
+
+  width: 100%;
+  max-width: 100%;
+
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+
+  padding: 0 22px 22px;
+  margin-bottom: 24px;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 18px 20px;
+
+  font-size: 14px;
+  line-height: 1.2;
+
+  box-sizing: border-box;
+}
+
+
+/* ===========================
+   HEADER BAR
+=========================== */
+
+fieldset.field-personal-details.panel-wrapper > legend.field-label {
+
+  display: block;
+
+  width: calc(100% + 44px);
+
+  margin: 0 -22px 18px;
+  padding: 18px 22px;
+
+  background: #dce6ff;
+
+  border-radius: 16px 16px 0 0;
+
+  color: #1f2937;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+
+/* ===========================
+   FIELD WRAPPERS
+=========================== */
+
+fieldset.field-personal-details .field-wrapper {
+
+  width: calc(50% - 10px);
+
+  padding: 0;
+  margin: 0;
+
+  position: relative;
+
+  box-sizing: border-box;
+}
+
+
+/* Email row */
+
+fieldset.field-personal-details .field-personal-email-id {
+
+  width: calc(50% - 10px);
+}
+
+fieldset.field-personal-details .field-personal-email-verify {
+
+  width: 0;
+  position: relative;
+}
+
+
+/* Suggestions */
+
+fieldset.field-personal-details .field-email-suggestions {
+
+  width: 100%;
+}
+
+
+
+/* ===========================
+   LABELS (TOP LABEL STYLE)
+=========================== */
+
+fieldset.field-personal-details label.field-label {
+
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #8b93a3;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+
+/* ===========================
+   INPUTS
+=========================== */
+
+fieldset.field-personal-details input,
+fieldset.field-personal-details select {
+
+  width: 100%;
+  height: 46px;
+
+  border: 1px solid #dfe4ec;
+  border-radius: 10px;
+
+  background: #fff;
+
+  padding: 0 14px;
+
+  color: #293242;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  outline: none;
+
+  box-sizing: border-box;
+}
+
+
+
+/* ===========================
+   VERIFY BUTTON
+=========================== */
+
+fieldset.field-personal-details 
+.field-personal-email-verify button {
+
+  position: absolute;
+
+  right: 14px;
+  top: 32px;
+
+  border: 0;
+  background: transparent;
+
+  color: #4f63e6;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+
+/* Leave space for Verify */
+
+fieldset.field-personal-details 
+.field-personal-email-id input {
+
+  padding-right: 70px;
+}
+
+
+
+/* ===========================
+   EMAIL SUGGESTIONS
+=========================== */
+
+fieldset.field-personal-details 
+.field-email-suggestions p {
+
+  margin-top: -6px;
+
+  color: #4f63e6;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  word-spacing: 8px;
+}
+
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width: 768px) {
+
+  fieldset.field-personal-details .field-wrapper {
+
+    width: 100%;
+  }
+
+}
+
+/*ADDRES PANEL 4TH*/
+/* ADDRESS PANEL ONLY — does not color accordion */
+fieldset.field-address-details.panel-wrapper {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 0 24px !important;
+  position: relative;
+}
+
+/* Purple only on the 3 direct address pieces */
+fieldset.field-address-details.panel-wrapper > legend.field-label,
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-display,
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-type {
+  background: #eee9fb !important;
+}
+
+/* Fill browser fieldset/legend gap */
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-display::after {
+  content: "";
+  position: absolute;
+  left: -46px;
+  right: -28px;
+  bottom: -22px;
+  height: 22px;
+  background: #eee9fb;
+  z-index: -1;
+}
+
+/* Header */
+fieldset.field-address-details.panel-wrapper > legend.field-label {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 22px 28px 12px !important;
+  border-radius: 16px 16px 0 0;
+  color: #1f2937;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Address block */
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-display {
+  position: relative;
+  width: 100% !important;
+  padding: 10px 28px 8px 46px !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-display::before {
+  content: "";
+  position: absolute;
+  left: 28px;
+  top: 12px;
+  bottom: 8px;
+  width: 3px;
+  background: #b79bff;
+  border-radius: 3px;
+}
+
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-display label {
+  display: block;
+  margin: 0 0 6px !important;
+  color: #7b8494;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-display input {
+  width: 100% !important;
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  color: #293242;
+  font-size: 14px;
+  font-weight: 700;
+  outline: none;
+}
+
+/* Radio section */
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-type {
+  width: 100% !important;
+  padding: 8px 28px 24px !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 0 16px 16px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-type > legend {
+  margin: 0 0 12px !important;
+  color: #293242;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-type .radio-wrapper {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 26px;
+}
+
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-type input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  accent-color: #4f63e6;
+}
+
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-type label {
+  margin: 0;
+  color: #293242;
+  font-size: 14px;
+  font-weight: 600;
+}
+/* FIX left/right purple break */
+fieldset.field-address-details.panel-wrapper {
+  overflow: hidden !important;
+  border-radius: 16px !important;
+}
+
+fieldset.field-address-details.panel-wrapper > legend.field-label,
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-display,
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-type {
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+fieldset.field-address-details.panel-wrapper > .field-aadhaar-address-type {
+  display: block !important;
+  border-radius: 0 0 16px 16px !important;
+}
+
+/*ACCORDIAN -1*/ 
+/* EMPLOYER DETAILS - CLEAN GRID FIX */
+fieldset.field-employer-details.panel-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+  background: #fff;
+
+  padding: 0 24px 24px !important;
+  margin: 0 0 24px !important;
+  overflow: hidden;
+
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 24px;
+  row-gap: 18px;
+
+  font-size: 14px;
+}
+
+/* Header */
+fieldset.field-employer-details.panel-wrapper > legend.accordion-legend {
+  grid-column: 1 / -1;
+
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+
+  width: calc(100% + 48px) !important;
+  margin: 0 -24px 18px !important;
+  padding: 18px 24px !important;
+
+  background: #eef3ff;
+  border-radius: 16px 16px 0 0;
+
+  color: #111827;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* Arrow */
+fieldset.field-employer-details.panel-wrapper > legend.accordion-legend::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid #3156e8;
+  border-top: 3px solid #3156e8;
+  transform: rotate(-45deg);
+}
+
+/* Reset wrappers */
+fieldset.field-employer-details .field-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+  position: relative;
+  display: block !important;
+}
+
+/* Grid placement */
+fieldset.field-employer-details .field-employer-company-name {
+  grid-column: 1;
+}
+
+fieldset.field-employer-details .field-employer-company-name-other {
+  grid-column: 2;
+}
+
+fieldset.field-employer-details .field-employer-company-note {
+  grid-column: 1 / -1;
+}
+
+fieldset.field-employer-details .field-industry-type {
+  grid-column: 1;
+}
+
+fieldset.field-employer-details .field-industry-note,
+fieldset.field-employer-details .field-disclaimer-employer-details {
+  grid-column: 1 / -1;
+}
+
+/* Labels */
+fieldset.field-employer-details .drop-down-wrapper > label.field-label,
+fieldset.field-employer-details .text-wrapper > label.field-label {
+  position: absolute !important;
+  top: -7px !important;
+  left: 14px !important;
+
+  display: inline-block !important;
+  width: auto !important;
+  max-width: none !important;
+
+  white-space: nowrap !important;
+  background: #fff !important;
+  padding: 0 6px !important;
+
+  color: #8b93a3 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  z-index: 5;
+}
+
+/* Inputs */
+fieldset.field-employer-details input,
+fieldset.field-employer-details select {
+  width: 100% !important;
+  height: 46px !important;
+
+  border: 1px solid #dfe4ec;
+  border-radius: 10px;
+  background: #fff;
+
+  padding: 0 14px;
+
+  color: #293242;
+  font-size: 13px;
+  font-weight: 700;
+
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Helper text */
+fieldset.field-employer-details .plain-text-wrapper p {
+  margin: 0 !important;
+  color: #8b93a3 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.3;
+}
+
+/* Disclaimer bar */
+fieldset.field-employer-details .field-disclaimer-employer-details {
+  background: #eef2ff;
+  border-radius: 8px;
+  padding: 10px 14px !important;
+}
+
+fieldset.field-employer-details .field-disclaimer-employer-details input {
+  display: none !important;
+}
+
+fieldset.field-employer-details .field-disclaimer-employer-details label.field-label {
+  position: static !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+
+  color: #3156e8 !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  fieldset.field-employer-details.panel-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  fieldset.field-employer-details .field-employer-company-name,
+  fieldset.field-employer-details .field-employer-company-name-other,
+  fieldset.field-employer-details .field-industry-type,
+  fieldset.field-employer-details .field-employer-company-note,
+  fieldset.field-employer-details .field-industry-note,
+  fieldset.field-employer-details .field-disclaimer-employer-details {
+    grid-column: 1;
+  }
+}
+/* FIX clipped/broken employer labels */
+fieldset.field-employer-details .field-employer-company-name,
+fieldset.field-employer-details .field-employer-company-name-other,
+fieldset.field-employer-details .field-industry-type {
+  padding-top: 10px !important;
+}
+
+fieldset.field-employer-details .drop-down-wrapper > label.field-label,
+fieldset.field-employer-details .text-wrapper > label.field-label {
+  top: 3px !important;
+  left: 14px !important;
+  background: #fff !important;
+  white-space: nowrap !important;
+  z-index: 10 !important;
+}
+
+/* push only first row slightly down from header */
+fieldset.field-employer-details .field-employer-company-name,
+fieldset.field-employer-details .field-employer-company-name-other {
+  margin-top: 6px !important;
+}
+
+/* ACCORDIAN- 2*/
+/* WORK EMAIL ID PANEL */
+fieldset.field-work-email-id.panel-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+  background: #fff;
+
+  padding: 0 22px 22px !important;
+  margin: 0 0 24px !important;
+  overflow: hidden;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 0;
+
+  font-size: 14px;
+}
+
+/* Header */
+fieldset.field-work-email-id > legend.accordion-legend {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+
+  width: calc(100% + 44px) !important;
+  margin: 0 -22px 18px !important;
+  padding: 18px 22px !important;
+
+  background: #dce6ff;
+  border-radius: 16px 16px 0 0;
+
+  color: #1f2937;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+
+/* Email input wrapper */
+fieldset.field-work-email-id .field-work-email {
+  width: 36% !important;
+  min-width: 360px;
+  position: relative;
+  padding: 10px 0 0 !important;
+  margin: 0 !important;
+}
+
+/* Floating label */
+fieldset.field-work-email-id .field-work-email > label.field-label {
+  position: absolute !important;
+  top: 3px !important;
+  left: 14px !important;
+  z-index: 5;
+
+  background: #fff;
+  padding: 0 6px;
+
+  color: #8b93a3;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Input */
+fieldset.field-work-email-id .field-work-email input {
+  width: 100% !important;
+  height: 46px !important;
+
+  border: 1px solid #dfe4ec;
+  border-radius: 10px;
+  background: #fff;
+
+  padding: 0 70px 0 14px;
+
+  color: #293242;
+  font-size: 13px;
+  font-weight: 700;
+
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Verify button */
+fieldset.field-work-email-id .field-work-email-verify {
+  width: 0 !important;
+  position: relative;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+fieldset.field-work-email-id .field-work-email-verify button {
+  position: absolute;
+  left: -78px;
+  top: 25px;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  background: transparent !important;
+
+  color: #4f63e6 !important;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+/* Note */
+fieldset.field-work-email-id .field-work-email-note {
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+fieldset.field-work-email-id .field-work-email-note p {
+  margin: 0 !important;
+  color: #8b93a3;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  fieldset.field-work-email-id .field-work-email {
+    width: 100% !important;
+    min-width: 0;
+  }
+}
+
+/*ACCORDIAN -3 */
+/* INCOME DETAILS PANEL */
+fieldset.field-income-details.panel-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+  background: #fff;
+
+  padding: 0 22px 22px !important;
+  margin: 0 0 24px !important;
+  overflow: hidden;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 20px;
+
+  font-size: 14px;
+}
+
+/* Header */
+fieldset.field-income-details > legend.accordion-legend {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+
+  width: calc(100% + 44px) !important;
+  margin: 0 -22px 18px !important;
+  padding: 18px 22px !important;
+
+  background: #dce6ff;
+  border-radius: 16px 16px 0 0;
+
+  color: #1f2937;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+/* Two inputs */
+fieldset.field-income-details .field-monthly-net-income-salary,
+fieldset.field-income-details .field-ongoing-emi-if-any {
+  width: calc(50% - 10px) !important;
+  position: relative;
+  padding: 10px 0 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+}
+
+/* Floating labels */
+fieldset.field-income-details .field-wrapper > label.field-label {
+  position: absolute !important;
+  top: 3px !important;
+  left: 14px !important;
+  z-index: 5;
+
+  background: #fff;
+  padding: 0 6px;
+
+  color: #8b93a3;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Inputs */
+fieldset.field-income-details input {
+  width: 100% !important;
+  height: 46px !important;
+
+  border: 1px solid #dfe4ec;
+  border-radius: 10px;
+  background: #fff;
+
+  padding: 0 14px;
+
+  color: #293242;
+  font-size: 13px;
+  font-weight: 700;
+
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  fieldset.field-income-details .field-monthly-net-income-salary,
+  fieldset.field-income-details .field-ongoing-emi-if-any {
+    width: 100% !important;
+  }
+}
+
+/*ACCORDIAN -4*/
+/* TYPE OF LOAN PANEL */
+fieldset.field-type-of-loan.panel-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+  background: #fff;
+
+  padding: 0 22px 22px !important;
+  margin: 0 0 24px !important;
+  overflow: hidden;
+
+  font-size: 14px;
+}
+
+/* Header */
+fieldset.field-type-of-loan > legend.accordion-legend {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+
+  width: calc(100% + 44px) !important;
+  margin: 0 -22px 18px !important;
+  padding: 18px 22px !important;
+
+  background: #dce6ff;
+  border-radius: 16px 16px 0 0;
+
+  color: #1f2937;
+  font-size: 15px;
+  font-weight: 700;
+}
+/* Select field */
+fieldset.field-type-of-loan .field-select-loan-type {
+  width: 260px !important;
+  position: relative;
+  padding: 10px 0 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box;
+}
+
+/* Floating label */
+fieldset.field-type-of-loan .field-select-loan-type > label.field-label {
+  position: absolute !important;
+  top: 3px !important;
+  left: 14px !important;
+  z-index: 5;
+
+  background: #fff;
+  padding: 0 6px;
+
+  color: #8b93a3;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Select */
+fieldset.field-type-of-loan select {
+  width: 100% !important;
+  height: 46px !important;
+
+  border: 1px solid #dfe4ec;
+  border-radius: 10px;
+  background: #fff;
+
+  padding: 0 14px;
+
+  color: #293242;
+  font-size: 13px;
+  font-weight: 700;
+
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Confirm button */
+.field-confirm-button.submit-wrapper {
+  width: auto !important;
+  margin: 0 0 24px !important;
+  padding: 0 !important;
+}
+
+.field-confirm-button.submit-wrapper button {
+  width: 180px;
+  height: 44px;
+
+  border: 0;
+  border-radius: 8px;
+  background: #2446db;
+
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
