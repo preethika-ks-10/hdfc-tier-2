@@ -56,7 +56,73 @@ function maskMobileNumber(mobileNumber) {
   return ` ${'*'.repeat(5)}${value.substring(5)}`;
 }
 
+/**
+ * EMI Calculation
+ * @param {scope} globals
+ */
+function getNumber(value) {
+  return Number(String(value || "").replace(/[₹,\sA-Za-z]/g, ""));
+}
+
+function getLoanAmount(globals) {
+  const data = globals.functions.exportData();
+  const raw = getNumber(data.loan_amount);
+
+  /* slider raw value → actual loan amount */
+  if (raw <= 0.25) return 50000;
+  if (raw <= 1) return Math.round(raw * 200000);
+
+  if (raw <= 5) return Math.round(raw * 200000);      // up to 10L
+  if (raw <= 6) return Math.round(1000000 + (raw - 5) * 500000); // 10L to 15L
+
+  return Math.round(raw);
+}
+
+function updateLoanDisplay(globals) {
+  const loanAmount = getLoanAmount(globals);
+
+  return loanAmount > 0
+    ? "₹" + loanAmount.toLocaleString("en-IN")
+    : "";
+}
+
+function updateLoanDetails(globals) {
+  const data = globals.functions.exportData();
+
+  const loanAmount = getLoanAmount(globals);
+
+  const rawTenure = getNumber(data["Loan Tenure"]);
+  const tenure = rawTenure <= 7 ? rawTenure * 12 : rawTenure;
+
+  const rate = 10.97;
+  const monthlyRate = rate / (12 * 100);
+
+  let emi = 0;
+
+  if (loanAmount > 0 && tenure > 0) {
+    emi =
+      (loanAmount *
+        monthlyRate *
+        Math.pow(1 + monthlyRate, tenure)) /
+      (Math.pow(1 + monthlyRate, tenure) - 1);
+
+    emi = Math.round(emi);
+  }
+
+  return emi > 0
+    ? "₹" + emi.toLocaleString("en-IN")
+    : "";
+}
+
+function getRate() {
+  return "10.97%";
+}
+
+function getTax() {
+  return "₹4,000";
+}
 // eslint-disable-next-line import/prefer-default-export
 export {
-  getFullName, days, submitFormArrayToString, maskMobileNumber,
+  getFullName, days, submitFormArrayToString, maskMobileNumber,  updateLoanDetails,
+  updateLoanDisplay, getRate, getTax,
 };

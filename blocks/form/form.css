@@ -793,63 +793,671 @@ main .form form select[multiple] {
     height: calc(42px + 50px);
 }
 
-/* FIRST PAGE*/
-main .form form .text-wrapper.field-mobile.field-wrapper {
+/* ONLY PERSONAL LOAN OFFER PANEL */
+#panelcontainer-bdf4fed7d3 {
+  display: grid !important;
+  grid-template-columns: 360px 360px 360px !important;
+  column-gap: 20px !important;
+  row-gap: 10px !important;
+  width: 1180px !important;
+  margin: 0 auto !important;
+  padding: 20px !important;
+  border: 0 !important;
+  background: #fff !important;
+  font-family: Arial, sans-serif !important;
+  box-sizing: border-box !important;
+}
+
+/* title */
+#panelcontainer-bdf4fed7d3 > legend {
+  grid-column: 1 / -1 !important;
+  display: block !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  margin: 0 0 22px 0 !important;
+}
+
+/* reset only inside this panel */
+#panelcontainer-bdf4fed7d3 fieldset,
+#panelcontainer-bdf4fed7d3 .field-wrapper {
+  border: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* PAN / DOB radios */
+#panelcontainer-bdf4fed7d3 .field-pan-card-or-dob-choice {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  display: flex !important;
+  gap: 20px !important;
+  align-items: center !important;
+  margin: 0 0 8px 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-pan-card-or-dob-choice legend {
+  display: none !important;
+}
+
+/* mobile */
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number {
+  grid-column: 1 !important;
+  grid-row: 3 !important;
   position: relative !important;
+  margin: 0 !important;
 }
- 
-/* India flag */
-main .form form .text-wrapper.field-mobile.field-wrapper .field-label + input {
-  padding-left: 82px !important;
+
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number label {
+  display: none !important;
 }
- 
-main .form form .text-wrapper.field-mobile.field-wrapper::before {
-  content: "";
+
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number input {
+  width: 100% !important;
+  height: 48px !important;
+  border: 1px solid #dcdcdc !important;
+  border-radius: 10px !important;
+  padding: 0 15px 0 105px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06) !important;
+  box-sizing: border-box !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::before {
+  content: "🇮🇳  +91" !important;
   position: absolute !important;
   left: 14px !important;
-  top: 50% !important;
+  top: 24px !important;
   transform: translateY(-50%) !important;
-  width: 16px !important;
-  height: 12px !important;
-  z-index: 9999 !important;
-  pointer-events: none !important;
-  background-image: url("https://flagcdn.com/w40/in.png");
-  background-repeat: no-repeat !important;
-  background-size: contain !important;
-  background-position: center !important;
-  border-radius: 2px;
-}
- 
-/* +91 */
-main .form form .text-wrapper.field-mobile.field-wrapper::after {
-  content: "+91" !important;
-  position: absolute !important;
-  left: 36px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  color: #6b7280 !important;
+  z-index: 5 !important;
   font-size: 14px !important;
-  font-weight: 500 !important;
-  z-index: 9999 !important;
-  line-height: 1 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::after {
+  content: "⌄" !important;
+  position: absolute !important;
+  left: 74px !important;
+  top: 22px !important;
+  transform: translateY(-50%) !important;
+  font-size: 12px !important;
+  color: #999 !important;
+  z-index: 5 !important;
+}
+
+/* DOB */
+#panelcontainer-bdf4fed7d3 .field-date-of-birth {
+  grid-column: 2 !important;
+  grid-row: 3 !important;
+  position: relative !important;
+  margin: 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-date-of-birth label {
+  display: none !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-date-of-birth input {
+  width: 100% !important;
+  height: 48px !important;
+  border: 1px solid #dcdcdc !important;
+  border-radius: 10px !important;
+  padding: 0 44px 0 15px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06) !important;
+  box-sizing: border-box !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-date-of-birth::after {
+  content: "📅" !important;
+  position: absolute !important;
+  right: 12px !important;
+  top: 24px !important;
+  transform: translateY(-50%) !important;
+  opacity: 0.45 !important;
   pointer-events: none !important;
 }
- 
-/* divider */
-main .form form .text-wrapper.field-mobile.field-wrapper input[name="mobile"] {
-  background-image: linear-gradient(
-    to right,
-    transparent 0,
-    transparent 66px,
-    #d1d5db 66px,
-    #d1d5db 67px,
-    transparent 67px
+
+/* hide PAN field */
+#panelcontainer-bdf4fed7d3 .field-pan-card-number {
+  display: none !important;
+}
+
+/* OTP note */
+#panelcontainer-bdf4fed7d3 .field-otp-note {
+  grid-column: 1 !important;
+  grid-row: 4 !important;
+  margin: -4px 0 20px 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-otp-note p {
+  margin: 0 !important;
+  font-size: 12px !important;
+  color: #6b7280 !important;
+}
+
+/* source of income */
+#panelcontainer-bdf4fed7d3 .field-source-of-income {
+  grid-column: 3 !important;
+  grid-row: 2 / span 3 !important;
+  margin: 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-source-of-income legend {
+  display: block !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #4b5563 !important;
+  margin: 0 0 10px 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-source-of-income .radio-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-bottom: 12px !important;
+}
+
+/* yellow income note */
+#panelcontainer-bdf4fed7d3 .field-income-verification-note {
+  grid-column: 3 !important;
+  grid-row: 3 !important;
+  width: 360px !important;
+  background: #fffdf2 !important;
+  border: 1px solid #ffe08a !important;
+  border-radius: 8px !important;
+  padding: 10px 12px !important;
+  font-size: 12px !important;
+  line-height: 1.35 !important;
+  font-weight: 700 !important;
+  color: #9a6a00 !important;
+  margin-top: 34px !important;
+  box-sizing: border-box !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-income-verification-note p {
+  margin: 0 !important;
+}
+
+/* radios only inside this panel */
+#panelcontainer-bdf4fed7d3 input[type="radio"] {
+  width: 18px !important;
+  height: 18px !important;
+  accent-color: #2f5bea !important;
+}
+
+#panelcontainer-bdf4fed7d3 .radio-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .radio-wrapper label {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #1f2937 !important;
+}
+
+/* consent */
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data {
+  grid-column: 1 / -1 !important;
+  grid-row: 6 !important;
+  margin-top: 12px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-consent-marketing,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing-data {
+  grid-column: 1 / -1 !important;
+  grid-row: 7 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing-data {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+}
+
+#panelcontainer-bdf4fed7d3 input[type="checkbox"] {
+  width: 16px !important;
+  height: 16px !important;
+  margin-top: 2px !important;
+  flex: 0 0 auto !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data label,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing label,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing-data label {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  color: #4b5563 !important;
+}
+
+/* terms */
+#panelcontainer-bdf4fed7d3 .field-terms-privacy-text {
+  grid-column: 1 / -1 !important;
+  grid-row: 8 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-terms-privacy-text p {
+  margin: 0 !important;
+  font-size: 12px !important;
+  color: #4b5563 !important;
+}
+/* FINAL POSITION FIX - ONLY THIS PANEL */
+
+#panelcontainer-bdf4fed7d3 {
+  grid-template-columns: 360px 360px 360px !important;
+  column-gap: 20px !important;
+  row-gap: 8px !important;
+  align-items: start !important;
+}
+
+/* title */
+#panelcontainer-bdf4fed7d3 > legend {
+  grid-column: 1 / -1 !important;
+  grid-row: 1 !important;
+  margin: 0 0 12px 0 !important;
+}
+
+/* pan / dob radio row */
+#panelcontainer-bdf4fed7d3 .field-pan-card-or-dob-choice {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 20px !important;
+  align-items: center !important;
+  margin: 0 0 8px 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-pan-card-or-dob-choice .radio-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin: 0 !important;
+}
+
+/* input row */
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number {
+  grid-column: 1 !important;
+  grid-row: 3 !important;
+  margin: 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-date-of-birth {
+  grid-column: 2 !important;
+  grid-row: 3 !important;
+  margin: 0 !important;
+}
+
+/* source of income */
+#panelcontainer-bdf4fed7d3 .field-source-of-income {
+  grid-column: 3 !important;
+  grid-row: 2 / span 4 !important;
+  margin: 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-source-of-income .radio-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 7px !important;
+  margin: 0 0 12px 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-source-of-income .radio-wrapper:first-of-type {
+  margin-bottom: 64px !important;
+}
+
+/* yellow note between salaried and self-employed */
+#panelcontainer-bdf4fed7d3 .field-income-verification-note {
+  grid-column: 3 !important;
+  grid-row: 3 !important;
+  width: 360px !important;
+  height: auto !important;
+  margin: 22px 0 0 0 !important;
+  padding: 10px 12px !important;
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+  font-weight: 700 !important;
+  background: #fffdf2 !important;
+  border: 1px solid #f4d06f !important;
+  border-radius: 6px !important;
+  color: #9a6a00 !important;
+}
+
+/* OTP directly below mobile */
+#panelcontainer-bdf4fed7d3 .field-otp-note {
+  grid-column: 1 !important;
+  grid-row: 4 !important;
+  margin: -3px 0 28px 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-otp-note p {
+  font-size: 11px !important;
+}
+
+/* consent rows */
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data {
+  grid-column: 1 / -1 !important;
+  grid-row: 5 !important;
+  margin: 8px 0 0 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-consent-marketing,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing-data {
+  grid-column: 1 / -1 !important;
+  grid-row: 6 !important;
+  margin: 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-terms-privacy-text {
+  grid-column: 1 / -1 !important;
+  grid-row: 7 !important;
+  margin: 2px 0 0 0 !important;
+}
+
+/* make text size like reference */
+#panelcontainer-bdf4fed7d3 label,
+#panelcontainer-bdf4fed7d3 p {
+  font-size: 12px !important;
+}
+
+/* remove big input/text look */
+#panelcontainer-bdf4fed7d3 .field-income-verification-note p {
+  margin: 0 !important;
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+}
+/* VIEW LOAN ELIGIBILITY BUTTON */
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility {
+  display: block !important;
+  grid-column: 1 !important;
+  grid-row: 8 !important;
+  margin: 18px 0 0 0 !important;
+  padding: 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button {
+  width: 180px !important;
+  height: 48px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: #9db7f5 !important;
+  color: #ffffff !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button::after {
+  content: "›";
+  font-size: 24px !important;
+  margin-left: 18px !important;
+  vertical-align: -2px !important;
+}
+/* FIX INDIAN FLAG */
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::before {
+  content: "" !important;
+  width: 18px !important;
+  height: 12px !important;
+  left: 14px !important;
+  top: 24px !important;
+  background: linear-gradient(
+    to bottom,
+    #ff9933 0 33%,
+    #ffffff 33% 66%,
+    #138808 66% 100%
   ) !important;
-  background-repeat: no-repeat !important;
-  background-size: 100% 100% !important;
+  border: 1px solid #ddd !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::after {
+  content: "+91  ˅" !important;
+  left: 42px !important;
+  top: 24px !important;
+  color: #4b5563 !important;
+  font-size: 13px !important;
+}
+
+/* PAN FIELD SHOW WHEN PAN CARD SELECTED */
+#panelcontainer-bdf4fed7d3:has(#pan-card-or-dob-choice:checked) .field-pan-card-number {
+  display: block !important;
+  grid-column: 2 !important;
+  grid-row: 3 !important;
+  position: relative !important;
+  margin: 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3:has(#pan-card-or-dob-choice:checked) .field-date-of-birth {
+  display: none !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-pan-card-number label {
+  display: none !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-pan-card-number input {
+  width: 100% !important;
+  height: 48px !important;
+  border: 1px solid #dcdcdc !important;
+  border-radius: 10px !important;
+  padding: 0 15px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06) !important;
+  box-sizing: border-box !important;
+}
+
+/* BUTTON FULL TEXT */
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility {
+  grid-column: 1 !important;
+  grid-row: 8 !important;
+  margin-top: 18px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button {
+  width: 170px !important;
+  height: 46px !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  font-size: 13px !important;
+  padding: 0 18px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button {
+  font-size: 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button::before {
+  content: "View Loan Eligibility";
+  font-size: 13px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button::after {
+  content: "›";
+  font-size: 22px !important;
+  margin-left: 12px !important;
+}
+
+/* ESSENTIALS TEXT COLOR */
+#panelcontainer-bdf4fed7d3 ~ * {
+  color: #4b5563 !important;
+}
+
+#panelcontainer-bdf4fed7d3 ~ * h3,
+#panelcontainer-bdf4fed7d3 ~ * legend {
+  color: #4b5563 !important;
+}
+/* ESSENTIALS FOR THE JOURNEY - HORIZONTAL */
+#panelcontainer-a600059c18 {
+  width: 100% !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;        /* 🔴 prevents vertical stacking */
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 40px !important;
+  padding: 18px 28px !important;
+  border: 0 !important;
+  background: #fff !important;
+}
+
+/* title full width */
+#panelcontainer-a600059c18 > legend {
+  width: 100% !important;
+  display: block !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  margin-bottom: 18px !important;
+}
+
+/* each item */
+#panelcontainer-a600059c18 .plain-text-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex: 1 !important;                 /* 🔴 equal spacing */
+  min-width: 0 !important;
+}
+
+/* text */
+#panelcontainer-a600059c18 .plain-text-wrapper p {
+  margin: 0 !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  color: #3157c9 !important;
+  line-height: 1.2 !important;
+}
+
+/* icons */
+#panelcontainer-a600059c18 .field-essential-mobile-phone::before {
+  content: "📱";
+}
+
+#panelcontainer-a600059c18 .field-essential-pan-card::before {
+  content: "🪪";
+}
+
+#panelcontainer-a600059c18 .field-essential-date-of-birth::before {
+  content: "🗓️";
+}
+
+#panelcontainer-a600059c18 .field-essential-cheque-book-bank-account-details::before {
+  content: "🧾";
+}
+
+#panelcontainer-a600059c18 .plain-text-wrapper::before {
+  font-size: 15px !important;
+  opacity: 0.6 !important;
+}
+
+/* OTP PANEL */
+/* OTP PAGE ONLY */
+#panelcontainer-0fa7951f12 {
+  width: 680px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: #fff !important;
+  font-family: Arial, sans-serif !important;
+}
+
+/* title */
+#panelcontainer-0fa7951f12 > legend {
+  display: block !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  margin: 0 0 4px 0 !important;
+}
+
+/* instructions */
+#panelcontainer-0fa7951f12 .field-otp-instructions {
+  margin: 0 0 20px 0 !important;
+}
+
+#panelcontainer-0fa7951f12 .field-otp-instructions p {
+  margin: 0 !important;
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+  color: #111827 !important;
+  font-weight: 700 !important;
+}
+
+#panelcontainer-0fa7951f12 .field-otp-instructions u {
+  color: #3157c9 !important;
+  text-decoration: none !important;
+  font-weight: 800 !important;
+}
+
+/* OTP input */
+#panelcontainer-0fa7951f12 .field-otp-code {
+  width: 520px !important;
+  position: relative !important;
+  margin: 0 0 8px 0 !important;
+}
+
+#panelcontainer-0fa7951f12 .field-otp-code input {
+  width: 520px !important;
+  height: 48px !important;
+  border: 1px solid #dcdcdc !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06) !important;
+  padding: 0 52px 0 18px !important;
+  font-size: 18px !important;
+  letter-spacing: 34px !important;
+  color: #111827 !important;
+  box-sizing: border-box !important;
+  outline: none !important;
 }
 
 
+
+#panelcontainer-0fa7951f12 .field-otp-code::after {
+  content: "👁" !important;
+  position: absolute !important;
+  right: 18px !important;
+  top: 13px !important;
+  font-size: 15px !important;
+  opacity: 0.65 !important;
+  pointer-events: none !important;
+}
+
+/* hide validation */
+#panelcontainer-0fa7951f12 .field-description {
+  display: none !important;
+}
+/* FIX: SUBMIT + RESEND SAME ROW */
+#panelcontainer-0fa7951f12 .submit-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  margin-top: 28px !important;
+}
+
+/* move submit inside flex */
+#panelcontainer-0fa7951f12 .field-otp-submit {
+  display: inline-block !important;
+  margin: 0 !important;
+}
+
+/* move resend beside submit */
+#panelcontainer-0fa7951f12 .field-otp-resend-icon {
+  display: inline-block !important;
+  margin: 0 !important;
+  position: static !important;   /* 🔴 important */
+}
+
+/* resend button style */
+#panelcontainer-0fa7951f12 .field-otp-resend-icon button {
+  width: 120px !important;
+  height: 46px !important;
+  border-radius: 8px !important;
+  background: #5f8dde !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
 
 
 
@@ -1132,7 +1740,47 @@ main .form form .text-wrapper.field-mobile.field-wrapper input[name="mobile"] {
   padding: 13px 22px;
   box-sizing: border-box;
 }
+/* FIX SLIDER VALUE ALIGNMENT */
+#panelcontainer-bd9b2af0ce .range-labels {
+  position: absolute !important;
+  top: 52px !important;
+  left: 0 !important;
+  width: 450px !important;
+  height: 20px !important;
+}
 
+#panelcontainer-bd9b2af0ce .range-labels span {
+  position: absolute !important;
+  transform: translateX(-50%) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  color: #8f98a8 !important;
+  white-space: nowrap !important;
+}
+
+#panelcontainer-bd9b2af0ce .range-labels span:first-child {
+  transform: translateX(0) !important;
+}
+
+#panelcontainer-bd9b2af0ce .range-labels span:last-child {
+  transform: translateX(-100%) !important;
+}
+
+#panelcontainer-bd9b2af0ce .range-labels span::before {
+  content: "";
+  position: absolute;
+  top: -19px;
+  left: 50%;
+  width: 1px;
+  height: 8px;
+  background: rgba(255,255,255,.65);
+}
+
+/* remove wrong min/max behavior */
+#panelcontainer-bd9b2af0ce .range-min,
+#panelcontainer-bd9b2af0ce .range-max {
+  position: static !important;
+}
 
 /*ACCORDIAN*/
 
