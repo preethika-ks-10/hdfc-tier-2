@@ -161,9 +161,16 @@ function initSalaryBankUI() {
   const cardContainer = document.createElement("div");
   cardContainer.className = "bank-card-container";
 
-  panel.appendChild(row);
   row.appendChild(cardContainer);
   row.appendChild(dropdownWrapper);
+
+  const legend = panel.querySelector("legend.field-label");
+
+  if (legend && legend.nextSibling) {
+    panel.insertBefore(row, legend.nextSibling);
+  } else {
+    panel.prepend(row);
+  }
 
   select.innerHTML = `
     <option value="hdfc_bank">HDFC Bank</option>
@@ -173,26 +180,27 @@ function initSalaryBankUI() {
   function renderCards(type) {
     cardContainer.innerHTML = "";
 
-    const list = type === "hdfc_bank"
-      ? banks.filter(bank => bank.value === "hdfc_bank")
-      : banks;
+    const list =
+      type === "hdfc_bank"
+        ? banks.filter((bank) => bank.value === "hdfc_bank")
+        : banks;
 
-    list.forEach(bank => {
+    list.forEach((bank) => {
       const card = document.createElement("div");
       card.className = "bank-card";
       card.dataset.value = bank.value;
-
-      if (bank.value === "hdfc_bank") {
-        card.classList.add("active");
-      }
 
       card.innerHTML = `
         <img src="${bankLogos[bank.value]}" alt="${bank.text}">
         <span>${bank.text}</span>
       `;
 
+      if (bank.value === "hdfc_bank") {
+        card.classList.add("active");
+      }
+
       card.addEventListener("click", function () {
-        document.querySelectorAll(".bank-card").forEach(item => {
+        document.querySelectorAll(".bank-card").forEach((item) => {
           item.classList.remove("active");
         });
 
@@ -212,6 +220,8 @@ function initSalaryBankUI() {
 }
 
 if (typeof window !== "undefined") {
+  window.initSalaryBankUI = initSalaryBankUI;
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initSalaryBankUI);
   } else {
@@ -219,8 +229,10 @@ if (typeof window !== "undefined") {
   }
 
   window.addEventListener("load", initSalaryBankUI);
+
   setTimeout(initSalaryBankUI, 500);
   setTimeout(initSalaryBankUI, 1500);
+  setTimeout(initSalaryBankUI, 3000);
 }
 // eslint-disable-next-line import/prefer-default-export
 export {

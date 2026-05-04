@@ -2892,77 +2892,56 @@ fieldset.field-type-of-loan select {
 
 
 
-/* ============================= */
-/* SALARY BANK SECTION - FINAL */
-/* ============================= */
-/* SALARY BANK PANEL FIX */
 .field-salary-bank-selection {
   position: relative !important;
   background: #fff !important;
   border: 1px solid #cfd8ff !important;
   border-radius: 12px !important;
-  padding: 0 24px 34px !important;
+  padding: 0 28px 34px !important;
   margin-bottom: 36px !important;
-  min-height: auto !important;
   overflow: hidden !important;
 }
 
 .field-salary-bank-selection > legend.field-label {
-  position: relative !important;
-  width: calc(100% + 48px) !important;
-  height: 60px !important;
-  margin: 0 -24px 24px !important;
+  width: calc(100% + 56px) !important;
+  height: 64px !important;
+  margin: 0 -28px 28px !important;
   padding: 0 24px 0 70px !important;
-
   background: #e9efff !important;
   border-radius: 10px 10px 0 0 !important;
-
   display: flex !important;
   align-items: center !important;
-
   font-size: 16px !important;
   font-weight: 700 !important;
-  color: #111827 !important;
 }
 
-.field-salary-bank-selection > legend.field-label::before {
-  content: "🏦";
-  position: absolute;
-  left: 24px;
-  font-size: 22px;
-}
-
-/* Main row */
 .salary-bank-content-row {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
   gap: 24px !important;
+  width: 100% !important;
+  margin-bottom: 34px !important;
 }
 
-/* Cards stay inside panel */
 .bank-card-container {
   display: flex !important;
   align-items: center !important;
   gap: 16px !important;
-  flex-wrap: wrap !important;
-  padding: 0 !important;
+  flex-wrap: nowrap !important;
 }
 
-/* Card */
 .bank-card {
   width: 88px !important;
   height: 88px !important;
   border: 1px solid #dfe5f0 !important;
   border-radius: 12px !important;
   background: #fff !important;
-
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
   gap: 8px !important;
-
   cursor: pointer !important;
 }
 
@@ -2978,15 +2957,14 @@ fieldset.field-type-of-loan select {
 
 .bank-card span {
   font-size: 12px !important;
-  color: #111827 !important;
   text-align: center !important;
 }
 
-/* Dropdown */
 .drop-down-wrapper.field-salary-bank {
-  position: static !important;
   width: 230px !important;
+  min-width: 230px !important;
   margin: 0 !important;
+  padding: 0 !important;
 }
 
 .drop-down-wrapper.field-salary-bank label {
@@ -2994,91 +2972,8 @@ fieldset.field-type-of-loan select {
 }
 
 .drop-down-wrapper.field-salary-bank select {
-  width: 100% !important;
-  height: 48px !important;
-  border: 1px solid #6b7280 !important;
-  border-radius: 4px !important;
-  background: #fff !important;
-  padding: 0 14px !important;
-  font-size: 15px !important;
-  color: #111827 !important;
-}
-
-/* Push next panel down */
-fieldset.field-income-verification-method.panel-wrapper {
-  margin-top: 36px !important;
-  position: relative !important;
-  clear: both !important;
-}
-
-/* FINAL FIX: keep salary bank cards inside first panel */
-
-.field-salary-bank-selection {
-  display: block !important;
-  position: relative !important;
-  padding: 0 28px 34px !important;
-  margin-bottom: 36px !important;
-  min-height: 250px !important;
-  overflow: visible !important;
-}
-
-.field-salary-bank-selection > legend.field-label {
-  position: relative !important;
-  width: calc(100% + 56px) !important;
-  margin: 0 -28px 28px !important;
-  height: 64px !important;
-}
-
-/* Put bank card + dropdown in same row */
-.salary-bank-content-row {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 24px !important;
-
-  width: 100% !important;
-  min-height: 100px !important;
-
-  position: relative !important;
-  z-index: 2 !important;
-}
-
-/* Cards left side */
-.bank-card-container {
-  display: flex !important;
-  align-items: center !important;
-  gap: 16px !important;
-  flex-wrap: nowrap !important;
-
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Dropdown right side */
-.drop-down-wrapper.field-salary-bank {
-  position: static !important;
-  width: 230px !important;
-  min-width: 230px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Remove old dropdown full-width behavior */
-.drop-down-wrapper.field-salary-bank select {
   width: 230px !important;
   height: 48px !important;
-}
-
-/* Make sure next panel starts after salary bank panel */
-fieldset.field-income-verification-method.panel-wrapper {
-  position: relative !important;
-  margin-top: 36px !important;
-  clear: both !important;
-}
-
-/* Important: do not let generated row move outside */
-.field-salary-bank-selection .salary-bank-content-row {
-  order: 1 !important;
 }
 /* NEXT PANEL*/
 /* INCOME VERIFICATION METHOD PANEL */
