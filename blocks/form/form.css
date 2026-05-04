@@ -793,59 +793,92 @@ main .form form select[multiple] {
     height: calc(42px + 50px);
 }
 
-/* ONLY PERSONAL LOAN OFFER PANEL */
+/* ===== MAIN CARD ===== */
 #panelcontainer-bdf4fed7d3 {
-  display: grid !important;
-  grid-template-columns: 360px 360px 360px !important;
-  column-gap: 20px !important;
-  row-gap: 10px !important;
-  width: 1180px !important;
+  width: 1350px !important;
   margin: 0 auto !important;
-  padding: 20px !important;
-  border: 0 !important;
+  padding: 50px 56px 54px 56px !important;
   background: #fff !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 36px rgba(0,0,0,.08) !important;
   font-family: Arial, sans-serif !important;
   box-sizing: border-box !important;
+
+  display: grid !important;
+  grid-template-columns: 398px 398px 360px !important;
+  column-gap: 30px !important;
+  row-gap: 0 !important;
 }
 
 /* title */
 #panelcontainer-bdf4fed7d3 > legend {
   grid-column: 1 / -1 !important;
+  grid-row: 1 !important;
   display: block !important;
-  font-size: 16px !important;
+  font-size: 20px !important;
   font-weight: 800 !important;
   color: #111827 !important;
-  margin: 0 0 22px 0 !important;
+  margin: 0 0 30px 0 !important;
 }
 
-/* reset only inside this panel */
+/* reset */
 #panelcontainer-bdf4fed7d3 fieldset,
 #panelcontainer-bdf4fed7d3 .field-wrapper {
   border: 0 !important;
+  margin: 0 !important;
   padding: 0 !important;
   box-sizing: border-box !important;
 }
 
-/* PAN / DOB radios */
+/* hide errors */
+#panelcontainer-bdf4fed7d3 .field-invalid .field-description,
+#panelcontainer-bdf4fed7d3 .field-description[aria-live="polite"],
+#panelcontainer-bdf4fed7d3 .field-error,
+#panelcontainer-bdf4fed7d3 .error,
+#panelcontainer-bdf4fed7d3 [class*="error"] {
+  display: none !important;
+}
+
+/* ===== PAN / DOB RADIO ===== */
 #panelcontainer-bdf4fed7d3 .field-pan-card-or-dob-choice {
   grid-column: 2 !important;
   grid-row: 2 !important;
   display: flex !important;
-  gap: 20px !important;
+  flex-direction: row !important;
   align-items: center !important;
-  margin: 0 0 8px 0 !important;
+  gap: 28px !important;
+  margin: 0 0 18px 92px !important;
 }
 
 #panelcontainer-bdf4fed7d3 .field-pan-card-or-dob-choice legend {
   display: none !important;
 }
 
-/* mobile */
+#panelcontainer-bdf4fed7d3 .radio-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin: 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 input[type="radio"] {
+  width: 18px !important;
+  height: 18px !important;
+  accent-color: #2f5bea !important;
+}
+
+#panelcontainer-bdf4fed7d3 .radio-wrapper label {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #111827 !important;
+}
+
+/* ===== MOBILE FIELD ===== */
 #panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number {
   grid-column: 1 !important;
   grid-row: 3 !important;
   position: relative !important;
-  margin: 0 !important;
 }
 
 #panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number label {
@@ -853,42 +886,60 @@ main .form form select[multiple] {
 }
 
 #panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number input {
-  width: 100% !important;
+  width: 398px !important;
   height: 48px !important;
-  border: 1px solid #dcdcdc !important;
-  border-radius: 10px !important;
-  padding: 0 15px 0 105px !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,.06) !important;
+  border: 1px solid #dcdfe6 !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  padding: 0 18px 0 146px !important;
+  font-size: 14px !important;
+  color: #111827 !important;
   box-sizing: border-box !important;
+  outline: none !important;
 }
 
 #panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::before {
-  content: "🇮🇳  +91" !important;
+  content: "🇮🇳 +91" !important;
   position: absolute !important;
-  left: 14px !important;
+  left: 16px !important;
   top: 24px !important;
   transform: translateY(-50%) !important;
-  z-index: 5 !important;
-  font-size: 14px !important;
+  font-size: 15px !important;
+  z-index: 2 !important;
 }
 
 #panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::after {
-  content: "⌄" !important;
+  content: "Enter Aadhaar Linked Mobile Number" !important;
   position: absolute !important;
-  left: 74px !important;
-  top: 22px !important;
+  left: 84px !important;
+  top: 24px !important;
   transform: translateY(-50%) !important;
-  font-size: 12px !important;
-  color: #999 !important;
-  z-index: 5 !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #9ca3af !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
 }
 
-/* DOB */
+/* OTP note */
+#panelcontainer-bdf4fed7d3 .field-otp-note {
+  grid-column: 1 !important;
+  grid-row: 4 !important;
+  margin: 10px 0 46px 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-otp-note p {
+  margin: 0 !important;
+  font-size: 14px !important;
+  color: #4b5563 !important;
+}
+
+/* ===== DOB FIELD ===== */
 #panelcontainer-bdf4fed7d3 .field-date-of-birth {
   grid-column: 2 !important;
   grid-row: 3 !important;
   position: relative !important;
-  margin: 0 !important;
 }
 
 #panelcontainer-bdf4fed7d3 .field-date-of-birth label {
@@ -896,339 +947,47 @@ main .form form select[multiple] {
 }
 
 #panelcontainer-bdf4fed7d3 .field-date-of-birth input {
-  width: 100% !important;
+  width: 398px !important;
   height: 48px !important;
-  border: 1px solid #dcdcdc !important;
-  border-radius: 10px !important;
-  padding: 0 44px 0 15px !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,.06) !important;
+  border: 1px solid #dcdfe6 !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  padding: 0 44px 0 20px !important;
+  font-size: 14px !important;
+  color: #111827 !important;
   box-sizing: border-box !important;
+  outline: none !important;
 }
 
-#panelcontainer-bdf4fed7d3 .field-date-of-birth::after {
-  content: "📅" !important;
+#panelcontainer-bdf4fed7d3 .field-date-of-birth::before {
+  content: "Enter / Select Date of Birth" !important;
   position: absolute !important;
-  right: 12px !important;
+  left: 20px !important;
   top: 24px !important;
   transform: translateY(-50%) !important;
-  opacity: 0.45 !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #9ca3af !important;
   pointer-events: none !important;
 }
 
-/* hide PAN field */
+#panelcontainer-bdf4fed7d3 .field-date-of-birth::after {
+  content: "▦" !important;
+  position: absolute !important;
+  right: 16px !important;
+  top: 24px !important;
+  transform: translateY(-50%) !important;
+  font-size: 15px !important;
+  color: #8b8f98 !important;
+  pointer-events: none !important;
+}
+
+/* ===== PAN FIELD ===== */
 #panelcontainer-bdf4fed7d3 .field-pan-card-number {
-  display: none !important;
-}
-
-/* OTP note */
-#panelcontainer-bdf4fed7d3 .field-otp-note {
-  grid-column: 1 !important;
-  grid-row: 4 !important;
-  margin: -4px 0 20px 0 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-otp-note p {
-  margin: 0 !important;
-  font-size: 12px !important;
-  color: #6b7280 !important;
-}
-
-/* source of income */
-#panelcontainer-bdf4fed7d3 .field-source-of-income {
-  grid-column: 3 !important;
-  grid-row: 2 / span 3 !important;
-  margin: 0 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-source-of-income legend {
-  display: block !important;
-  font-size: 13px !important;
-  font-weight: 700 !important;
-  color: #4b5563 !important;
-  margin: 0 0 10px 0 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-source-of-income .radio-wrapper {
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-  margin-bottom: 12px !important;
-}
-
-/* yellow income note */
-#panelcontainer-bdf4fed7d3 .field-income-verification-note {
-  grid-column: 3 !important;
-  grid-row: 3 !important;
-  width: 360px !important;
-  background: #fffdf2 !important;
-  border: 1px solid #ffe08a !important;
-  border-radius: 8px !important;
-  padding: 10px 12px !important;
-  font-size: 12px !important;
-  line-height: 1.35 !important;
-  font-weight: 700 !important;
-  color: #9a6a00 !important;
-  margin-top: 34px !important;
-  box-sizing: border-box !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-income-verification-note p {
-  margin: 0 !important;
-}
-
-/* radios only inside this panel */
-#panelcontainer-bdf4fed7d3 input[type="radio"] {
-  width: 18px !important;
-  height: 18px !important;
-  accent-color: #2f5bea !important;
-}
-
-#panelcontainer-bdf4fed7d3 .radio-wrapper {
-  display: flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-}
-
-#panelcontainer-bdf4fed7d3 .radio-wrapper label {
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  color: #1f2937 !important;
-}
-
-/* consent */
-#panelcontainer-bdf4fed7d3 .field-consent-processing-data {
-  grid-column: 1 / -1 !important;
-  grid-row: 6 !important;
-  margin-top: 12px !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-consent-marketing,
-#panelcontainer-bdf4fed7d3 .field-consent-marketing-data {
-  grid-column: 1 / -1 !important;
-  grid-row: 7 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-consent-processing-data,
-#panelcontainer-bdf4fed7d3 .field-consent-marketing,
-#panelcontainer-bdf4fed7d3 .field-consent-marketing-data {
-  display: flex !important;
-  align-items: flex-start !important;
-  gap: 8px !important;
-}
-
-#panelcontainer-bdf4fed7d3 input[type="checkbox"] {
-  width: 16px !important;
-  height: 16px !important;
-  margin-top: 2px !important;
-  flex: 0 0 auto !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-consent-processing-data label,
-#panelcontainer-bdf4fed7d3 .field-consent-marketing label,
-#panelcontainer-bdf4fed7d3 .field-consent-marketing-data label {
-  font-size: 12px !important;
-  line-height: 1.4 !important;
-  color: #4b5563 !important;
-}
-
-/* terms */
-#panelcontainer-bdf4fed7d3 .field-terms-privacy-text {
-  grid-column: 1 / -1 !important;
-  grid-row: 8 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-terms-privacy-text p {
-  margin: 0 !important;
-  font-size: 12px !important;
-  color: #4b5563 !important;
-}
-/* FINAL POSITION FIX - ONLY THIS PANEL */
-
-#panelcontainer-bdf4fed7d3 {
-  grid-template-columns: 360px 360px 360px !important;
-  column-gap: 20px !important;
-  row-gap: 8px !important;
-  align-items: start !important;
-}
-
-/* title */
-#panelcontainer-bdf4fed7d3 > legend {
-  grid-column: 1 / -1 !important;
-  grid-row: 1 !important;
-  margin: 0 0 12px 0 !important;
-}
-
-/* pan / dob radio row */
-#panelcontainer-bdf4fed7d3 .field-pan-card-or-dob-choice {
-  grid-column: 2 !important;
-  grid-row: 2 !important;
-  display: flex !important;
-  flex-direction: row !important;
-  gap: 20px !important;
-  align-items: center !important;
-  margin: 0 0 8px 0 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-pan-card-or-dob-choice .radio-wrapper {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 6px !important;
-  margin: 0 !important;
-}
-
-/* input row */
-#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number {
-  grid-column: 1 !important;
-  grid-row: 3 !important;
-  margin: 0 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-date-of-birth {
-  grid-column: 2 !important;
-  grid-row: 3 !important;
-  margin: 0 !important;
-}
-
-/* source of income */
-#panelcontainer-bdf4fed7d3 .field-source-of-income {
-  grid-column: 3 !important;
-  grid-row: 2 / span 4 !important;
-  margin: 0 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-source-of-income .radio-wrapper {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: center !important;
-  gap: 7px !important;
-  margin: 0 0 12px 0 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-source-of-income .radio-wrapper:first-of-type {
-  margin-bottom: 64px !important;
-}
-
-/* yellow note between salaried and self-employed */
-#panelcontainer-bdf4fed7d3 .field-income-verification-note {
-  grid-column: 3 !important;
-  grid-row: 3 !important;
-  width: 360px !important;
-  height: auto !important;
-  margin: 22px 0 0 0 !important;
-  padding: 10px 12px !important;
-  font-size: 11px !important;
-  line-height: 1.35 !important;
-  font-weight: 700 !important;
-  background: #fffdf2 !important;
-  border: 1px solid #f4d06f !important;
-  border-radius: 6px !important;
-  color: #9a6a00 !important;
-}
-
-/* OTP directly below mobile */
-#panelcontainer-bdf4fed7d3 .field-otp-note {
-  grid-column: 1 !important;
-  grid-row: 4 !important;
-  margin: -3px 0 28px 0 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-otp-note p {
-  font-size: 11px !important;
-}
-
-/* consent rows */
-#panelcontainer-bdf4fed7d3 .field-consent-processing-data {
-  grid-column: 1 / -1 !important;
-  grid-row: 5 !important;
-  margin: 8px 0 0 0 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-consent-marketing,
-#panelcontainer-bdf4fed7d3 .field-consent-marketing-data {
-  grid-column: 1 / -1 !important;
-  grid-row: 6 !important;
-  margin: 0 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-terms-privacy-text {
-  grid-column: 1 / -1 !important;
-  grid-row: 7 !important;
-  margin: 2px 0 0 0 !important;
-}
-
-/* make text size like reference */
-#panelcontainer-bdf4fed7d3 label,
-#panelcontainer-bdf4fed7d3 p {
-  font-size: 12px !important;
-}
-
-/* remove big input/text look */
-#panelcontainer-bdf4fed7d3 .field-income-verification-note p {
-  margin: 0 !important;
-  font-size: 11px !important;
-  line-height: 1.35 !important;
-}
-/* VIEW LOAN ELIGIBILITY BUTTON */
-#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility {
-  display: block !important;
-  grid-column: 1 !important;
-  grid-row: 8 !important;
-  margin: 18px 0 0 0 !important;
-  padding: 0 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button {
-  width: 180px !important;
-  height: 48px !important;
-  border: 0 !important;
-  border-radius: 8px !important;
-  background: #9db7f5 !important;
-  color: #ffffff !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button::after {
-  content: "›";
-  font-size: 24px !important;
-  margin-left: 18px !important;
-  vertical-align: -2px !important;
-}
-/* FIX INDIAN FLAG */
-#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::before {
-  content: "" !important;
-  width: 18px !important;
-  height: 12px !important;
-  left: 14px !important;
-  top: 24px !important;
-  background: linear-gradient(
-    to bottom,
-    #ff9933 0 33%,
-    #ffffff 33% 66%,
-    #138808 66% 100%
-  ) !important;
-  border: 1px solid #ddd !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::after {
-  content: "+91  ˅" !important;
-  left: 42px !important;
-  top: 24px !important;
-  color: #4b5563 !important;
-  font-size: 13px !important;
-}
-
-/* PAN FIELD SHOW WHEN PAN CARD SELECTED */
-#panelcontainer-bdf4fed7d3:has(#pan-card-or-dob-choice:checked) .field-pan-card-number {
-  display: block !important;
   grid-column: 2 !important;
   grid-row: 3 !important;
   position: relative !important;
-  margin: 0 !important;
-}
-
-#panelcontainer-bdf4fed7d3:has(#pan-card-or-dob-choice:checked) .field-date-of-birth {
   display: none !important;
 }
 
@@ -1237,231 +996,1170 @@ main .form form select[multiple] {
 }
 
 #panelcontainer-bdf4fed7d3 .field-pan-card-number input {
-  width: 100% !important;
+  width: 398px !important;
   height: 48px !important;
-  border: 1px solid #dcdcdc !important;
-  border-radius: 10px !important;
-  padding: 0 15px !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,.06) !important;
+  border: 1px solid #dcdfe6 !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  padding: 0 20px !important;
+  font-size: 14px !important;
   box-sizing: border-box !important;
 }
 
-/* BUTTON FULL TEXT */
-#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility {
-  grid-column: 1 !important;
-  grid-row: 8 !important;
-  margin-top: 18px !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button {
-  width: 170px !important;
-  height: 46px !important;
-  white-space: nowrap !important;
-  overflow: visible !important;
-  text-overflow: unset !important;
-  font-size: 13px !important;
-  padding: 0 18px !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button {
-  font-size: 0 !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button::before {
-  content: "View Loan Eligibility";
-  font-size: 13px !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button::after {
-  content: "›";
-  font-size: 22px !important;
-  margin-left: 12px !important;
-}
-
-/* ESSENTIALS TEXT COLOR */
-#panelcontainer-bdf4fed7d3 ~ * {
-  color: #4b5563 !important;
-}
-
-#panelcontainer-bdf4fed7d3 ~ * h3,
-#panelcontainer-bdf4fed7d3 ~ * legend {
-  color: #4b5563 !important;
-}
-/* ESSENTIALS FOR THE JOURNEY - HORIZONTAL */
-#panelcontainer-a600059c18 {
-  width: 100% !important;
-  display: flex !important;
-  flex-wrap: nowrap !important;        /* 🔴 prevents vertical stacking */
-  justify-content: space-between !important;
-  align-items: center !important;
-  gap: 40px !important;
-  padding: 18px 28px !important;
-  border: 0 !important;
-  background: #fff !important;
-}
-
-/* title full width */
-#panelcontainer-a600059c18 > legend {
-  width: 100% !important;
+/* Toggle PAN/DOB */
+#panelcontainer-bdf4fed7d3:has(#pan-card-or-dob-choice:checked) .field-pan-card-number {
   display: block !important;
-  font-size: 13px !important;
+}
+
+#panelcontainer-bdf4fed7d3:has(#pan-card-or-dob-choice:checked) .field-date-of-birth {
+  display: none !important;
+}
+
+#panelcontainer-bdf4fed7d3:has(#pan-card-or-dob-choice-1:checked) .field-date-of-birth {
+  display: block !important;
+}
+
+#panelcontainer-bdf4fed7d3:has(#pan-card-or-dob-choice-1:checked) .field-pan-card-number {
+  display: none !important;
+}
+
+/* ===== SOURCE OF INCOME ===== */
+#panelcontainer-bdf4fed7d3 .field-source-of-income {
+  grid-column: 3 !important;
+  grid-row: 2 / span 4 !important;
+  margin: 10px 0 0 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-source-of-income legend {
+  display: block !important;
+  font-size: 16px !important;
   font-weight: 800 !important;
   color: #111827 !important;
-  margin-bottom: 18px !important;
+  margin: 0 0 26px 0 !important;
 }
 
-/* each item */
-#panelcontainer-a600059c18 .plain-text-wrapper {
-  display: flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  flex: 1 !important;                 /* 🔴 equal spacing */
-  min-width: 0 !important;
-}
-
-/* text */
-#panelcontainer-a600059c18 .plain-text-wrapper p {
-  margin: 0 !important;
-  font-size: 12px !important;
-  font-weight: 800 !important;
-  color: #3157c9 !important;
-  line-height: 1.2 !important;
-}
-
-/* icons */
-#panelcontainer-a600059c18 .field-essential-mobile-phone::before {
-  content: "📱";
-}
-
-#panelcontainer-a600059c18 .field-essential-pan-card::before {
-  content: "🪪";
-}
-
-#panelcontainer-a600059c18 .field-essential-date-of-birth::before {
-  content: "🗓️";
-}
-
-#panelcontainer-a600059c18 .field-essential-cheque-book-bank-account-details::before {
-  content: "🧾";
-}
-
-#panelcontainer-a600059c18 .plain-text-wrapper::before {
-  font-size: 15px !important;
-  opacity: 0.6 !important;
-}
-
-/* OTP PANEL */
-/* OTP PAGE ONLY */
-#panelcontainer-0fa7951f12 {
-  width: 680px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  background: #fff !important;
-  font-family: Arial, sans-serif !important;
-}
-
-/* title */
-#panelcontainer-0fa7951f12 > legend {
-  display: block !important;
-  font-size: 14px !important;
-  font-weight: 800 !important;
-  color: #111827 !important;
-  margin: 0 0 4px 0 !important;
-}
-
-/* instructions */
-#panelcontainer-0fa7951f12 .field-otp-instructions {
+#panelcontainer-bdf4fed7d3 .field-source-of-income .radio-wrapper {
   margin: 0 0 20px 0 !important;
 }
 
-#panelcontainer-0fa7951f12 .field-otp-instructions p {
+/* yellow salaried message */
+#panelcontainer-bdf4fed7d3 .field-income-verification-note {
+  display: none !important;
+  grid-column: 3 !important;
+  grid-row: 4 !important;
+  width: 360px !important;
+  margin: -12px 0 0 0 !important;
+  padding: 10px 14px !important;
+  background: #fff9ec !important;
+  border: 1px solid #f4b64b !important;
+  border-radius: 6px !important;
+  box-sizing: border-box !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-income-verification-note p {
   margin: 0 !important;
-  font-size: 13px !important;
+  font-size: 12px !important;
   line-height: 1.35 !important;
   color: #111827 !important;
-  font-weight: 700 !important;
 }
 
-#panelcontainer-0fa7951f12 .field-otp-instructions u {
-  color: #3157c9 !important;
-  text-decoration: none !important;
-  font-weight: 800 !important;
+/* show yellow note only when salaried selected */
+#panelcontainer-bdf4fed7d3:has(#source-of-income:checked) .field-income-verification-note {
+  display: block !important;
 }
 
-/* OTP input */
-#panelcontainer-0fa7951f12 .field-otp-code {
-  width: 520px !important;
-  position: relative !important;
-  margin: 0 0 8px 0 !important;
+/* ===== CHECKBOX CONSENTS ===== */
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data {
+  grid-column: 1 / -1 !important;
+  grid-row: 5 !important;
+  margin: 0 0 14px 0 !important;
 }
 
-#panelcontainer-0fa7951f12 .field-otp-code input {
-  width: 520px !important;
-  height: 48px !important;
-  border: 1px solid #dcdcdc !important;
-  border-radius: 8px !important;
-  background: #fff !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,.06) !important;
-  padding: 0 52px 0 18px !important;
-  font-size: 18px !important;
-  letter-spacing: 34px !important;
+#panelcontainer-bdf4fed7d3 .field-consent-marketing {
+  grid-column: 1 / -1 !important;
+  grid-row: 6 !important;
+  margin: 0 0 24px 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+}
+
+#panelcontainer-bdf4fed7d3 input[type="checkbox"] {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 1px 0 0 0 !important;
+  flex: 0 0 auto !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data label,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing label {
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  font-weight: 400 !important;
   color: #111827 !important;
-  box-sizing: border-box !important;
-  outline: none !important;
 }
 
+/* ===== TERMS ===== */
+#panelcontainer-bdf4fed7d3 .field-terms-privacy-text {
+  grid-column: 1 / -1 !important;
+  grid-row: 7 !important;
+  margin: 6px 0 34px 0 !important;
+}
 
+#panelcontainer-bdf4fed7d3 .field-terms-privacy-text p {
+  margin: 0 !important;
+  font-size: 14px !important;
+  color: #111827 !important;
+}
 
-#panelcontainer-0fa7951f12 .field-otp-code::after {
-  content: "👁" !important;
+#panelcontainer-bdf4fed7d3 .field-terms-privacy-text a,
+#panelcontainer-bdf4fed7d3 .field-terms-privacy-text u {
+  color: #0057ff !important;
+  text-decoration: none !important;
+}
+
+/* ===== BUTTON ===== */
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility {
+  grid-column: 1 !important;
+  grid-row: 8 !important;
+  margin: 0 0 36px 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button {
+  width: 180px !important;
+  height: 50px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: #5d74f2 !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button::after {
+  content: "›" !important;
+  font-size: 24px !important;
+  margin-left: 10px !important;
+  vertical-align: -2px !important;
+}
+
+/* ===== IMPORTANT LINKS ===== */
+#panelcontainer-bdf4fed7d3::after {
+  content: "Important links related to Product Features, Customer Care, Sachet Portal, Privacy Policy, GRO Details and RBI CMS Portal can be accessed in the ‘Help’ section above." !important;
+  grid-column: 1 / -1 !important;
+  grid-row: 9 !important;
+  display: block !important;
+  border-top: 1px solid #d1d5db !important;
+  padding-top: 14px !important;
+  margin: 0 !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  color: #111827 !important;
+}
+
+/* ===== ESSENTIALS ===== */
+#panelcontainer-a600059c18 {
+  width: 1350px !important;
+  margin: 0 auto 40px auto !important;
+  padding: 32px 56px 60px 56px !important;
+  background: #fff !important;
+  border: 0 !important;
+  border-radius: 0 0 12px 12px !important;
+  box-shadow: 0 18px 35px rgba(0,0,0,.06) !important;
+  font-family: Arial, sans-serif !important;
+  box-sizing: border-box !important;
+
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  column-gap: 40px !important;
+  row-gap: 0 !important;
+}
+
+#panelcontainer-a600059c18 > legend {
+  grid-column: 1 / -1 !important;
+  display: block !important;
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  margin: 0 0 28px 0 !important;
+}
+
+#panelcontainer-a600059c18 .plain-text-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#panelcontainer-a600059c18 .plain-text-wrapper p {
+  margin: 0 !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #111827 !important;
+  line-height: 1.2 !important;
+}
+
+#panelcontainer-a600059c18 .field-essential-mobile-phone::before {
+  content: "☎" !important;
+}
+
+#panelcontainer-a600059c18 .field-essential-pan-card::before {
+  content: "▣" !important;
+}
+
+#panelcontainer-a600059c18 .field-essential-date-of-birth::before {
+  content: "▦" !important;
+}
+
+#panelcontainer-a600059c18 .field-essential-cheque-book-bank-account-details::before {
+  content: "▧" !important;
+}
+
+#panelcontainer-a600059c18 .plain-text-wrapper::before {
+  font-size: 16px !important;
+  opacity: .65 !important;
+  color: #111827 !important;
+}
+/* FINAL FIX - EXACT LAYOUT */
+
+#panelcontainer-bdf4fed7d3 {
+  width: 1350px !important;
+  min-height: 745px !important;
+  margin: 0 auto !important;
+  padding: 50px 56px 0 56px !important;
+  position: relative !important;
+  background: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 36px rgba(0,0,0,.08) !important;
+  border: 0 !important;
+  font-family: Arial, sans-serif !important;
+  box-sizing: border-box !important;
+  display: block !important;
+}
+
+/* title */
+#panelcontainer-bdf4fed7d3 > legend {
+  display: block !important;
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  margin: 0 !important;
+}
+
+/* hide errors */
+#panelcontainer-bdf4fed7d3 .field-invalid .field-description,
+#panelcontainer-bdf4fed7d3 [class*="error"] {
+  display: none !important;
+}
+
+/* PAN DOB radio */
+#panelcontainer-bdf4fed7d3 .field-pan-card-or-dob-choice {
   position: absolute !important;
-  right: 18px !important;
-  top: 13px !important;
-  font-size: 15px !important;
-  opacity: 0.65 !important;
+  left: 565px !important;
+  top: 96px !important;
+  display: flex !important;
+  gap: 28px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-pan-card-or-dob-choice legend {
+  display: none !important;
+}
+
+/* common radio */
+#panelcontainer-bdf4fed7d3 .radio-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+#panelcontainer-bdf4fed7d3 input[type="radio"] {
+  width: 18px !important;
+  height: 18px !important;
+  accent-color: #2f5bea !important;
+}
+
+#panelcontainer-bdf4fed7d3 .radio-wrapper label {
+  font-size: 14px !important;
+  color: #111827 !important;
+}
+
+/* mobile input */
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number {
+  position: absolute !important;
+  left: 56px !important;
+  top: 142px !important;
+  width: 398px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number label {
+  display: none !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number input {
+  width: 398px !important;
+  height: 48px !important;
+  border: 1px solid #dcdfe6 !important;
+  border-radius: 8px !important;
+  padding-left: 145px !important;
+  box-shadow: none !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::before {
+  content: "🇮🇳 +91" !important;
+  position: absolute !important;
+  left: 16px !important;
+  top: 24px !important;
+  transform: translateY(-50%) !important;
+  z-index: 2 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::after {
+  content: "Enter Aadhaar Linked Mobile Number" !important;
+  position: absolute !important;
+  left: 88px !important;
+  top: 24px !important;
+  transform: translateY(-50%) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #9ca3af !important;
   pointer-events: none !important;
 }
 
-/* hide validation */
-#panelcontainer-0fa7951f12 .field-description {
+/* DOB input */
+#panelcontainer-bdf4fed7d3 .field-date-of-birth,
+#panelcontainer-bdf4fed7d3 .field-pan-card-number {
+  position: absolute !important;
+  left: 485px !important;
+  top: 142px !important;
+  width: 398px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-date-of-birth label,
+#panelcontainer-bdf4fed7d3 .field-pan-card-number label {
   display: none !important;
 }
-/* FIX: SUBMIT + RESEND SAME ROW */
-#panelcontainer-0fa7951f12 .submit-wrapper {
-  display: flex !important;
-  align-items: center !important;
-  gap: 16px !important;
-  margin-top: 28px !important;
-}
 
-/* move submit inside flex */
-#panelcontainer-0fa7951f12 .field-otp-submit {
-  display: inline-block !important;
-  margin: 0 !important;
-}
-
-/* move resend beside submit */
-#panelcontainer-0fa7951f12 .field-otp-resend-icon {
-  display: inline-block !important;
-  margin: 0 !important;
-  position: static !important;   /* 🔴 important */
-}
-
-/* resend button style */
-#panelcontainer-0fa7951f12 .field-otp-resend-icon button {
-  width: 120px !important;
-  height: 46px !important;
+#panelcontainer-bdf4fed7d3 .field-date-of-birth input,
+#panelcontainer-bdf4fed7d3 .field-pan-card-number input {
+  width: 398px !important;
+  height: 48px !important;
+  border: 1px solid #dcdfe6 !important;
   border-radius: 8px !important;
-  background: #5f8dde !important;
-  color: #fff !important;
-  font-size: 13px !important;
+  padding: 0 44px 0 20px !important;
+  box-shadow: none !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-date-of-birth input::placeholder {
+  color: transparent !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-date-of-birth::before {
+  content: "Enter / Select Date of Birth" !important;
+  position: absolute !important;
+  left: 20px !important;
+  top: 24px !important;
+  transform: translateY(-50%) !important;
+  color: #9ca3af !important;
+  font-size: 16px !important;
   font-weight: 700 !important;
 }
 
+#panelcontainer-bdf4fed7d3 .field-date-of-birth::after {
+  content: "▦" !important;
+  position: absolute !important;
+  right: 16px !important;
+  top: 24px !important;
+  transform: translateY(-50%) !important;
+}
 
+/* PAN/DOB toggle */
+#panelcontainer-bdf4fed7d3 .field-pan-card-number {
+  display: none !important;
+}
 
+#panelcontainer-bdf4fed7d3:has(#pan-card-or-dob-choice:checked) .field-pan-card-number {
+  display: block !important;
+}
 
+#panelcontainer-bdf4fed7d3:has(#pan-card-or-dob-choice:checked) .field-date-of-birth {
+  display: none !important;
+}
+
+/* OTP note */
+#panelcontainer-bdf4fed7d3 .field-otp-note {
+  position: absolute !important;
+  left: 56px !important;
+  top: 202px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-otp-note p {
+  margin: 0 !important;
+  font-size: 14px !important;
+  color: #4b5563 !important;
+}
+
+/* income */
+#panelcontainer-bdf4fed7d3 .field-source-of-income {
+  position: absolute !important;
+  left: 930px !important;
+  top: 105px !important;
+  width: 360px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-source-of-income legend {
+  display: block !important;
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  margin-bottom: 24px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-source-of-income .radio-wrapper {
+  margin-bottom: 22px !important;
+}
+
+/* yellow salaried note */
+#panelcontainer-bdf4fed7d3 .field-income-verification-note {
+  display: none !important;
+  position: absolute !important;
+  left: 930px !important;
+  top: 232px !important;
+  width: 360px !important;
+  padding: 10px 14px !important;
+  background: #fff9ec !important;
+  border: 1px solid #f4b64b !important;
+  border-radius: 6px !important;
+  box-sizing: border-box !important;
+  z-index: 5 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-income-verification-note p {
+  margin: 0 !important;
+  font-size: 12px !important;
+  line-height: 1.35 !important;
+}
+
+#panelcontainer-bdf4fed7d3:has(#source-of-income:checked) .field-income-verification-note {
+  display: block !important;
+}
+
+/* consents */
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data {
+  position: absolute !important;
+  left: 56px !important;
+  top: 265px !important;
+  width: 1180px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-consent-marketing {
+  position: absolute !important;
+  left: 56px !important;
+  top: 305px !important;
+  width: 1180px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+}
+
+#panelcontainer-bdf4fed7d3 input[type="checkbox"] {
+  width: 18px !important;
+  height: 18px !important;
+  margin-top: 1px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data label,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing label {
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  color: #111827 !important;
+}
+
+/* terms */
+#panelcontainer-bdf4fed7d3 .field-terms-privacy-text {
+  position: absolute !important;
+  left: 56px !important;
+  top: 365px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-terms-privacy-text p {
+  margin: 0 !important;
+  font-size: 14px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-terms-privacy-text a,
+#panelcontainer-bdf4fed7d3 .field-terms-privacy-text u {
+  color: #0057ff !important;
+}
+
+/* button */
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility {
+  position: absolute !important;
+  left: 56px !important;
+  top: 435px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button {
+  width: 180px !important;
+  height: 50px !important;
+  border-radius: 8px !important;
+  border: 0 !important;
+  background: #5d74f2 !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button::after {
+  content: "›" !important;
+  font-size: 24px !important;
+  margin-left: 10px !important;
+  vertical-align: -2px !important;
+}
+
+/* important links */
+#panelcontainer-bdf4fed7d3::after {
+  content: "Important links related to Product Features, Customer Care, Sachet Portal, Privacy Policy, GRO Details and RBI CMS Portal can be accessed in the ‘Help’ section above." !important;
+  position: absolute !important;
+  left: 56px !important;
+  right: 56px !important;
+  top: 520px !important;
+  border-top: 1px solid #d1d5db !important;
+  padding-top: 14px !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  color: #111827 !important;
+}
+
+/* essentials inside same visual card */
+#panelcontainer-a600059c18 {
+  width: 1350px !important;
+  margin: -185px auto 40px auto !important;
+  padding: 0 56px 60px 56px !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  column-gap: 40px !important;
+  font-family: Arial, sans-serif !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+#panelcontainer-a600059c18 > legend {
+  grid-column: 1 / -1 !important;
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  margin: 0 0 28px 0 !important;
+  color: #111827 !important;
+}
+
+#panelcontainer-a600059c18 .plain-text-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#panelcontainer-a600059c18 .plain-text-wrapper p {
+  margin: 0 !important;
+  font-size: 14px !important;
+  color: #111827 !important;
+}
+
+#panelcontainer-a600059c18 .field-essential-mobile-phone::before {
+  content: "☎" !important;
+}
+
+#panelcontainer-a600059c18 .field-essential-pan-card::before {
+  content: "▣" !important;
+}
+
+#panelcontainer-a600059c18 .field-essential-date-of-birth::before {
+  content: "▦" !important;
+}
+
+#panelcontainer-a600059c18 .field-essential-cheque-book-bank-account-details::before {
+  content: "▧" !important;
+}
+
+#panelcontainer-a600059c18 .plain-text-wrapper::before {
+  font-size: 16px !important;
+  opacity: .65 !important;
+}
+/* ===== FINAL POSITION CORRECTION ===== */
+
+/* MAIN CARD */
+#panelcontainer-bdf4fed7d3 {
+  width: 1350px !important;
+  min-height: 745px !important;
+  margin: 0 auto !important;
+  padding: 50px 56px 0 56px !important;
+  position: relative !important;
+  display: block !important;
+  overflow: visible !important;
+}
+
+/* TITLE */
+#panelcontainer-bdf4fed7d3 > legend {
+  position: absolute !important;
+  left: 56px !important;
+  top: 48px !important;
+}
+
+/* PAN / DOB RADIO - correct position */
+#panelcontainer-bdf4fed7d3 .field-pan-card-or-dob-choice {
+  position: absolute !important;
+  left: 610px !important;
+  top: 95px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 28px !important;
+  margin: 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-pan-card-or-dob-choice legend {
+  display: none !important;
+}
+
+/* MOBILE INPUT */
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number {
+  position: absolute !important;
+  left: 56px !important;
+  top: 142px !important;
+}
+
+/* DOB / PAN INPUT */
+#panelcontainer-bdf4fed7d3 .field-date-of-birth,
+#panelcontainer-bdf4fed7d3 .field-pan-card-number {
+  position: absolute !important;
+  left: 485px !important;
+  top: 142px !important;
+}
+
+/* SOURCE OF INCOME */
+#panelcontainer-bdf4fed7d3 .field-source-of-income {
+  position: absolute !important;
+  left: 930px !important;
+  top: 95px !important;
+  width: 360px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-source-of-income legend {
+  margin-bottom: 22px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-source-of-income .radio-wrapper {
+  margin-bottom: 20px !important;
+}
+
+/* SALARIED NOTE - no overlap */
+#panelcontainer-bdf4fed7d3 .field-income-verification-note {
+  position: absolute !important;
+  left: 930px !important;
+  top: 235px !important;
+  width: 360px !important;
+  z-index: 10 !important;
+}
+
+/* OTP NOTE */
+#panelcontainer-bdf4fed7d3 .field-otp-note {
+  position: absolute !important;
+  left: 56px !important;
+  top: 202px !important;
+}
+
+/* CONSENT ROW 1 */
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data {
+  position: absolute !important;
+  left: 56px !important;
+  top: 265px !important;
+  width: 1180px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+}
+
+/* CONSENT ROW 2 */
+#panelcontainer-bdf4fed7d3 .field-consent-marketing {
+  position: absolute !important;
+  left: 56px !important;
+  top: 305px !important;
+  width: 1180px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+}
+
+/* checkbox */
+#panelcontainer-bdf4fed7d3 input[type="checkbox"] {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  flex: 0 0 18px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data label,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing label {
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  color: #111827 !important;
+  margin: 0 !important;
+}
+
+/* TERMS */
+#panelcontainer-bdf4fed7d3 .field-terms-privacy-text {
+  position: absolute !important;
+  left: 56px !important;
+  top: 370px !important;
+}
+
+/* BUTTON */
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility {
+  position: absolute !important;
+  left: 56px !important;
+  top: 435px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button {
+  width: 180px !important;
+  height: 50px !important;
+  border-radius: 8px !important;
+  background: #5d74f2 !important;
+  color: #ffffff !important;
+  font-size: 0 !important;
+  font-weight: 800 !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button::before {
+  content: "View Loan Eligibility" !important;
+  font-size: 14px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button::after {
+  content: "›" !important;
+  font-size: 24px !important;
+  margin-left: 10px !important;
+  vertical-align: -2px !important;
+}
+
+/* IMPORTANT LINKS */
+#panelcontainer-bdf4fed7d3::after {
+  top: 520px !important;
+}
+
+/* ===== ESSENTIALS HORIZONTAL ===== */
+
+#panelcontainer-a600059c18 {
+  width: 1350px !important;
+  margin: -180px auto 40px auto !important;
+  padding: 0 56px 60px 56px !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  position: relative !important;
+  z-index: 20 !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  column-gap: 40px !important;
+}
+
+#panelcontainer-a600059c18 > legend {
+  grid-column: 1 / -1 !important;
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  margin: 0 0 28px 0 !important;
+}
+
+#panelcontainer-a600059c18 .plain-text-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+}
+
+#panelcontainer-a600059c18 .field-essential-mobile-phone {
+  grid-column: 1 !important;
+}
+
+#panelcontainer-a600059c18 .field-essential-pan-card {
+  grid-column: 2 !important;
+}
+
+#panelcontainer-a600059c18 .field-essential-date-of-birth {
+  grid-column: 3 !important;
+}
+
+#panelcontainer-a600059c18 .field-essential-cheque-book-bank-account-details {
+  grid-column: 4 !important;
+}
+
+#panelcontainer-a600059c18 .plain-text-wrapper p {
+  margin: 0 !important;
+  font-size: 14px !important;
+  color: #111827 !important;
+  white-space: nowrap !important;
+}
+/* ===== FINAL ALIGNMENT FIX ===== */
+
+/* PAN / DOB radio position */
+#panelcontainer-bdf4fed7d3 .field-pan-card-or-dob-choice {
+  position: absolute !important;
+  left: 565px !important;
+  top: 88px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 36px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Source of income correct position */
+#panelcontainer-bdf4fed7d3 .field-source-of-income {
+  position: absolute !important;
+  left: 900px !important;
+  top: 90px !important;
+  width: 400px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-source-of-income legend {
+  font-size: 16px !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  margin: 0 0 24px 0 !important;
+}
+
+/* Salaried row */
+#panelcontainer-bdf4fed7d3 .field-source-of-income .radio-wrapper:nth-of-type(1) {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 0 0 22px 0 !important;
+}
+
+/* Self employed row */
+#panelcontainer-bdf4fed7d3 .field-source-of-income .radio-wrapper:nth-of-type(2) {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 0 !important;
+}
+
+/* Hide yellow message by default */
+#panelcontainer-bdf4fed7d3 .field-income-verification-note {
+  display: none !important;
+}
+
+/* Show yellow message only when salaried selected */
+#panelcontainer-bdf4fed7d3:has(#source-of-income:checked) .field-income-verification-note {
+  display: block !important;
+  position: absolute !important;
+  left: 970px !important;
+  top: 225px !important;
+  width: 360px !important;
+  padding: 10px 14px !important;
+  background: #fff9ec !important;
+  border: 1px solid #f4b64b !important;
+  border-radius: 6px !important;
+  z-index: 20 !important;
+}
+
+/* Move consent rows down to avoid overlap */
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data {
+  position: absolute !important;
+  left: 56px !important;
+  top: 265px !important;
+  width: 1180px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-consent-marketing {
+  position: absolute !important;
+  left: 56px !important;
+  top: 305px !important;
+  width: 1180px !important;
+}
+
+/* Checkbox alignment */
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+}
+
+#panelcontainer-bdf4fed7d3 input[type="checkbox"] {
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  flex: 0 0 18px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data label,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing label {
+  margin: 0 !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  color: #111827 !important;
+}
+
+/* Terms */
+#panelcontainer-bdf4fed7d3 .field-terms-privacy-text {
+  position: absolute !important;
+  left: 56px !important;
+  top: 365px !important;
+}
+
+/* Button */
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility {
+  position: absolute !important;
+  left: 56px !important;
+  top: 430px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button {
+  width: 180px !important;
+  height: 50px !important;
+  font-size: 0 !important;
+  padding: 0 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button::before {
+  content: "View Loan Eligibility" !important;
+  font-size: 14px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-view-loan-eligibility button::after {
+  content: "" !important;
+}
+#panelcontainer-bdf4fed7d3,
+#panelcontainer-a600059c18 {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+/* ===== FIX CHECKBOX ALIGNMENT (INLINE ROW) ===== */
+
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing {
+  display: flex !important;
+  align-items: flex-start !important;
+  flex-direction: row !important;
+  gap: 10px !important;
+}
+
+/* force checkbox to stay inline */
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data input[type="checkbox"],
+#panelcontainer-bdf4fed7d3 .field-consent-marketing input[type="checkbox"] {
+  position: relative !important;   /* 🔴 key fix */
+  top: 2px !important;
+  margin: 0 !important;
+  width: 18px !important;
+  height: 18px !important;
+  flex: 0 0 18px !important;
+}
+
+/* label should sit beside checkbox */
+#panelcontainer-bdf4fed7d3 .field-consent-processing-data label,
+#panelcontainer-bdf4fed7d3 .field-consent-marketing label {
+  display: inline-block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.5 !important;
+  max-width: 1100px !important;
+}
+
+/* ===== OTP PANEL FINAL CLEAN VERSION ===== */
+
+#panelcontainer-0fa7951f12 {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 520px !important;
+  margin: 0 !important;
+  padding: 56px 0 120px 56px !important;
+  background: #fff !important;
+  font-family: Arial, sans-serif !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+/* TITLE */
+#panelcontainer-0fa7951f12 > legend {
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  margin-bottom: 22px !important;
+}
+
+/* INSTRUCTION TEXT */
+#panelcontainer-0fa7951f12 .field-otp-instructions {
+  margin-bottom: 40px !important;
+}
+
+#panelcontainer-0fa7951f12 .field-otp-instructions p {
+  font-size: 16px !important;
+  color: #111827 !important;
+}
+
+#panelcontainer-0fa7951f12 .field-otp-instructions a {
+  color: #0057ff !important;
+  text-decoration: underline !important;
+}
+
+/* OTP INPUT */
+#panelcontainer-0fa7951f12 .field-otp-code {
+  position: relative !important;
+  width: 504px !important;
+}
+
+#panelcontainer-0fa7951f12 .field-otp-code input {
+  width: 504px !important;
+  height: 48px !important;
+  border: 1px solid #dcdfe6 !important;
+  border-radius: 8px !important;
+  padding: 0 52px 0 18px !important;
+  font-size: 18px !important;
+  letter-spacing: 28px !important;
+}
+
+/* EYE ICON */
+/* EYE ICON - correct */
+#panelcontainer-0fa7951f12 .field-otp-code::after {
+  content: "" !important;
+  position: absolute !important;
+  right: 18px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  font-size: 16px !important;
+  line-height: 1 !important;
+  opacity: 0.75 !important;
+  pointer-events: none !important;
+}
+
+/* TIMER */
+#panelcontainer-0fa7951f12 .field-description {
+  margin-top: 6px !important;
+  font-size: 13px !important;
+  color: #6b7280 !important;
+}
+
+/* ATTEMPTS (RIGHT SIDE) */
+#panelcontainer-0fa7951f12 .field-otp-attempts {
+  position: absolute !important;
+  right: 80px !important;
+  top: 245px !important;
+  font-size: 16px !important;
+  color: #4b5563 !important;
+}
+
+/* REMOVE WRAPPER EFFECT */
+#panelcontainer-0fa7951f12 .submit-wrapper {
+  display: block !important;
+}
+
+/* ===== BUTTONS CORRECTED ===== */
+
+#panelcontainer-0fa7951f12 {
+  position: relative !important;
+}
+
+/* reset wrapper */
+#panelcontainer-0fa7951f12 .submit-wrapper {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* RESEND LEFT */
+#panelcontainer-0fa7951f12 .field-otp-resend-icon {
+  position: absolute !important;
+  left: 56px !important;
+  top: 340px !important;
+  width: 130px !important;
+  height: 50px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* SUBMIT RIGHT */
+#panelcontainer-0fa7951f12 .field-otp-submit {
+  position: absolute !important;
+  left: 276px !important;
+  top: 340px !important;
+  width: 130px !important;
+  height: 50px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* button style */
+#panelcontainer-0fa7951f12 .field-otp-resend-icon button,
+#panelcontainer-0fa7951f12 .field-otp-submit button,
+#panelcontainer-0fa7951f12 input[type="submit"] {
+  width: 130px !important;
+  min-width: 130px !important;
+  height: 50px !important;
+  min-height: 50px !important;
+  border-radius: 8px !important;
+  background: #5d74f2 !important;
+  color: #fff !important;
+  border: none !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+/* FINAL SMALL IMPROVEMENTS */
+
+/* reduce gap between text and input */
+#panelcontainer-0fa7951f12 .field-otp-instructions {
+  margin-bottom: 30px !important;
+}
+
+/* make edit mobile number blue */
+#panelcontainer-0fa7951f12 .field-otp-instructions a,
+#panelcontainer-0fa7951f12 .field-otp-instructions u {
+  color: #0057ff !important;
+  text-decoration: underline !important;
+  font-weight: 500 !important;
+}
+
+/* move input slightly closer */
+#panelcontainer-0fa7951f12 .field-otp-code {
+  margin-top: 0 !important;
+}
+/* slightly align timer like second image */
+#panelcontainer-0fa7951f12 .field-description {
+  margin-top: 3px !important;
+}
 
 
 
@@ -1781,7 +2479,25 @@ main .form form select[multiple] {
 #panelcontainer-bd9b2af0ce .range-max {
   position: static !important;
 }
+/* HARD REMOVE ANY LEFT LINE */
 
+/* remove pseudo elements completely */
+#panelcontainer-2522c08681 .field-emi::before,
+#panelcontainer-2522c08681 .field-rate::before,
+#panelcontainer-2522c08681 .field-tax::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* remove any left borders from all inner elements */
+#panelcontainer-2522c08681 * {
+  border-left: none !important;
+}
+
+/* remove any box shadows that look like line */
+#panelcontainer-2522c08681 * {
+  box-shadow: none !important;
+}
 /*ACCORDIAN*/
 
 /* Full Name Display Box */
