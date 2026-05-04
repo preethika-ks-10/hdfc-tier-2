@@ -122,71 +122,110 @@ function getTax() {
   return "₹4,000";
 }
 
-function initBankDropdownSelection() {
+/* ============================= */
+/* BANK SELECTION JS */
+/* ============================= */
+
+function initSalaryBankUI() {
+  const panel = document.querySelector(".field-salary-bank-selection");
+  const dropdownWrapper = document.querySelector(".drop-down-wrapper.field-salary-bank");
+  const select = document.querySelector("select[name='salary_bank']");
+
+  if (!panel || !dropdownWrapper || !select || panel.dataset.salaryBankReady === "true") return;
+
+  panel.dataset.salaryBankReady = "true";
+
+  const bankLogos = {
+    hdfc_bank: "/content/dam/s_hdfc_capstone/hdfc.png",
+    icici_bank: "/content/dam/s_hdfc_capstone/icici.png",
+    axis_bank: "/content/dam/s_hdfc_capstone/axis.png",
+    kotak: "/content/dam/s_hdfc_capstone/kotak.png",
+    sbi: "/content/dam/s_hdfc_capstone/sbi.png",
+    bank_of_baroda: "/content/dam/s_hdfc_capstone/bob.jpeg",
+    idfc_first: "/content/dam/s_hdfc_capstone/idfc.png"
+  };
+
   const banks = [
-    "HDFC Bank",
-    "ICICI Bank",
-    "Axis Bank",
-    "Kotak",
-    "SBI",
-    "Bank of Baroda",
-    "IDFC First"
+    { value: "hdfc_bank", text: "HDFC Bank" },
+    { value: "icici_bank", text: "ICICI Bank" },
+    { value: "axis_bank", text: "Axis Bank" },
+    { value: "kotak", text: "Kotak" },
+    { value: "sbi", text: "SBI" },
+    { value: "bank_of_baroda", text: "Bank of Baroda" },
+    { value: "idfc_first", text: "IDFC First" }
   ];
 
-  function setupDropdown() {
-    const dropdown = document.querySelector(".field-other-bank-name select");
-    const bankWrappers = document.querySelectorAll(".field-salary-bank .radio-wrapper");
+  const row = document.createElement("div");
+  row.className = "salary-bank-content-row";
 
-    if (!dropdown || !bankWrappers.length) return;
+  const cardContainer = document.createElement("div");
+  cardContainer.className = "bank-card-container";
 
-    if (dropdown.options.length <= 1) {
-      dropdown.innerHTML = "";
+  panel.appendChild(row);
+  row.appendChild(cardContainer);
+  row.appendChild(dropdownWrapper);
 
-      const defaultOption = document.createElement("option");
-      defaultOption.value = "";
-      defaultOption.text = "Other Bank";
-      dropdown.appendChild(defaultOption);
+  select.innerHTML = `
+    <option value="hdfc_bank">HDFC Bank</option>
+    <option value="other_bank">Other Bank</option>
+  `;
 
-      banks.forEach(function (bank) {
-        const option = document.createElement("option");
-        option.value = bank;
-        option.text = bank;
-        dropdown.appendChild(option);
-      });
-    }
+  function renderCards(type) {
+    cardContainer.innerHTML = "";
 
-    if (dropdown.dataset.bankListener !== "true") {
-      dropdown.dataset.bankListener = "true";
+    const list = type === "hdfc_bank"
+      ? banks.filter(bank => bank.value === "hdfc_bank")
+      : banks;
 
-      dropdown.addEventListener("change", function () {
-        const selectedBank = this.value;
+    list.forEach(bank => {
+      const card = document.createElement("div");
+      card.className = "bank-card";
+      card.dataset.value = bank.value;
 
-        bankWrappers.forEach(function (wrapper, index) {
-          const input = wrapper.querySelector('input[type="radio"]');
+      if (bank.value === "hdfc_bank") {
+        card.classList.add("active");
+      }
 
-          if (input && banks[index] === selectedBank) {
-            input.checked = true;
-            input.click();
-            input.dispatchEvent(new Event("change", { bubbles: true }));
-          }
+      card.innerHTML = `
+        <img src="${bankLogos[bank.value]}" alt="${bank.text}">
+        <span>${bank.text}</span>
+      `;
+
+      card.addEventListener("click", function () {
+        document.querySelectorAll(".bank-card").forEach(item => {
+          item.classList.remove("active");
         });
+
+        card.classList.add("active");
       });
-    }
+
+      cardContainer.appendChild(card);
+    });
   }
 
-  setupDropdown();
-  setTimeout(setupDropdown, 500);
-  setTimeout(setupDropdown, 1000);
-  setTimeout(setupDropdown, 2000);
+  select.value = "hdfc_bank";
+  renderCards("hdfc_bank");
+
+  select.addEventListener("change", function () {
+    renderCards(select.value);
+  });
 }
 
 if (typeof window !== "undefined") {
-  window.addEventListener("load", initBankDropdownSelection);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSalaryBankUI);
+  } else {
+    initSalaryBankUI();
+  }
+
+  window.addEventListener("load", initSalaryBankUI);
+  setTimeout(initSalaryBankUI, 500);
+  setTimeout(initSalaryBankUI, 1500);
 }
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber,  updateLoanDetails,
-  updateLoanDisplay, getRate, getTax, initBankDropdownSelection,
+  updateLoanDisplay, getRate, getTax,  initSalaryBankUI,
 };
 
 
