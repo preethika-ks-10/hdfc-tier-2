@@ -607,3 +607,43 @@ document.addEventListener("change", function (e) {
   }
 
 });
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const dropdown = document.querySelector(".field-other-bank-name select");
+
+  if (!dropdown) return;
+
+  const banks = [
+    "HDFC Bank",
+    "ICICI Bank",
+    "Axis Bank",
+    "Kotak",
+    "SBI",
+    "Bank of Baroda",
+    "IDFC First"
+  ];
+
+  dropdown.innerHTML = `<option value="">Other Bank</option>`;
+
+  banks.forEach(function (bank) {
+    dropdown.innerHTML += `<option value="${bank}">${bank}</option>`;
+  });
+
+  dropdown.addEventListener("change", function () {
+    const selectedBank = this.value;
+
+    document.querySelectorAll(".field-salary-bank .radio-wrapper").forEach(function (wrapper, index) {
+      const input = wrapper.querySelector('input[type="radio"]');
+
+      if (!input) return;
+
+      if (banks[index] === selectedBank) {
+        input.checked = true;
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+    });
+  });
+});

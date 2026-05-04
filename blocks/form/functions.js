@@ -121,8 +121,72 @@ function getRate() {
 function getTax() {
   return "₹4,000";
 }
+
+function initBankDropdownSelection() {
+  const banks = [
+    "HDFC Bank",
+    "ICICI Bank",
+    "Axis Bank",
+    "Kotak",
+    "SBI",
+    "Bank of Baroda",
+    "IDFC First"
+  ];
+
+  function setupDropdown() {
+    const dropdown = document.querySelector(".field-other-bank-name select");
+    const bankWrappers = document.querySelectorAll(".field-salary-bank .radio-wrapper");
+
+    if (!dropdown || !bankWrappers.length) return;
+
+    if (dropdown.options.length <= 1) {
+      dropdown.innerHTML = "";
+
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "";
+      defaultOption.text = "Other Bank";
+      dropdown.appendChild(defaultOption);
+
+      banks.forEach(function (bank) {
+        const option = document.createElement("option");
+        option.value = bank;
+        option.text = bank;
+        dropdown.appendChild(option);
+      });
+    }
+
+    if (dropdown.dataset.bankListener !== "true") {
+      dropdown.dataset.bankListener = "true";
+
+      dropdown.addEventListener("change", function () {
+        const selectedBank = this.value;
+
+        bankWrappers.forEach(function (wrapper, index) {
+          const input = wrapper.querySelector('input[type="radio"]');
+
+          if (input && banks[index] === selectedBank) {
+            input.checked = true;
+            input.click();
+            input.dispatchEvent(new Event("change", { bubbles: true }));
+          }
+        });
+      });
+    }
+  }
+
+  setupDropdown();
+  setTimeout(setupDropdown, 500);
+  setTimeout(setupDropdown, 1000);
+  setTimeout(setupDropdown, 2000);
+}
+
+if (typeof window !== "undefined") {
+  window.addEventListener("load", initBankDropdownSelection);
+}
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber,  updateLoanDetails,
-  updateLoanDisplay, getRate, getTax,
+  updateLoanDisplay, getRate, getTax, initBankDropdownSelection,
 };
+
+
