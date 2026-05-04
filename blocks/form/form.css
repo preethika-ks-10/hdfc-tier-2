@@ -1992,6 +1992,70 @@ main .form form select[multiple] {
   line-height: 1.5 !important;
   max-width: 1100px !important;
 }
+/* ===== FINAL LAST FIXES ===== */
+
+/* center the full layout */
+#panelcontainer-bdf4fed7d3,
+#panelcontainer-a600059c18 {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+}
+
+/* PAN / DOB radio above DOB/PAN input */
+#panelcontainer-bdf4fed7d3 .field-pan-card-or-dob-choice {
+  position: absolute !important;
+  left: 565px !important;
+  top: 92px !important;
+  width: 260px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 34px !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+
+/* Indian flag + +91 */
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 16px !important;
+  top: 24px !important;
+  width: 22px !important;
+  height: 14px !important;
+  transform: translateY(-50%) !important;
+  background: linear-gradient(
+    to bottom,
+    #ff9933 0 33%,
+    #ffffff 33% 66%,
+    #138808 66% 100%
+  ) !important;
+  border: 1px solid #ddd !important;
+  box-sizing: border-box !important;
+  z-index: 3 !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::after {
+  content: "+91   Enter Aadhaar Linked Mobile Number" !important;
+  position: absolute !important;
+  left: 48px !important;
+  top: 24px !important;
+  transform: translateY(-50%) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #9ca3af !important;
+  pointer-events: none !important;
+  z-index: 3 !important;
+}
+
+/* mobile input padding after flag text */
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number input {
+  padding-left: 64px !important;
+}
 
 /* ===== OTP PANEL FINAL CLEAN VERSION ===== */
 
