@@ -234,10 +234,51 @@ if (typeof window !== "undefined") {
   setTimeout(initSalaryBankUI, 1500);
   setTimeout(initSalaryBankUI, 3000);
 }
+
+
+/**
+ * Generate OTP (API Call)
+ */
+async function generateOtp(globals) {
+  const data = globals.functions.exportData();
+
+  const mobile = data.mobile || data.Mobile || data["Mobile Number"];
+  const dob = data.dob || data.DOB || data["Date of Birth"];
+  const pan = data.pan || data.PAN || data["Pan Card"];
+
+  if (!mobile) return "mobile is required";
+  if (!dob && !pan) return "Either dob or pan is required";
+
+  try {
+    const response = await fetch("/generate-otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        mobile,
+        dob: dob || null,
+        pan: pan || null
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.status !== "success") {
+      return result.message;
+    }
+
+    return result.otp;
+
+  } catch (e) {
+    return "Something went wrong";
+  }
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber,  updateLoanDetails,
-  updateLoanDisplay, getRate, getTax,  initSalaryBankUI,
+  updateLoanDisplay, getRate, getTax,  initSalaryBankUI, generateOtp,
 };
 
 

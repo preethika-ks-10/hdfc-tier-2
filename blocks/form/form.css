@@ -787,12 +787,7 @@ main div.form-wrapper {
         margin: 0;
     }
 }
-
-/* Expand height for multi-select dropdowns (array types) */
-main .form form select[multiple] {
-    height: calc(42px + 50px);
-}
-
+/* ===== FIX PARENT WIDTH SO PANEL DOES NOT BREAK ===== */
 /* ===== AEM SHOW/HIDE SAFETY ===== */
 [data-visible="false"],
 [data-visible="false"] * {
@@ -2128,6 +2123,7 @@ body {
 .field-loan-application-summary[data-visible="false"] {
   display: none !important;
 }
+
 
 
 
