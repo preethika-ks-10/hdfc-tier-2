@@ -296,11 +296,21 @@ function runOtpCountdown(globals) {
     }
 
     window.otpTimerInterval = setInterval(function () {
-      setTextValue(
-        globals,
-        "otp_resend_timer",
-        "Resend OTP in: " + seconds + " secs"
-      );
+      const text = "Resend OTP in: " + seconds + " secs";
+
+      const timerEl =
+        document.querySelector('[name="otp_resend_timer"]') ||
+        document.querySelector('.field-otp_resend_timer');
+
+      if (timerEl) {
+        timerEl.value = text;
+        timerEl.textContent = text;
+
+        const textNode = timerEl.querySelector("p, span, div");
+        if (textNode) {
+          textNode.textContent = text;
+        }
+      }
 
       seconds--;
 
@@ -308,7 +318,15 @@ function runOtpCountdown(globals) {
         clearInterval(window.otpTimerInterval);
         window.otpTimerInterval = null;
 
-        setTextValue(globals, "otp_resend_timer", "Resend OTP");
+        if (timerEl) {
+          timerEl.value = "Resend OTP";
+          timerEl.textContent = "Resend OTP";
+
+          const textNode = timerEl.querySelector("p, span, div");
+          if (textNode) {
+            textNode.textContent = "Resend OTP";
+          }
+        }
       }
     }, 1000);
 
@@ -318,7 +336,6 @@ function runOtpCountdown(globals) {
     return "";
   }
 }
-
 function generateOTP(globals) {
   try {
     const payload = {
