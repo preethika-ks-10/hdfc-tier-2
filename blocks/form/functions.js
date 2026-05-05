@@ -251,7 +251,7 @@ function generateOTP(globals) {
 
     if (!payload.mobile || (!payload.pan && !payload.dob)) {
       alert("Enter Mobile and PAN or DOB");
-      return;
+      return "";
     }
 
     fetch("/generate-otp", {
@@ -263,9 +263,7 @@ function generateOTP(globals) {
     })
       .then((res) => res.json())
       .then((result) => {
-        const { form } = globals;
-
-        const otpField = form.validate_otp.enter_otp;
+        const otpField = globals.form.validate_otp.enter_otp;
 
         if (result.status === "success" && result.otp) {
           globals.functions.setProperty(otpField, {
@@ -274,16 +272,14 @@ function generateOTP(globals) {
         } else {
           alert(result.message || "OTP generation failed");
         }
-      })
-      .catch((err) => {
-        console.error("Generate OTP Error:", err);
-        alert("API Error");
       });
+
+    return "";
   } catch (e) {
     console.error(e);
+    return "";
   }
 }
-
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber,  updateLoanDetails,
