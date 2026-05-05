@@ -201,21 +201,24 @@ if (typeof window !== "undefined") {
   setTimeout(initSalaryBankUI, 3000);
 }
 /*GENERATE OTP*/
+/**
+ * @param {scope} globals
+ */
+
 const OTP_BASE_URL = "https://writing-dimly-spout.ngrok-free.dev";
 
 function generateOTP(globals) {
   try {
-    const data = globals.functions.exportData();
+    const data =
+      globals && globals.functions && globals.functions.exportData
+        ? globals.functions.exportData()
+        : {};
 
     const payload = {
       mobile: data.aadhaar_linked_mobile_number || "",
       pan: data.pan_card_number || null,
       dob: data.date_of_birth || null,
     };
-
-    if (!payload.mobile || (!payload.pan && !payload.dob)) {
-      return "";
-    }
 
     fetch(OTP_BASE_URL + "/generate-otp", {
       method: "POST",
@@ -238,7 +241,7 @@ function generateOTP(globals) {
         }
       })
       .catch((err) => {
-        console.error("Generate OTP Error:", err);
+        console.error("Generate OTP API Error:", err);
       });
 
     return "";
@@ -247,7 +250,6 @@ function generateOTP(globals) {
     return "";
   }
 }
-
 export {
   getFullName,
   days,
