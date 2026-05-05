@@ -204,6 +204,7 @@ if (typeof window !== "undefined") {
 /**
  * @param {scope} globals
  */
+/* GENERATE OTP */
 const OTP_BASE_URL = "https://writing-dimly-spout.ngrok-free.dev";
 
 function getValue(globals, name) {
@@ -213,7 +214,12 @@ function getValue(globals, name) {
       if (data && data[name]) return data[name];
     }
 
-    if (globals && globals.form && globals.form.personal_loan_offer && globals.form.personal_loan_offer[name]) {
+    if (
+      globals &&
+      globals.form &&
+      globals.form.personal_loan_offer &&
+      globals.form.personal_loan_offer[name]
+    ) {
       return globals.form.personal_loan_offer[name].value || "";
     }
 
@@ -226,15 +232,17 @@ function getValue(globals, name) {
 
 function setOtpValue(globals, value) {
   try {
-    if (globals && globals.functions && globals.functions.setProperty) {
+    if (
+      globals &&
+      globals.functions &&
+      globals.functions.setProperty &&
+      globals.form &&
+      globals.form.otp_page &&
+      globals.form.otp_page.otp_code
+    ) {
       globals.functions.setProperty(globals.form.otp_page.otp_code, {
         value: value,
       });
-      return;
-    }
-
-    if (globals && globals.form && globals.form.otp_page && globals.form.otp_page.otp_code) {
-      globals.form.otp_page.otp_code.value = value;
       return;
     }
 
@@ -246,6 +254,68 @@ function setOtpValue(globals, value) {
     }
   } catch (e) {
     console.error("setOtpValue Error:", e);
+  }
+}
+
+function setTextValue(globals, fieldName, value) {
+  try {
+    if (
+      globals &&
+      globals.functions &&
+      globals.functions.setProperty &&
+      globals.form &&
+      globals.form.otp_page &&
+      globals.form.otp_page[fieldName]
+    ) {
+      globals.functions.setProperty(globals.form.otp_page[fieldName], {
+        value: value,
+        text: value,
+      });
+      return;
+    }
+
+    const el = document.querySelector(`[name="${fieldName}"]`);
+    if (el) {
+      el.value = value;
+      el.textContent = value;
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+      el.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+  } catch (e) {
+    console.error("setTextValue Error:", e);
+  }
+}
+
+function runOtpCountdown(globals) {
+  try {
+    let seconds = 21;
+
+    if (window.otpTimerInterval) {
+      clearInterval(window.otpTimerInterval);
+      window.otpTimerInterval = null;
+    }
+
+    window.otpTimerInterval = setInterval(function () {
+      setTextValue(
+        globals,
+        "otp_resend_timer",
+        "Resend OTP in: " + seconds + " secs"
+      );
+
+      seconds--;
+
+      if (seconds < 0) {
+        clearInterval(window.otpTimerInterval);
+        window.otpTimerInterval = null;
+
+        setTextValue(globals, "otp_resend_timer", "Resend OTP");
+      }
+    }, 1000);
+
+    return "";
+  } catch (e) {
+    console.error("runOtpCountdown Error:", e);
+    return "";
   }
 }
 
@@ -272,15 +342,22 @@ function generateOTP(globals) {
       },
       body: JSON.stringify(payload),
     })
-      .then((res) => res.json())
-      .then((result) => {
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (result) {
         console.log("OTP RESULT:", result);
 
         if (result.status === "success" && result.otp) {
+          window.otpTryCount = 0;
+
           setOtpValue(globals, String(result.otp));
+          setTextValue(globals, "otp_attempts_left", "3/3 attempt(s) left");
+
+          runOtpCountdown(globals);
         }
       })
-      .catch((err) => {
+      .catch(function (err) {
         console.error("Generate OTP API Error:", err);
       });
 
@@ -301,4 +378,5 @@ export {
   getTax,
   initSalaryBankUI,
   generateOTP,
+  runOtpCountdown,
 };
