@@ -241,6 +241,13 @@ if (typeof window !== "undefined") {
  */
 const OTP_BASE_URL = "https://writing-dimly-spout.ngrok-free.dev";
 
+function setText(globals, field, text) {
+  globals.functions.setProperty(field, {
+    value: text,
+    text: text,
+  });
+}
+
 function generateOTP(globals) {
   try {
     const data = globals.functions.exportData();
@@ -305,14 +312,19 @@ function generateOTP(globals) {
 function runOtpCountdown(globals) {
   let seconds = 21;
 
+  const timerField = globals.form.otp_page.otp_resend_timer;
+  const resendBtn = globals.form.otp_page.otp_resend_icon;
+
   if (window.otpTimerInterval) {
     clearInterval(window.otpTimerInterval);
   }
 
-  window.otpTimerInterval = setInterval(function () {
-    globals.functions.setProperty(globals.form.otp_page.otp_resend_timer, {
-      value: "Resend OTP in: " + seconds + " secs",
-    });
+  globals.functions.setProperty(resendBtn, {
+    enabled: false,
+  });
+
+  window.otpTimerInterval = setInterval(() => {
+    setText(globals, timerField, "Resend OTP in: " + seconds + " secs");
 
     seconds--;
 
@@ -320,8 +332,10 @@ function runOtpCountdown(globals) {
       clearInterval(window.otpTimerInterval);
       window.otpTimerInterval = null;
 
-      globals.functions.setProperty(globals.form.otp_page.otp_resend_timer, {
-        value: "Resend OTP",
+      setText(globals, timerField, "Resend OTP");
+
+      globals.functions.setProperty(resendBtn, {
+        enabled: true,
       });
     }
   }, 1000);
@@ -335,6 +349,9 @@ function validateOTP(globals) {
   try {
     const data = globals.functions.exportData();
 
+    const msgField = globals.form.otp_page["success failure msg"];
+    const attemptsField = globals.form.otp_page.otp_attempts_left;
+
     const payload = {
       mobile: data.aadhaar_linked_mobile_number || "",
       pan: data.pan_card_number || null,
@@ -343,7 +360,7 @@ function validateOTP(globals) {
     };
 
     if (!payload.otp) {
-      alert("Please enter OTP");
+      setText(globals, msgField, "Please enter OTP");
       return "";
     }
 
@@ -352,7 +369,7 @@ function validateOTP(globals) {
     }
 
     if (window.otpTryCount >= 3) {
-      alert("No attempts left. Please resend OTP.");
+      setText(globals, msgField, "No attempts left. Please resend OTP.");
       return "";
     }
 
@@ -372,11 +389,15 @@ function validateOTP(globals) {
             window.otpTimerInterval = null;
           }
 
-          globals.functions.setProperty(globals.form.otp_page.otp_attempts_left, {
-            value: "Verified",
-          });
+          setText(globals, msgField, "OTP submitted successfully");
+          setText(globals, attemptsField, "Verified");
 
-          alert("OTP submitted successfully");
+          // optional: move to next page/panel
+          // replace customer_details_page with your actual next panel name
+          // globals.functions.setProperty(globals.form.customer_details_page, {
+          //   visible: true,
+          // });
+
           return "";
         }
 
@@ -384,19 +405,20 @@ function validateOTP(globals) {
 
         const remaining = 3 - window.otpTryCount;
 
-        globals.functions.setProperty(globals.form.otp_page.otp_attempts_left, {
-          value:
-            remaining > 0
-              ? remaining + "/3 attempt(s) left"
-              : "No attempts left",
-        });
+        setText(
+          globals,
+          attemptsField,
+          remaining > 0
+            ? remaining + "/3 attempt(s) left"
+            : "No attempts left"
+        );
 
-        alert("Invalid OTP");
+        setText(globals, msgField, "Invalid OTP");
         return "";
       })
       .catch((err) => {
         console.error("Verify OTP Error:", err);
-        alert("Verify OTP API Error");
+        setText(globals, msgField, "Verify OTP API Error");
       });
 
     return "";
@@ -405,6 +427,9 @@ function validateOTP(globals) {
     return "";
   }
 }
+/**
+ * @param {scope} globals
+ */
 
 function resendOTP(globals) {
   try {
@@ -414,9 +439,8 @@ function resendOTP(globals) {
       value: "",
     });
 
-    globals.functions.setProperty(globals.form.otp_page.otp_attempts_left, {
-      value: "3/3 attempt(s) left",
-    });
+    setText(globals, globals.form.otp_page.otp_attempts_left, "3/3 attempt(s) left");
+    setText(globals, globals.form.otp_page["success failure msg"], "");
 
     generateOTP(globals);
 
