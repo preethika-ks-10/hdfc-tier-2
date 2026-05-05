@@ -244,9 +244,9 @@ function generateOTP(globals) {
     const data = globals.functions.exportData();
 
     const payload = {
-      mobile: data.mobile_no || "",
-      pan: data.pan_firstpage || null,
-      dob: data.dob_firstpage || null,
+      mobile: data.aadhaar_linked_mob || data.aadhaar_linked_mobile || "",
+      pan: data.pan_card_number || null,
+      dob: data.date_of_birth || null,
     };
 
     if (!payload.mobile || (!payload.pan && !payload.dob)) {
@@ -263,15 +263,24 @@ function generateOTP(globals) {
     })
       .then((res) => res.json())
       .then((result) => {
-        const otpField = globals.form.validate_otp.enter_otp;
+        const otpField = globals.form.otp_page.otp_code;
+        const attemptsField = globals.form.otp_page.otp_attempts_left;
 
         if (result.status === "success" && result.otp) {
           globals.functions.setProperty(otpField, {
             value: String(result.otp),
           });
+
+          globals.functions.setProperty(attemptsField, {
+            value: "3/3 attempt(s) left",
+          });
         } else {
           alert(result.message || "OTP generation failed");
         }
+      })
+      .catch((err) => {
+        console.error("Generate OTP Error:", err);
+        alert("API Error");
       });
 
     return "";
