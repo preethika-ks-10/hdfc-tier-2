@@ -297,29 +297,31 @@ function runOtpCountdown(globals) {
       window.otpTimerInterval = null;
     }
 
-    // ✅ disable resend button
     setButtonState(globals, "otp_resend_icon", false);
 
     function updateTimerText(text) {
       setTextValue(globals, "otp_resend_timer", text);
 
-      const allNodes = document.querySelectorAll("p, span, div, label");
+      const timerWrapper =
+        document.querySelector('[name="otp_resend_timer"]') ||
+        document.querySelector(".field-otp_resend_timer") ||
+        document.querySelector(".field-otp-resend-timer");
 
-      allNodes.forEach(function (node) {
-        if (
-          node.textContent &&
-          node.textContent.includes("Resend OTP")
-        ) {
+      if (timerWrapper) {
+        timerWrapper.value = text;
+        timerWrapper.textContent = text;
+
+        const innerNodes = timerWrapper.querySelectorAll("p, span, div, label");
+        innerNodes.forEach(function (node) {
           node.textContent = text;
-        }
-      });
+        });
+      }
     }
 
     updateTimerText("Resend OTP in: 21 secs");
 
     window.otpTimerInterval = setInterval(function () {
       updateTimerText("Resend OTP in: " + seconds + " secs");
-
       seconds--;
 
       if (seconds < 0) {
@@ -327,8 +329,6 @@ function runOtpCountdown(globals) {
         window.otpTimerInterval = null;
 
         updateTimerText("Resend OTP");
-
-        // ✅ enable resend button after timer
         setButtonState(globals, "otp_resend_icon", true);
       }
     }, 1000);
