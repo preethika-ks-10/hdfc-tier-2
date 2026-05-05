@@ -248,7 +248,7 @@ function setText(globals, field, text) {
   });
 }
 
-function generateOTP(globals) {
+function generateOTP() {
   try {
     const data = globals.functions.exportData();
 
@@ -309,7 +309,7 @@ function generateOTP(globals) {
 /**
  * @param {scope} globals
  */
-function runOtpCountdown(globals) {
+function runOtpCountdown() {
   let seconds = 21;
 
   const timerField = globals.form.otp_page.otp_resend_timer;
@@ -361,7 +361,7 @@ function setButtonState(globals, button, enabled) {
 /**
  * @param {scope} globals
  */
-function handleOtpChange(globals) {
+function handleOtpChange() {
   const data = globals.functions.exportData();
   const otp = String(data.otp_code || "").replace(/\s/g, "");
 
@@ -391,7 +391,7 @@ function setOtpMessage(globals, message, type) {
 /**
  * @param {scope} globals
  */
-function validateOTP(globals) {
+function validateOTP() {
   try {
     const data = globals.functions.exportData();
 
@@ -478,7 +478,7 @@ function validateOTP(globals) {
  * @param {scope} globals
  */
 
-function resendOTP(globals) {
+function resendOTP() {
   try {
     window.otpTryCount = 0;
 
