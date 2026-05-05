@@ -254,7 +254,7 @@ function generateOTP(globals) {
       return "";
     }
 
-    fetch("http://localhost:4000/generate-otp", {
+    fetch(OTP_BASE_URL + "/generate-otp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -264,6 +264,8 @@ function generateOTP(globals) {
       .then((res) => res.json())
       .then((result) => {
         if (result.status === "success" && result.otp) {
+          window.otpTryCount = 0;
+
           globals.functions.setProperty(globals.form.otp_page.otp_code, {
             value: String(result.otp),
           });
@@ -271,13 +273,15 @@ function generateOTP(globals) {
           globals.functions.setProperty(globals.form.otp_page.otp_attempts_left, {
             value: "3/3 attempt(s) left",
           });
+
+          runOtpCountdown(globals);
         } else {
           alert(result.message || "OTP generation failed");
         }
       })
       .catch((err) => {
         console.error("Generate OTP Error:", err);
-        alert("API Error - backend not reachable");
+        alert("Generate OTP API Error");
       });
 
     return "";
