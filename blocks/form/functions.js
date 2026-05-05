@@ -239,12 +239,12 @@ if (typeof window !== "undefined") {
 /**
  * Generate OTP (API Call)
  */
-function generateOTP(globals) {
+function generateOTP() {
   try {
-    const data = globals.functions.exportData();
+    const data = globals.functions.exportData(); // use globals directly
 
     const payload = {
-      mobile: data.aadhaar_linked_mob || data.aadhaar_linked_mobile || "",
+      mobile: data.aadhaar_linked_mob || "",
       pan: data.pan_card_number || null,
       dob: data.date_of_birth || null,
     };
