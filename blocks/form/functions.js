@@ -239,46 +239,55 @@ if (typeof window !== "undefined") {
 /**
  * Generate OTP (API Call)
  */
-async function generateOtp(globals) {
-  const data = globals.functions.exportData();
-
-  const mobile = data.mobile || data.Mobile || data["Mobile Number"];
-  const dob = data.dob || data.DOB || data["Date of Birth"];
-  const pan = data.pan || data.PAN || data["Pan Card"];
-
-  if (!mobile) return "mobile is required";
-  if (!dob && !pan) return "Either dob or pan is required";
-
+function generateOTP(globals) {
   try {
-    const response = await fetch("/generate-otp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        mobile,
-        dob: dob || null,
-        pan: pan || null
-      })
-    });
+    const data = globals.functions.exportData();
 
-    const result = await response.json();
+    const payload = {
+      mobile: data.mobile_no || "",
+      pan: data.pan_firstpage || null,
+      dob: data.dob_firstpage || null,
+    };
 
-    if (result.status !== "success") {
-      return result.message;
+    if (!payload.mobile || (!payload.pan && !payload.dob)) {
+      alert("Enter Mobile and PAN or DOB");
+      return;
     }
 
-    return result.otp;
+    fetch("/generate-otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        const { form } = globals;
 
+        const otpField = form.validate_otp.enter_otp;
+
+        if (result.status === "success" && result.otp) {
+          globals.functions.setProperty(otpField, {
+            value: String(result.otp),
+          });
+        } else {
+          alert(result.message || "OTP generation failed");
+        }
+      })
+      .catch((err) => {
+        console.error("Generate OTP Error:", err);
+        alert("API Error");
+      });
   } catch (e) {
-    return "Something went wrong";
+    console.error(e);
   }
 }
 
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber,  updateLoanDetails,
-  updateLoanDisplay, getRate, getTax,  initSalaryBankUI, generateOtp,
+  updateLoanDisplay, getRate, getTax,  initSalaryBankUI, generateOTP,
 };
 
 
