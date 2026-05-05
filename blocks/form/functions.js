@@ -319,9 +319,7 @@ function runOtpCountdown(globals) {
     clearInterval(window.otpTimerInterval);
   }
 
-  globals.functions.setProperty(resendBtn, {
-    enabled: false,
-  });
+  setButtonEnabled(globals, resendBtn, false);
 
   window.otpTimerInterval = setInterval(() => {
     setText(globals, timerField, "Resend OTP in: " + seconds + " secs");
@@ -333,10 +331,7 @@ function runOtpCountdown(globals) {
       window.otpTimerInterval = null;
 
       setText(globals, timerField, "Resend OTP");
-
-      globals.functions.setProperty(resendBtn, {
-        enabled: true,
-      });
+      setButtonEnabled(globals, resendBtn, true);
     }
   }, 1000);
 
@@ -352,15 +347,22 @@ function validateOTP(globals) {
     const msgField = globals.form.otp_page["success failure msg"];
     const attemptsField = globals.form.otp_page.otp_attempts_left;
 
+    const otp = String(data.otp_code || "").replace(/\s/g, "");
+
     const payload = {
       mobile: data.aadhaar_linked_mobile_number || "",
       pan: data.pan_card_number || null,
       dob: data.date_of_birth || null,
-      otp: data.otp_code || "",
+      otp: otp,
     };
 
-    if (!payload.otp) {
+    if (!otp) {
       setText(globals, msgField, "Please enter OTP");
+      return "";
+    }
+
+    if (otp.length !== 6) {
+      setText(globals, msgField, "Please enter valid 6-digit OTP");
       return "";
     }
 
@@ -392,9 +394,9 @@ function validateOTP(globals) {
           setText(globals, msgField, "OTP submitted successfully");
           setText(globals, attemptsField, "Verified");
 
-          // optional: move to next page/panel
-          // replace customer_details_page with your actual next panel name
-          // globals.functions.setProperty(globals.form.customer_details_page, {
+          // move next panel ONLY here if needed
+          // example:
+          // globals.functions.setProperty(globals.form.customer_details, {
           //   visible: true,
           // });
 
