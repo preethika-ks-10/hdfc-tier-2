@@ -206,25 +206,35 @@ if (typeof window !== "undefined") {
  */
 const OTP_BASE_URL = "https://writing-dimly-spout.ngrok-free.dev";
 
-function setText(globals, field, text) {
-  globals.functions.setProperty(field, {
-    value: text,
-    text: text,
-  });
-}
-
 function generateOTP(globals) {
   try {
     const data = globals.functions.exportData();
 
+    console.log("FORM DATA:", data);
+
     const payload = {
-      mobile: data.aadhaar_linked_mobile_number || "",
-      pan: data.pan_card_number || null,
-      dob: data.date_of_birth || null,
+      mobile:
+        data.aadhaar_linked_mobile_number ||
+        data.aadhaar_linked_mobile ||
+        data.mobile ||
+        data.mobile_number ||
+        "",
+
+      pan:
+        data.pan_card_number ||
+        data.pan ||
+        null,
+
+      dob:
+        data.date_of_birth ||
+        data.dob ||
+        null,
     };
 
+    console.log("OTP PAYLOAD:", payload);
+
     if (!payload.mobile || (!payload.pan && !payload.dob)) {
-      alert("Enter Mobile and PAN or DOB");
+      console.error("Missing mobile/pan/dob", payload);
       return "";
     }
 
@@ -238,6 +248,8 @@ function generateOTP(globals) {
     })
       .then((res) => res.json())
       .then((result) => {
+        console.log("OTP RESULT:", result);
+
         if (result.status === "success" && result.otp) {
           window.otpTryCount = 0;
 
@@ -249,20 +261,14 @@ function generateOTP(globals) {
             value: "3/3 attempt(s) left",
           });
 
-          // start timer only if function exists
-          if (typeof runOtpCountdown === "function") {
-            runOtpCountdown(globals);
-          }
-
           return "";
         }
 
-        alert(result.message || "OTP generation failed");
+        console.error(result.message || "OTP generation failed");
         return "";
       })
       .catch((err) => {
         console.error("Generate OTP Error:", err);
-        // removed popup because OTP may already be set
       });
 
     return "";
