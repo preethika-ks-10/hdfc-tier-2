@@ -390,19 +390,31 @@ function setButtonState(globals, fieldName, enabled) {
       globals.functions.setProperty(globals.form.otp_page[fieldName], {
         enabled: enabled,
         disabled: !enabled,
+        readOnly: !enabled,
       });
+    }
+
+    const btn =
+      document.querySelector(`[name="${fieldName}"]`) ||
+      document.querySelector(`.field-${fieldName} button`) ||
+      document.querySelector(`.field-${fieldName}`);
+
+    if (btn) {
+      btn.disabled = !enabled;
+      btn.style.pointerEvents = enabled ? "auto" : "none";
+      btn.style.opacity = enabled ? "1" : "0.5";
     }
   } catch (e) {
     console.error("setButtonState Error:", e);
   }
-} 
-// 
+}// 
 function validateOTP(globals) {
   try {
-    const otp = getValue(globals, "otp_code");
+    const otp = String(getValue(globals, "otp_code") || "").replace(/\s/g, "");
+
     const msgField = "success failure msg";
 
-    if (!otp || String(otp).replace(/\s/g, "").length !== 6) {
+    if (!otp || otp.length !== 6) {
       setTextValue(globals, msgField, "Enter valid 6-digit OTP");
       return "";
     }
@@ -420,7 +432,7 @@ function validateOTP(globals) {
       mobile: getValue(globals, "aadhaar_linked_mobile_number"),
       pan: getValue(globals, "pan_card_number") || null,
       dob: getValue(globals, "date_of_birth") || null,
-      otp: String(otp).replace(/\s/g, ""),
+      otp: otp,
     };
 
     fetch(OTP_BASE_URL + "/verify-otp", {
@@ -441,6 +453,9 @@ function validateOTP(globals) {
 
           setTextValue(globals, msgField, "OTP validated successfully");
           setTextValue(globals, "otp_attempts_left", "Verified");
+
+          setButtonState(globals, "otp_submit", false);
+          setButtonState(globals, "otp_resend_icon", false);
 
           return "";
         }
@@ -473,7 +488,7 @@ function validateOTP(globals) {
     console.error("validateOTP Error:", e);
     return "";
   }
-} 
+}
 // 
 function resendOTP(globals) {
   try {
