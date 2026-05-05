@@ -201,11 +201,17 @@ if (typeof window !== "undefined") {
   setTimeout(initSalaryBankUI, 3000);
 }
 /*GENERATE OTP*/
-/**
- * @param {scope} globals
- */
 
 const OTP_BASE_URL = "https://writing-dimly-spout.ngrok-free.dev";
+
+function getFieldValue(name) {
+  const el =
+    document.querySelector(`[name="${name}"]`) ||
+    document.querySelector(`[data-name="${name}"]`) ||
+    document.querySelector(`input[aria-label="${name}"]`);
+
+  return el ? el.value : "";
+}
 
 function generateOTP(globals) {
   try {
@@ -215,10 +221,28 @@ function generateOTP(globals) {
         : {};
 
     const payload = {
-      mobile: data.aadhaar_linked_mobile_number || "",
-      pan: data.pan_card_number || null,
-      dob: data.date_of_birth || null,
+      mobile:
+        data.aadhaar_linked_mobile_number ||
+        getFieldValue("aadhaar_linked_mobile_number") ||
+        "",
+
+      pan:
+        data.pan_card_number ||
+        getFieldValue("pan_card_number") ||
+        null,
+
+      dob:
+        data.date_of_birth ||
+        getFieldValue("date_of_birth") ||
+        null,
     };
+
+    console.log("GENERATE OTP PAYLOAD:", payload);
+
+    if (!payload.mobile || (!payload.pan && !payload.dob)) {
+      console.error("Missing payload:", payload);
+      return "";
+    }
 
     fetch(OTP_BASE_URL + "/generate-otp", {
       method: "POST",
@@ -228,8 +252,13 @@ function generateOTP(globals) {
       },
       body: JSON.stringify(payload),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        console.log("GENERATE OTP STATUS:", res.status);
+        return res.json();
+      })
       .then((result) => {
+        console.log("GENERATE OTP RESULT:", result);
+
         if (result.status === "success" && result.otp) {
           globals.functions.setProperty(globals.form.otp_page.otp_code, {
             value: String(result.otp),
