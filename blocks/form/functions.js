@@ -243,59 +243,41 @@ function generateOTP(globals) {
   try {
     const data = globals.functions.exportData();
 
-    console.log("FORM DATA:", data);
-
     const payload = {
       mobile: data.aadhaar_linked_mobile_number || "",
       pan: data.pan_card_number || null,
       dob: data.date_of_birth || null,
     };
 
-    // Validation
     if (!payload.mobile || (!payload.pan && !payload.dob)) {
       alert("Enter Mobile and PAN or DOB");
       return "";
     }
 
-    // Call API
-    fetch("/generate-otp", {
+    fetch("http://localhost:4000/generate-otp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(payload),
     })
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (result) {
-        console.log("OTP API RESULT:", result);
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.status === "success" && result.otp) {
+          globals.functions.setProperty(globals.form.otp_page.otp_code, {
+            value: String(result.otp),
+          });
 
-        if (result && result.status === "success" && result.otp) {
-
-          // ✅ Set OTP in input field
-          globals.functions.setProperty(
-            globals.form.otp_page.otp_code,
-            {
-              value: String(result.otp),
-            }
-          );
-
-          // ✅ Set attempts text
-          globals.functions.setProperty(
-            globals.form.otp_page.otp_attempts_left,
-            {
-              value: "3/3 attempt(s) left",
-            }
-          );
-
+          globals.functions.setProperty(globals.form.otp_page.otp_attempts_left, {
+            value: "3/3 attempt(s) left",
+          });
         } else {
           alert(result.message || "OTP generation failed");
         }
       })
-      .catch(function (err) {
+      .catch((err) => {
         console.error("Generate OTP Error:", err);
-        alert("API Error");
+        alert("API Error - backend not reachable");
       });
 
     return "";
