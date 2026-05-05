@@ -239,9 +239,13 @@ if (typeof window !== "undefined") {
 /**
  * @param {scope} globals
  */
+const OTP_BASE_URL = "https://writing-dimly-spout.ngrok-free.dev";
+
 function generateOTP(globals) {
   try {
     const data = globals.functions.exportData();
+
+    console.log("FORM DATA:", data);
 
     const payload = {
       mobile: data.aadhaar_linked_mobile_number || "",
@@ -249,20 +253,28 @@ function generateOTP(globals) {
       dob: data.date_of_birth || null,
     };
 
+    console.log("OTP PAYLOAD:", payload);
+
     if (!payload.mobile || (!payload.pan && !payload.dob)) {
       alert("Enter Mobile and PAN or DOB");
       return "";
     }
 
-    fetch(OTP_BASE_URL + "/generate-otp", {
+    fetch(`${OTP_BASE_URL}/generate-otp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "true"
       },
       body: JSON.stringify(payload),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        console.log("GENERATE OTP STATUS:", res.status);
+        return res.json();
+      })
       .then((result) => {
+        console.log("GENERATE OTP RESULT:", result);
+
         if (result.status === "success" && result.otp) {
           window.otpTryCount = 0;
 
