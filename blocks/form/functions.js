@@ -237,9 +237,9 @@ if (typeof window !== "undefined") {
 
 
 /**
- * Generate OTP (API Call)
+ * @param {scope} globals
  */
-function generateOTP() {
+function generateOTP(globals) {
   try {
     const data = globals.functions.exportData();
 
