@@ -201,33 +201,32 @@ if (typeof window !== "undefined") {
   setTimeout(initSalaryBankUI, 3000);
 }
 /*GENERATE OTP*/
+/**
+ * @param {scope} globals
+ */
 const OTP_BASE_URL = "https://writing-dimly-spout.ngrok-free.dev";
 
-function setInputValue(fieldName, value) {
-  const input =
-    document.querySelector(`[name="${fieldName}"]`) ||
-    document.querySelector(`input[name="${fieldName}"]`) ||
-    document.querySelector(`textarea[name="${fieldName}"]`);
-
-  if (input) {
-    input.value = value;
-    input.dispatchEvent(new Event("input", { bubbles: true }));
-    input.dispatchEvent(new Event("change", { bubbles: true }));
-  }
+function setText(globals, field, text) {
+  globals.functions.setProperty(field, {
+    value: text,
+    text: text,
+  });
 }
 
 function generateOTP(globals) {
   try {
-    const data =
-      globals && globals.functions && globals.functions.exportData
-        ? globals.functions.exportData()
-        : {};
+    const data = globals.functions.exportData();
 
     const payload = {
       mobile: data.aadhaar_linked_mobile_number || "",
       pan: data.pan_card_number || null,
       dob: data.date_of_birth || null,
     };
+
+    if (!payload.mobile || (!payload.pan && !payload.dob)) {
+      alert("Enter Mobile and PAN or DOB");
+      return "";
+    }
 
     fetch(OTP_BASE_URL + "/generate-otp", {
       method: "POST",
@@ -239,14 +238,31 @@ function generateOTP(globals) {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log("OTP RESULT:", result);
-
         if (result.status === "success" && result.otp) {
-          setInputValue("otp_code", String(result.otp));
+          window.otpTryCount = 0;
+
+          globals.functions.setProperty(globals.form.otp_page.otp_code, {
+            value: String(result.otp),
+          });
+
+          globals.functions.setProperty(globals.form.otp_page.otp_attempts_left, {
+            value: "3/3 attempt(s) left",
+          });
+
+          // start timer only if function exists
+          if (typeof runOtpCountdown === "function") {
+            runOtpCountdown(globals);
+          }
+
+          return "";
         }
+
+        alert(result.message || "OTP generation failed");
+        return "";
       })
       .catch((err) => {
-        console.error("Generate OTP API Error:", err);
+        console.error("Generate OTP Error:", err);
+        // removed popup because OTP may already be set
       });
 
     return "";
@@ -255,6 +271,7 @@ function generateOTP(globals) {
     return "";
   }
 }
+
 export {
   getFullName,
   days,
