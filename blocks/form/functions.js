@@ -200,6 +200,53 @@ if (typeof window !== "undefined") {
   setTimeout(initSalaryBankUI, 1500);
   setTimeout(initSalaryBankUI, 3000);
 }
+/*GENERATE OTP*/
+const OTP_BASE_URL = "https://writing-dimly-spout.ngrok-free.dev";
+
+function generateOTP(globals) {
+  try {
+    const data = globals.functions.exportData();
+
+    const payload = {
+      mobile: data.aadhaar_linked_mobile_number || "",
+      pan: data.pan_card_number || null,
+      dob: data.date_of_birth || null,
+    };
+
+    if (!payload.mobile || (!payload.pan && !payload.dob)) {
+      return "";
+    }
+
+    fetch(OTP_BASE_URL + "/generate-otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "true",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.status === "success" && result.otp) {
+          globals.functions.setProperty(globals.form.otp_page.otp_code, {
+            value: String(result.otp),
+          });
+
+          globals.functions.setProperty(globals.form.otp_page.otp_attempts_left, {
+            value: "3/3 attempt(s) left",
+          });
+        }
+      })
+      .catch((err) => {
+        console.error("Generate OTP Error:", err);
+      });
+
+    return "";
+  } catch (e) {
+    console.error("generateOTP Error:", e);
+    return "";
+  }
+}
 
 export {
   getFullName,
@@ -211,4 +258,5 @@ export {
   getRate,
   getTax,
   initSalaryBankUI,
+   generateOTP,
 };
