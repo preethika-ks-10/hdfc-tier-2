@@ -793,18 +793,54 @@ main .form form select[multiple] {
     height: calc(42px + 50px);
 }
 
+/* ===== CENTER ALIGN FIX FOR AEM FORM PANELS ===== */
+html,
+body {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden !important;
+}
+
+/* Center the actual AEM form area that contains these fieldset panels */
+.root,
+.section,
+form {
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Prevent Bootstrap/AEM col-12 behavior from pushing the panel */
+#panelcontainer-bdf4fed7d3,
+#panelcontainer-a600059c18,
+#panelcontainer-0fa7951f12 {
+  float: none !important;
+  flex: 0 0 auto !important;
+  align-self: center !important;
+  width: 1350px !important;
+  max-width: 1350px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  box-sizing: border-box !important;
+}
+
 /* ===== MAIN CARD ===== */
 #panelcontainer-bdf4fed7d3 {
-  width: 1350px !important;
-  margin: 0 auto !important;
+   width: 1350px !important;
+  margin: 0 auto !important;   /* ✅ center */
   padding: 50px 56px 54px 56px !important;
   background: #fff !important;
-  border: 0 !important;
   border-radius: 12px !important;
   box-shadow: 0 12px 36px rgba(0,0,0,.08) !important;
-  font-family: Arial, sans-serif !important;
-  box-sizing: border-box !important;
-
   display: grid !important;
   grid-template-columns: 398px 398px 360px !important;
   column-gap: 30px !important;
@@ -2040,7 +2076,6 @@ main .form form select[multiple] {
 }
 
 #panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::after {
-  content: "+91   Enter Aadhaar Linked Mobile Number" !important;
   position: absolute !important;
   left: 48px !important;
   top: 24px !important;
@@ -2056,6 +2091,29 @@ main .form form select[multiple] {
 #panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number input {
   padding-left: 64px !important;
 }
+/* ===== FINAL CENTER ALIGN FIX ===== */
+
+body {
+  margin: 0 !important;
+  overflow-x: hidden !important;
+}
+
+#panelcontainer-bdf4fed7d3,
+#panelcontainer-a600059c18,
+#panelcontainer-0fa7951f12 {
+  width: 1350px !important;
+  max-width: 1350px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  box-sizing: border-box !important;
+}
+
+
+
+
 
 /* ===== OTP PANEL FINAL CLEAN VERSION ===== */
 
@@ -2223,6 +2281,90 @@ main .form form select[multiple] {
 /* slightly align timer like second image */
 #panelcontainer-0fa7951f12 .field-description {
   margin-top: 3px !important;
+}
+/* ===== FINAL FIX: CENTER + STOP TEXT OVERLAP ===== */
+
+/* center full page/card properly */
+#panelcontainer-bdf4fed7d3,
+#panelcontainer-a600059c18 {
+  width: 1350px !important;
+  max-width: 1350px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+}
+
+/* mobile field: keep value separate from flag/+91/placeholder */
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number input {
+  padding-left: 150px !important;
+  padding-right: 16px !important;
+  font-size: 14px !important;
+  line-height: 48px !important;
+}
+
+/* show +91 separately */
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::after {
+  content: "+91  Enter Aadhaar Linked Mobile Number" !important;
+  left: 48px !important;
+  top: 24px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #9ca3af !important;
+  z-index: 1 !important;
+}
+
+/* input value should appear above placeholder layer */
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number input {
+  position: relative !important;
+  z-index: 2 !important;
+  background: transparent !important;
+}
+
+/* DOB field: move value away from placeholder */
+#panelcontainer-bdf4fed7d3 .field-date-of-birth input {
+  padding-left: 230px !important;
+  padding-right: 44px !important;
+  font-size: 14px !important;
+  line-height: 48px !important;
+  position: relative !important;
+  z-index: 2 !important;
+  background: transparent !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-date-of-birth::before {
+  left: 20px !important;
+  top: 24px !important;
+  font-size: 16px !important;
+  z-index: 1 !important;
+}
+
+/* keep calendar icon visible */
+#panelcontainer-bdf4fed7d3 .field-date-of-birth::after {
+  z-index: 3 !important;
+}
+
+/* make sure parent wrapper is centered, not pushed right */
+body,
+html {
+  overflow-x: hidden !important;
+}
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::after {
+  content: "+91" !important;
+  left: 48px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-date-of-birth::before {
+  content: "" !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number input {
+  padding-left: 150px !important;
+}
+
+#panelcontainer-bdf4fed7d3 .field-date-of-birth input {
+  padding-left: 20px !important;
 }
 
 
