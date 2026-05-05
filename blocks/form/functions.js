@@ -206,35 +206,61 @@ if (typeof window !== "undefined") {
  */
 const OTP_BASE_URL = "https://writing-dimly-spout.ngrok-free.dev";
 
+function getValue(globals, name) {
+  try {
+    if (globals && globals.functions && globals.functions.exportData) {
+      const data = globals.functions.exportData();
+      if (data && data[name]) return data[name];
+    }
+
+    if (globals && globals.form && globals.form.personal_loan_offer && globals.form.personal_loan_offer[name]) {
+      return globals.form.personal_loan_offer[name].value || "";
+    }
+
+    const el = document.querySelector(`[name="${name}"]`);
+    return el ? el.value : "";
+  } catch (e) {
+    return "";
+  }
+}
+
+function setOtpValue(globals, value) {
+  try {
+    if (globals && globals.functions && globals.functions.setProperty) {
+      globals.functions.setProperty(globals.form.otp_page.otp_code, {
+        value: value,
+      });
+      return;
+    }
+
+    if (globals && globals.form && globals.form.otp_page && globals.form.otp_page.otp_code) {
+      globals.form.otp_page.otp_code.value = value;
+      return;
+    }
+
+    const el = document.querySelector(`[name="otp_code"]`);
+    if (el) {
+      el.value = value;
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+      el.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+  } catch (e) {
+    console.error("setOtpValue Error:", e);
+  }
+}
+
 function generateOTP(globals) {
   try {
-    const data = globals.functions.exportData();
-
-    console.log("FORM DATA:", data);
-
     const payload = {
-      mobile:
-        data.aadhaar_linked_mobile_number ||
-        data.aadhaar_linked_mobile ||
-        data.mobile ||
-        data.mobile_number ||
-        "",
-
-      pan:
-        data.pan_card_number ||
-        data.pan ||
-        null,
-
-      dob:
-        data.date_of_birth ||
-        data.dob ||
-        null,
+      mobile: getValue(globals, "aadhaar_linked_mobile_number"),
+      pan: getValue(globals, "pan_card_number") || null,
+      dob: getValue(globals, "date_of_birth") || null,
     };
 
     console.log("OTP PAYLOAD:", payload);
 
     if (!payload.mobile || (!payload.pan && !payload.dob)) {
-      console.error("Missing mobile/pan/dob", payload);
+      console.error("Missing mobile or PAN/DOB", payload);
       return "";
     }
 
@@ -251,24 +277,11 @@ function generateOTP(globals) {
         console.log("OTP RESULT:", result);
 
         if (result.status === "success" && result.otp) {
-          window.otpTryCount = 0;
-
-          globals.functions.setProperty(globals.form.otp_page.otp_code, {
-            value: String(result.otp),
-          });
-
-          globals.functions.setProperty(globals.form.otp_page.otp_attempts_left, {
-            value: "3/3 attempt(s) left",
-          });
-
-          return "";
+          setOtpValue(globals, String(result.otp));
         }
-
-        console.error(result.message || "OTP generation failed");
-        return "";
       })
       .catch((err) => {
-        console.error("Generate OTP Error:", err);
+        console.error("Generate OTP API Error:", err);
       });
 
     return "";
@@ -277,7 +290,6 @@ function generateOTP(globals) {
     return "";
   }
 }
-
 export {
   getFullName,
   days,
