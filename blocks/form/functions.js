@@ -245,36 +245,27 @@ function generateOTP(globals) {
   try {
     const data = globals.functions.exportData();
 
-    console.log("FORM DATA:", data);
-
     const payload = {
       mobile: data.aadhaar_linked_mobile_number || "",
       pan: data.pan_card_number || null,
       dob: data.date_of_birth || null,
     };
 
-    console.log("OTP PAYLOAD:", payload);
-
     if (!payload.mobile || (!payload.pan && !payload.dob)) {
       alert("Enter Mobile and PAN or DOB");
       return "";
     }
 
-    fetch(`${OTP_BASE_URL}/generate-otp`, {
+    fetch(OTP_BASE_URL + "/generate-otp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "ngrok-skip-browser-warning": "true"
+        "ngrok-skip-browser-warning": "true",
       },
       body: JSON.stringify(payload),
     })
-      .then((res) => {
-        console.log("GENERATE OTP STATUS:", res.status);
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((result) => {
-        console.log("GENERATE OTP RESULT:", result);
-
         if (result.status === "success" && result.otp) {
           window.otpTryCount = 0;
 
@@ -286,14 +277,20 @@ function generateOTP(globals) {
             value: "3/3 attempt(s) left",
           });
 
-          runOtpCountdown(globals);
-        } else {
-          alert(result.message || "OTP generation failed");
+          // start timer only if function exists
+          if (typeof runOtpCountdown === "function") {
+            runOtpCountdown(globals);
+          }
+
+          return "";
         }
+
+        alert(result.message || "OTP generation failed");
+        return "";
       })
       .catch((err) => {
         console.error("Generate OTP Error:", err);
-        alert("Generate OTP API Error");
+        // removed popup because OTP may already be set
       });
 
     return "";
@@ -302,11 +299,36 @@ function generateOTP(globals) {
     return "";
   }
 }
+function runOtpCountdown(globals) {
+  let seconds = 21;
 
+  if (window.otpTimerInterval) {
+    clearInterval(window.otpTimerInterval);
+  }
+
+  window.otpTimerInterval = setInterval(function () {
+    globals.functions.setProperty(globals.form.otp_page.otp_resend_timer, {
+      value: "Resend OTP in: " + seconds + " secs",
+    });
+
+    seconds--;
+
+    if (seconds < 0) {
+      clearInterval(window.otpTimerInterval);
+      window.otpTimerInterval = null;
+
+      globals.functions.setProperty(globals.form.otp_page.otp_resend_timer, {
+        value: "Resend OTP",
+      });
+    }
+  }, 1000);
+
+  return "";
+}
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber,  updateLoanDetails,
-  updateLoanDisplay, getRate, getTax,  initSalaryBankUI, generateOTP,
+  updateLoanDisplay, getRate, getTax,  initSalaryBankUI, generateOTP, runOtpCountdown,
 };
 
 
