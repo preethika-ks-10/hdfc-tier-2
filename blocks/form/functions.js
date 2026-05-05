@@ -331,7 +331,7 @@ function runOtpCountdown(globals) {
 /**
  * @param {scope} globals
  */
-function validateOTP() {
+function validateOTP(globals) {
   try {
     const data = globals.functions.exportData();
 
@@ -367,42 +367,36 @@ function validateOTP() {
       .then((res) => res.json())
       .then((result) => {
         if (result.status === "success") {
-          // stop timer
           if (window.otpTimerInterval) {
             clearInterval(window.otpTimerInterval);
             window.otpTimerInterval = null;
           }
 
+          globals.functions.setProperty(globals.form.otp_page.otp_attempts_left, {
+            value: "Verified",
+          });
+
           alert("OTP submitted successfully");
-
-          globals.functions.setProperty(
-            globals.form.otp_page.otp_attempts_left,
-            { value: "Verified" }
-          );
-
           return "";
         }
 
-        // ❌ INVALID OTP
         window.otpTryCount++;
 
         const remaining = 3 - window.otpTryCount;
 
-        globals.functions.setProperty(
-          globals.form.otp_page.otp_attempts_left,
-          {
-            value:
-              remaining > 0
-                ? remaining + "/3 attempt(s) left"
-                : "No attempts left",
-          }
-        );
+        globals.functions.setProperty(globals.form.otp_page.otp_attempts_left, {
+          value:
+            remaining > 0
+              ? remaining + "/3 attempt(s) left"
+              : "No attempts left",
+        });
 
         alert("Invalid OTP");
         return "";
       })
       .catch((err) => {
         console.error("Verify OTP Error:", err);
+        alert("Verify OTP API Error");
       });
 
     return "";
@@ -411,28 +405,27 @@ function validateOTP() {
     return "";
   }
 }
-/**
- * @param {scope} globals
- */
-function resendOTP() {
-  window.otpTryCount = 0;
 
-  globals.functions.setProperty(globals.form.otp_page.otp_code, {
-    value: "",
-  });
+function resendOTP(globals) {
+  try {
+    window.otpTryCount = 0;
 
-  globals.functions.setProperty(
-    globals.form.otp_page.otp_attempts_left,
-    {
+    globals.functions.setProperty(globals.form.otp_page.otp_code, {
+      value: "",
+    });
+
+    globals.functions.setProperty(globals.form.otp_page.otp_attempts_left, {
       value: "3/3 attempt(s) left",
-    }
-  );
+    });
 
-  generateOTP(); // no globals passed
+    generateOTP(globals);
 
-  return "";
+    return "";
+  } catch (e) {
+    console.error("resendOTP Error:", e);
+    return "";
+  }
 }
-
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber,  updateLoanDetails,
