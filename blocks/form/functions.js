@@ -290,6 +290,8 @@ function runOtpCountdown(globals) {
   try {
     console.log("Timer started");
 
+    setButtonState(globals, "otp_resend_icon", false);
+
     let seconds = 21;
 
     if (window.otpTimerInterval) {
@@ -298,33 +300,7 @@ function runOtpCountdown(globals) {
     }
 
     function updateTimerText(text) {
-      try {
-        if (
-          globals &&
-          globals.functions &&
-          globals.functions.setProperty &&
-          globals.form &&
-          globals.form.otp_page &&
-          globals.form.otp_page.otp_resend_timer
-        ) {
-          globals.functions.setProperty(globals.form.otp_page.otp_resend_timer, {
-            value: text,
-            text: text,
-          });
-        }
-
-        const el =
-          document.querySelector('[name="otp_resend_timer"]') ||
-          document.querySelector(".field-otp_resend_timer") ||
-          document.querySelector(".field-otp-resend-timer");
-
-        if (el) {
-          el.textContent = text;
-          el.value = text;
-        }
-      } catch (e) {
-        console.error("updateTimerText Error:", e);
-      }
+      setTextValue(globals, "otp_resend_timer", text);
     }
 
     updateTimerText("Resend OTP in: 21 secs");
@@ -339,6 +315,8 @@ function runOtpCountdown(globals) {
         window.otpTimerInterval = null;
 
         updateTimerText("Resend OTP");
+
+        setButtonState(globals, "otp_resend_icon", true);
       }
     }, 1000);
 
@@ -398,6 +376,121 @@ function generateOTP(globals) {
     return "";
   }
 }
+/* DISABLE */
+function setButtonState(globals, fieldName, enabled) {
+  try {
+    if (
+      globals &&
+      globals.functions &&
+      globals.functions.setProperty &&
+      globals.form &&
+      globals.form.otp_page &&
+      globals.form.otp_page[fieldName]
+    ) {
+      globals.functions.setProperty(globals.form.otp_page[fieldName], {
+        enabled: enabled,
+        disabled: !enabled,
+      });
+    }
+  } catch (e) {
+    console.error("setButtonState Error:", e);
+  }
+} 
+// 
+function validateOTP(globals) {
+  try {
+    const otp = getValue(globals, "otp_code");
+    const msgField = "success failure msg";
+
+    if (!otp || String(otp).replace(/\s/g, "").length !== 6) {
+      setTextValue(globals, msgField, "Enter valid 6-digit OTP");
+      return "";
+    }
+
+    if (window.otpTryCount === undefined) {
+      window.otpTryCount = 0;
+    }
+
+    if (window.otpTryCount >= 3) {
+      setTextValue(globals, msgField, "No attempts left. Please resend OTP.");
+      return "";
+    }
+
+    const payload = {
+      mobile: getValue(globals, "aadhaar_linked_mobile_number"),
+      pan: getValue(globals, "pan_card_number") || null,
+      dob: getValue(globals, "date_of_birth") || null,
+      otp: String(otp).replace(/\s/g, ""),
+    };
+
+    fetch(OTP_BASE_URL + "/verify-otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "true",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.status === "success") {
+          if (window.otpTimerInterval) {
+            clearInterval(window.otpTimerInterval);
+            window.otpTimerInterval = null;
+          }
+
+          setTextValue(globals, msgField, "OTP validated successfully");
+          setTextValue(globals, "otp_attempts_left", "Verified");
+
+          return "";
+        }
+
+        window.otpTryCount++;
+
+        const remaining = 3 - window.otpTryCount;
+
+        setTextValue(
+          globals,
+          "otp_attempts_left",
+          remaining > 0 ? remaining + "/3 attempt(s) left" : "No attempts left"
+        );
+
+        setTextValue(
+          globals,
+          msgField,
+          remaining > 0 ? "Invalid OTP" : "No attempts left. Please resend OTP."
+        );
+
+        return "";
+      })
+      .catch((err) => {
+        console.error("Verify OTP API Error:", err);
+        setTextValue(globals, msgField, "Verify OTP API Error");
+      });
+
+    return "";
+  } catch (e) {
+    console.error("validateOTP Error:", e);
+    return "";
+  }
+} 
+// 
+function resendOTP(globals) {
+  try {
+    window.otpTryCount = 0;
+
+    setOtpValue(globals, "");
+    setTextValue(globals, "otp_attempts_left", "3/3 attempt(s) left");
+    setTextValue(globals, "success failure msg", "");
+
+    generateOTP(globals);
+
+    return "";
+  } catch (e) {
+    console.error("resendOTP Error:", e);
+    return "";
+  }
+}
 export {
   getFullName,
   days,
@@ -410,4 +503,6 @@ export {
   initSalaryBankUI,
   generateOTP,
   runOtpCountdown,
+  validateOTP,
+  resendOTP,
 };
