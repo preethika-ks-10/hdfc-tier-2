@@ -299,6 +299,9 @@ function generateOTP(globals) {
     return "";
   }
 }
+/**
+ * @param {scope} globals
+ */
 function runOtpCountdown(globals) {
   let seconds = 21;
 
@@ -325,10 +328,116 @@ function runOtpCountdown(globals) {
 
   return "";
 }
+/**
+ * @param {scope} globals
+ */
+function validateOTP() {
+  try {
+    const data = globals.functions.exportData();
+
+    const payload = {
+      mobile: data.aadhaar_linked_mobile_number || "",
+      pan: data.pan_card_number || null,
+      dob: data.date_of_birth || null,
+      otp: data.otp_code || "",
+    };
+
+    if (!payload.otp) {
+      alert("Please enter OTP");
+      return "";
+    }
+
+    if (window.otpTryCount === undefined) {
+      window.otpTryCount = 0;
+    }
+
+    if (window.otpTryCount >= 3) {
+      alert("No attempts left. Please resend OTP.");
+      return "";
+    }
+
+    fetch(OTP_BASE_URL + "/verify-otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": "true",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.status === "success") {
+          // stop timer
+          if (window.otpTimerInterval) {
+            clearInterval(window.otpTimerInterval);
+            window.otpTimerInterval = null;
+          }
+
+          alert("OTP submitted successfully");
+
+          globals.functions.setProperty(
+            globals.form.otp_page.otp_attempts_left,
+            { value: "Verified" }
+          );
+
+          return "";
+        }
+
+        // ❌ INVALID OTP
+        window.otpTryCount++;
+
+        const remaining = 3 - window.otpTryCount;
+
+        globals.functions.setProperty(
+          globals.form.otp_page.otp_attempts_left,
+          {
+            value:
+              remaining > 0
+                ? remaining + "/3 attempt(s) left"
+                : "No attempts left",
+          }
+        );
+
+        alert("Invalid OTP");
+        return "";
+      })
+      .catch((err) => {
+        console.error("Verify OTP Error:", err);
+      });
+
+    return "";
+  } catch (e) {
+    console.error("validateOTP Error:", e);
+    return "";
+  }
+}
+/**
+ * @param {scope} globals
+ */
+function resendOTP() {
+  window.otpTryCount = 0;
+
+  globals.functions.setProperty(globals.form.otp_page.otp_code, {
+    value: "",
+  });
+
+  globals.functions.setProperty(
+    globals.form.otp_page.otp_attempts_left,
+    {
+      value: "3/3 attempt(s) left",
+    }
+  );
+
+  generateOTP(); // no globals passed
+
+  return "";
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber,  updateLoanDetails,
-  updateLoanDisplay, getRate, getTax,  initSalaryBankUI, generateOTP, runOtpCountdown,
+  updateLoanDisplay, getRate, getTax,  initSalaryBankUI, generateOTP,validateOTP,
+  resendOTP, runOtpCountdown,
 };
 
 
