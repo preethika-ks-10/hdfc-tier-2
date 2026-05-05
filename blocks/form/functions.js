@@ -251,11 +251,13 @@ function generateOTP(globals) {
       dob: data.date_of_birth || null,
     };
 
+    // Validation
     if (!payload.mobile || (!payload.pan && !payload.dob)) {
       alert("Enter Mobile and PAN or DOB");
       return "";
     }
 
+    // Call API
     fetch("/generate-otp", {
       method: "POST",
       headers: {
@@ -269,7 +271,9 @@ function generateOTP(globals) {
       .then(function (result) {
         console.log("OTP API RESULT:", result);
 
-        if (result.status === "success" && result.otp) {
+        if (result && result.status === "success" && result.otp) {
+
+          // ✅ Set OTP in input field
           globals.functions.setProperty(
             globals.form.otp_page.otp_code,
             {
@@ -277,12 +281,14 @@ function generateOTP(globals) {
             }
           );
 
+          // ✅ Set attempts text
           globals.functions.setProperty(
             globals.form.otp_page.otp_attempts_left,
             {
               value: "3/3 attempt(s) left",
             }
           );
+
         } else {
           alert(result.message || "OTP generation failed");
         }
