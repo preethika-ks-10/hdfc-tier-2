@@ -241,10 +241,12 @@ if (typeof window !== "undefined") {
  */
 function generateOTP() {
   try {
-    const data = globals.functions.exportData(); // use globals directly
+    const data = globals.functions.exportData();
+
+    console.log("FORM DATA:", data);
 
     const payload = {
-      mobile: data.aadhaar_linked_mob || "",
+      mobile: data.aadhaar_linked_mobile_number || "",
       pan: data.pan_card_number || null,
       dob: data.date_of_birth || null,
     };
@@ -261,31 +263,38 @@ function generateOTP() {
       },
       body: JSON.stringify(payload),
     })
-      .then((res) => res.json())
-      .then((result) => {
-        const otpField = globals.form.otp_page.otp_code;
-        const attemptsField = globals.form.otp_page.otp_attempts_left;
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (result) {
+        console.log("OTP API RESULT:", result);
 
         if (result.status === "success" && result.otp) {
-          globals.functions.setProperty(otpField, {
-            value: String(result.otp),
-          });
+          globals.functions.setProperty(
+            globals.form.otp_page.otp_code,
+            {
+              value: String(result.otp),
+            }
+          );
 
-          globals.functions.setProperty(attemptsField, {
-            value: "3/3 attempt(s) left",
-          });
+          globals.functions.setProperty(
+            globals.form.otp_page.otp_attempts_left,
+            {
+              value: "3/3 attempt(s) left",
+            }
+          );
         } else {
           alert(result.message || "OTP generation failed");
         }
       })
-      .catch((err) => {
+      .catch(function (err) {
         console.error("Generate OTP Error:", err);
         alert("API Error");
       });
 
     return "";
   } catch (e) {
-    console.error(e);
+    console.error("generateOTP Error:", e);
     return "";
   }
 }
