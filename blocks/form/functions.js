@@ -236,10 +236,22 @@ if (typeof window !== "undefined") {
 }
 
 
-/**
- * @param {scope} globals
- */
 const OTP_BASE_URL = "https://writing-dimly-spout.ngrok-free.dev";
+
+function getGlobals() {
+  if (window.globals && window.globals.functions) {
+    return window.globals;
+  }
+
+  if (window.guideBridge && typeof window.guideBridge.resolveNode === "function") {
+    const scope = window.guideBridge.resolveNode("guide[0]");
+    if (scope && scope.functions) {
+      return scope;
+    }
+  }
+
+  throw new Error("globals not available");
+}
 
 function setText(globals, field, text) {
   globals.functions.setProperty(field, {
@@ -248,8 +260,61 @@ function setText(globals, field, text) {
   });
 }
 
+function setButtonState(globals, button, enabled) {
+  globals.functions.setProperty(button, {
+    enabled: enabled,
+    disabled: !enabled,
+    readOnly: !enabled,
+  });
+}
+
+function setOtpMessage(globals, message, type) {
+  const field = globals.form.otp_page["success failure msg"];
+
+  globals.functions.setProperty(field, {
+    value: message,
+    text: message,
+    style: {
+      color: type === "success" ? "green" : "red",
+      fontWeight: "600",
+    },
+  });
+}
+
+function runOtpCountdown() {
+  const globals = getGlobals();
+
+  let seconds = 21;
+
+  const timerField = globals.form.otp_page.otp_resend_timer;
+  const resendBtn = globals.form.otp_page.otp_resend_icon;
+
+  if (window.otpTimerInterval) {
+    clearInterval(window.otpTimerInterval);
+  }
+
+  setButtonState(globals, resendBtn, false);
+
+  window.otpTimerInterval = setInterval(() => {
+    setText(globals, timerField, "Resend OTP in: " + seconds + " secs");
+
+    seconds--;
+
+    if (seconds < 0) {
+      clearInterval(window.otpTimerInterval);
+      window.otpTimerInterval = null;
+
+      setText(globals, timerField, "Resend OTP");
+      setButtonState(globals, resendBtn, true);
+    }
+  }, 1000);
+
+  return "";
+}
+
 function generateOTP() {
   try {
+    const globals = getGlobals();
     const data = globals.functions.exportData();
 
     const payload = {
@@ -259,7 +324,7 @@ function generateOTP() {
     };
 
     if (!payload.mobile || (!payload.pan && !payload.dob)) {
-      alert("Enter Mobile and PAN or DOB");
+      setOtpMessage(globals, "Enter Mobile and PAN or DOB", "error");
       return "";
     }
 
@@ -280,24 +345,19 @@ function generateOTP() {
             value: String(result.otp),
           });
 
-          globals.functions.setProperty(globals.form.otp_page.otp_attempts_left, {
-            value: "3/3 attempt(s) left",
-          });
+          setText(globals, globals.form.otp_page.otp_attempts_left, "3/3 attempt(s) left");
+          setOtpMessage(globals, "", "error");
 
-          // start timer only if function exists
-          if (typeof runOtpCountdown === "function") {
-            runOtpCountdown(globals);
-          }
-
+          runOtpCountdown();
           return "";
         }
 
-        alert(result.message || "OTP generation failed");
+        setOtpMessage(globals, result.message || "OTP generation failed", "error");
         return "";
       })
       .catch((err) => {
         console.error("Generate OTP Error:", err);
-        // removed popup because OTP may already be set
+        setOtpMessage(globals, "Generate OTP API Error", "error");
       });
 
     return "";
@@ -306,93 +366,20 @@ function generateOTP() {
     return "";
   }
 }
-/**
- * @param {scope} globals
- */
-function runOtpCountdown() {
-  let seconds = 21;
 
-  const timerField = globals.form.otp_page.otp_resend_timer;
-  const resendBtn = globals.form.otp_page.otp_resend_icon;
-
-  if (window.otpTimerInterval) {
-    clearInterval(window.otpTimerInterval);
-  }
-
-  globals.functions.setProperty(resendBtn, {
-    enabled: false,
-  });
-
-  window.otpTimerInterval = setInterval(() => {
-    setText(globals, timerField, "Resend OTP in: " + seconds + " secs");
-
-    seconds--;
-
-    if (seconds < 0) {
-      clearInterval(window.otpTimerInterval);
-      window.otpTimerInterval = null;
-
-      setText(globals, timerField, "Resend OTP");
-
-      globals.functions.setProperty(resendBtn, {
-        enabled: true,
-      });
-    }
-  }, 1000);
-
-  return "";
-}
-/**
- * @param {scope} globals
- */
-function setText(globals, field, text) {
-  globals.functions.setProperty(field, {
-    value: text,
-    text: text,
-  });
-}
-
-function setButtonState(globals, button, enabled) {
-  globals.functions.setProperty(button, {
-    enabled: enabled,
-    disabled: !enabled,
-  });
-}
-/**
- * @param {scope} globals
- */
 function handleOtpChange() {
+  const globals = getGlobals();
   const data = globals.functions.exportData();
   const otp = String(data.otp_code || "").replace(/\s/g, "");
 
-  setButtonState(
-    globals,
-    globals.form.otp_page.otp_submit,
-    otp.length === 6
-  );
+  setButtonState(globals, globals.form.otp_page.otp_submit, otp.length === 6);
 
   return "";
 }
-/**
- * @param {scope} globals
- */
-function setOtpMessage(globals, message, type) {
-  const field = globals.form.otp_page["success failure msg"];
 
-  globals.functions.setProperty(field, {
-    value: message,
-    text: message,
-    style: {
-      color: type === "success" ? "green" : "red",
-      fontWeight: "600",
-    },
-  });
-}
-/**
- * @param {scope} globals
- */
 function validateOTP() {
   try {
+    const globals = getGlobals();
     const data = globals.functions.exportData();
 
     const otp = String(data.otp_code || "").replace(/\s/g, "");
@@ -403,8 +390,6 @@ function validateOTP() {
       dob: data.date_of_birth || null,
       otp: otp,
     };
-
-    const attemptsField = globals.form.otp_page.otp_attempts_left;
 
     if (!otp || otp.length !== 6) {
       setOtpMessage(globals, "Enter valid 6-digit OTP", "error");
@@ -438,8 +423,7 @@ function validateOTP() {
           }
 
           setOtpMessage(globals, "OTP validated successfully", "success");
-
-          setText(globals, attemptsField, "Verified");
+          setText(globals, globals.form.otp_page.otp_attempts_left, "Verified");
 
           setButtonState(globals, globals.form.otp_page.otp_submit, false);
           setButtonState(globals, globals.form.otp_page.otp_resend_icon, false);
@@ -452,12 +436,11 @@ function validateOTP() {
         const remaining = 3 - window.otpTryCount;
 
         if (remaining > 0) {
-          setText(globals, attemptsField, remaining + "/3 attempt(s) left");
+          setText(globals, globals.form.otp_page.otp_attempts_left, remaining + "/3 attempt(s) left");
           setOtpMessage(globals, "Invalid OTP", "error");
         } else {
-          setText(globals, attemptsField, "No attempts left");
+          setText(globals, globals.form.otp_page.otp_attempts_left, "No attempts left");
           setOtpMessage(globals, "No attempts left. Please resend OTP.", "error");
-
           setButtonState(globals, globals.form.otp_page.otp_submit, false);
         }
 
@@ -474,12 +457,11 @@ function validateOTP() {
     return "";
   }
 }
-/**
- * @param {scope} globals
- */
 
 function resendOTP() {
   try {
+    const globals = getGlobals();
+
     window.otpTryCount = 0;
 
     globals.functions.setProperty(globals.form.otp_page.otp_code, {
@@ -488,18 +470,16 @@ function resendOTP() {
 
     setText(globals, globals.form.otp_page.otp_attempts_left, "3/3 attempt(s) left");
     setOtpMessage(globals, "", "error");
-
     setButtonState(globals, globals.form.otp_page.otp_submit, false);
 
-    generateOTP(globals);
+    generateOTP();
 
     return "";
   } catch (e) {
     console.error("resendOTP Error:", e);
     return "";
   }
-}
-// eslint-disable-next-line import/prefer-default-export
+}// eslint-disable-next-line import/prefer-default-export
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber,  updateLoanDetails,
   updateLoanDisplay, getRate, getTax,  initSalaryBankUI, generateOTP,validateOTP,
