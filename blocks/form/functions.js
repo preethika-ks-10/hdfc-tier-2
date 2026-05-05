@@ -201,16 +201,19 @@ if (typeof window !== "undefined") {
   setTimeout(initSalaryBankUI, 3000);
 }
 /*GENERATE OTP*/
-
 const OTP_BASE_URL = "https://writing-dimly-spout.ngrok-free.dev";
 
-function getFieldValue(name) {
-  const el =
-    document.querySelector(`[name="${name}"]`) ||
-    document.querySelector(`[data-name="${name}"]`) ||
-    document.querySelector(`input[aria-label="${name}"]`);
+function setInputValue(fieldName, value) {
+  const input =
+    document.querySelector(`[name="${fieldName}"]`) ||
+    document.querySelector(`input[name="${fieldName}"]`) ||
+    document.querySelector(`textarea[name="${fieldName}"]`);
 
-  return el ? el.value : "";
+  if (input) {
+    input.value = value;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+  }
 }
 
 function generateOTP(globals) {
@@ -221,28 +224,10 @@ function generateOTP(globals) {
         : {};
 
     const payload = {
-      mobile:
-        data.aadhaar_linked_mobile_number ||
-        getFieldValue("aadhaar_linked_mobile_number") ||
-        "",
-
-      pan:
-        data.pan_card_number ||
-        getFieldValue("pan_card_number") ||
-        null,
-
-      dob:
-        data.date_of_birth ||
-        getFieldValue("date_of_birth") ||
-        null,
+      mobile: data.aadhaar_linked_mobile_number || "",
+      pan: data.pan_card_number || null,
+      dob: data.date_of_birth || null,
     };
-
-    console.log("GENERATE OTP PAYLOAD:", payload);
-
-    if (!payload.mobile || (!payload.pan && !payload.dob)) {
-      console.error("Missing payload:", payload);
-      return "";
-    }
 
     fetch(OTP_BASE_URL + "/generate-otp", {
       method: "POST",
@@ -252,21 +237,12 @@ function generateOTP(globals) {
       },
       body: JSON.stringify(payload),
     })
-      .then((res) => {
-        console.log("GENERATE OTP STATUS:", res.status);
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((result) => {
-        console.log("GENERATE OTP RESULT:", result);
+        console.log("OTP RESULT:", result);
 
         if (result.status === "success" && result.otp) {
-          globals.functions.setProperty(globals.form.otp_page.otp_code, {
-            value: String(result.otp),
-          });
-
-          globals.functions.setProperty(globals.form.otp_page.otp_attempts_left, {
-            value: "3/3 attempt(s) left",
-          });
+          setInputValue("otp_code", String(result.otp));
         }
       })
       .catch((err) => {
@@ -289,5 +265,5 @@ export {
   getRate,
   getTax,
   initSalaryBankUI,
-   generateOTP,
+  generateOTP,
 };
