@@ -345,22 +345,69 @@ function runOtpCountdown(globals) {
 /**
  * @param {scope} globals
  */
+function setText(globals, field, text) {
+  globals.functions.setProperty(field, {
+    value: text,
+    text: text,
+  });
+}
+
+function setButtonState(globals, button, enabled) {
+  globals.functions.setProperty(button, {
+    enabled: enabled,
+    disabled: !enabled,
+  });
+}
+/**
+ * @param {scope} globals
+ */
+function handleOtpChange(globals) {
+  const data = globals.functions.exportData();
+  const otp = String(data.otp_code || "").replace(/\s/g, "");
+
+  setButtonState(
+    globals,
+    globals.form.otp_page.otp_submit,
+    otp.length === 6
+  );
+
+  return "";
+}
+/**
+ * @param {scope} globals
+ */
+function setOtpMessage(globals, message, type) {
+  const field = globals.form.otp_page["success failure msg"];
+
+  globals.functions.setProperty(field, {
+    value: message,
+    text: message,
+    style: {
+      color: type === "success" ? "green" : "red",
+      fontWeight: "600",
+    },
+  });
+}
+/**
+ * @param {scope} globals
+ */
 function validateOTP(globals) {
   try {
     const data = globals.functions.exportData();
 
-    const msgField = globals.form.otp_page["success failure msg"];
-    const attemptsField = globals.form.otp_page.otp_attempts_left;
+    const otp = String(data.otp_code || "").replace(/\s/g, "");
 
     const payload = {
       mobile: data.aadhaar_linked_mobile_number || "",
       pan: data.pan_card_number || null,
       dob: data.date_of_birth || null,
-      otp: data.otp_code || "",
+      otp: otp,
     };
 
-    if (!payload.otp) {
-      setText(globals, msgField, "Please enter OTP");
+    const attemptsField = globals.form.otp_page.otp_attempts_left;
+
+    if (!otp || otp.length !== 6) {
+      setOtpMessage(globals, "Enter valid 6-digit OTP", "error");
       return "";
     }
 
@@ -369,7 +416,8 @@ function validateOTP(globals) {
     }
 
     if (window.otpTryCount >= 3) {
-      setText(globals, msgField, "No attempts left. Please resend OTP.");
+      setOtpMessage(globals, "No attempts left. Please resend OTP.", "error");
+      setButtonState(globals, globals.form.otp_page.otp_submit, false);
       return "";
     }
 
@@ -389,14 +437,12 @@ function validateOTP(globals) {
             window.otpTimerInterval = null;
           }
 
-          setText(globals, msgField, "OTP submitted successfully");
+          setOtpMessage(globals, "OTP validated successfully", "success");
+
           setText(globals, attemptsField, "Verified");
 
-          // optional: move to next page/panel
-          // replace customer_details_page with your actual next panel name
-          // globals.functions.setProperty(globals.form.customer_details_page, {
-          //   visible: true,
-          // });
+          setButtonState(globals, globals.form.otp_page.otp_submit, false);
+          setButtonState(globals, globals.form.otp_page.otp_resend_icon, false);
 
           return "";
         }
@@ -405,20 +451,21 @@ function validateOTP(globals) {
 
         const remaining = 3 - window.otpTryCount;
 
-        setText(
-          globals,
-          attemptsField,
-          remaining > 0
-            ? remaining + "/3 attempt(s) left"
-            : "No attempts left"
-        );
+        if (remaining > 0) {
+          setText(globals, attemptsField, remaining + "/3 attempt(s) left");
+          setOtpMessage(globals, "Invalid OTP", "error");
+        } else {
+          setText(globals, attemptsField, "No attempts left");
+          setOtpMessage(globals, "No attempts left. Please resend OTP.", "error");
 
-        setText(globals, msgField, "Invalid OTP");
+          setButtonState(globals, globals.form.otp_page.otp_submit, false);
+        }
+
         return "";
       })
       .catch((err) => {
         console.error("Verify OTP Error:", err);
-        setText(globals, msgField, "Verify OTP API Error");
+        setOtpMessage(globals, "Verify OTP API Error", "error");
       });
 
     return "";
@@ -440,7 +487,9 @@ function resendOTP(globals) {
     });
 
     setText(globals, globals.form.otp_page.otp_attempts_left, "3/3 attempt(s) left");
-    setText(globals, globals.form.otp_page["success failure msg"], "");
+    setOtpMessage(globals, "", "error");
+
+    setButtonState(globals, globals.form.otp_page.otp_submit, false);
 
     generateOTP(globals);
 
@@ -454,7 +503,7 @@ function resendOTP(globals) {
 export {
   getFullName, days, submitFormArrayToString, maskMobileNumber,  updateLoanDetails,
   updateLoanDisplay, getRate, getTax,  initSalaryBankUI, generateOTP,validateOTP,
-  resendOTP, runOtpCountdown,
+  resendOTP, runOtpCountdown, handleOtpChange,
 };
 
 
