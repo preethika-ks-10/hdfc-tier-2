@@ -288,6 +288,8 @@ function setTextValue(globals, fieldName, value) {
 
 function runOtpCountdown(globals) {
   try {
+    console.log("Timer started");
+
     let seconds = 21;
 
     if (window.otpTimerInterval) {
@@ -295,22 +297,40 @@ function runOtpCountdown(globals) {
       window.otpTimerInterval = null;
     }
 
-    window.otpTimerInterval = setInterval(function () {
-      const text = "Resend OTP in: " + seconds + " secs";
-
-      const timerEl =
-        document.querySelector('[name="otp_resend_timer"]') ||
-        document.querySelector('.field-otp_resend_timer');
-
-      if (timerEl) {
-        timerEl.value = text;
-        timerEl.textContent = text;
-
-        const textNode = timerEl.querySelector("p, span, div");
-        if (textNode) {
-          textNode.textContent = text;
+    function updateTimerText(text) {
+      try {
+        if (
+          globals &&
+          globals.functions &&
+          globals.functions.setProperty &&
+          globals.form &&
+          globals.form.otp_page &&
+          globals.form.otp_page.otp_resend_timer
+        ) {
+          globals.functions.setProperty(globals.form.otp_page.otp_resend_timer, {
+            value: text,
+            text: text,
+          });
         }
+
+        const el =
+          document.querySelector('[name="otp_resend_timer"]') ||
+          document.querySelector(".field-otp_resend_timer") ||
+          document.querySelector(".field-otp-resend-timer");
+
+        if (el) {
+          el.textContent = text;
+          el.value = text;
+        }
+      } catch (e) {
+        console.error("updateTimerText Error:", e);
       }
+    }
+
+    updateTimerText("Resend OTP in: 21 secs");
+
+    window.otpTimerInterval = setInterval(function () {
+      updateTimerText("Resend OTP in: " + seconds + " secs");
 
       seconds--;
 
@@ -318,15 +338,7 @@ function runOtpCountdown(globals) {
         clearInterval(window.otpTimerInterval);
         window.otpTimerInterval = null;
 
-        if (timerEl) {
-          timerEl.value = "Resend OTP";
-          timerEl.textContent = "Resend OTP";
-
-          const textNode = timerEl.querySelector("p, span, div");
-          if (textNode) {
-            textNode.textContent = "Resend OTP";
-          }
-        }
+        updateTimerText("Resend OTP");
       }
     }, 1000);
 
@@ -371,7 +383,9 @@ function generateOTP(globals) {
           setOtpValue(globals, String(result.otp));
           setTextValue(globals, "otp_attempts_left", "3/3 attempt(s) left");
 
-          runOtpCountdown(globals);
+          setTimeout(function () {
+  runOtpCountdown(globals);
+}, 500);
         }
       })
       .catch(function (err) {
