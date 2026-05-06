@@ -428,9 +428,6 @@ function setButtonState(globals, fieldName, enabled) {
  * @returns {string}
  */
 function validateOTP(globals) {
-
-  debugger;
-
   const otpPanel = globals.form.otp_page;
 
   const mobile =
@@ -440,103 +437,73 @@ function validateOTP(globals) {
     document.querySelector('input[name="otp_code"]')?.value || "";
 
   fetch("https://writing-dimly-spout.ngrok-free.dev/verify-otp", {
-
     method: "POST",
-
     headers: {
       "Content-Type": "application/json"
     },
-
     body: JSON.stringify({
       mobile,
       otp,
       pan: "ABCDE1234F"
     })
-
   })
-
     .then((res) => res.json())
-
     .then((response) => {
-
       console.log("VERIFY RESPONSE", response);
 
-      // Success / Failure Message
-      globals.functions.setProperty(
-        otpPanel.success_failure_msg,
-        {
+      const messageField =
+        otpPanel.success_failure_msg ||
+        otpPanel["success failure msg"];
+
+      if (messageField) {
+        globals.functions.setProperty(messageField, {
           value: response.message || "",
           visible: true
-        }
-      );
-
-      if (response.success === true) {
-
-        stopOtpTimer(globals);
-
-        const customer = response.customer;
-
-        console.log("CUSTOMER DATA", customer);
-
-        /* =========================
-           CUSTOMER DETAILS
-        ========================= */
-
-        // Full Name
-        globals.functions.setProperty(
-          globals.form.customerdetails.customer_details.full_name_pan_display,
-          {
-            value: customer.fullName || ""
-          }
-        );
-        // Address
-        globals.functions.setProperty(
-          globals.form.customerdetails.address_details.aadhaar_address_display,
-          {
-            value: customer.address || ""
-          }
-        );
-
-        // PAN Number
-        globals.functions.setProperty(
-          globals.form.customerdetails.personal_details.pan_number,
-          {
-            value: customer.pan || ""
-          }
-        );
-
-        // Email
-        globals.functions.setProperty(
-          globals.form.customerdetails.personal_details.personal_email_id,
-          {
-            value: customer.email || ""
-          }
-        );
-
-        // Hide OTP Page
-        globals.functions.setProperty(
-          globals.form.otp_page,
-          {
-            visible: false
-          }
-        );
-
-        // Show Customer Details Panel
-        globals.functions.setProperty(
-          globals.form.customerdetails,
-          {
-            visible: true
-          }
-        );
-
+        });
       }
 
+      if (response.success === true) {
+        if (typeof stopOtpTimer === "function") {
+          stopOtpTimer(globals);
+        }
+
+        const customer = response.customer || {};
+
+        const customerDetails = globals.form.customerdetails;
+
+        globals.functions.setProperty(
+          customerDetails.customer_details.full_name_pan_display,
+          { value: customer.fullName || "" }
+        );
+
+        globals.functions.setProperty(
+          customerDetails.address_details.aadhaar_address_display,
+          { value: customer.address || "" }
+        );
+
+        globals.functions.setProperty(
+          customerDetails.personal_details.pan_number,
+          { value: customer.pan || "" }
+        );
+
+        globals.functions.setProperty(
+          customerDetails.personal_details.personal_email_id,
+          { value: customer.email || "" }
+        );
+
+        globals.functions.setProperty(globals.form.otp_page, {
+          visible: false
+        });
+
+        globals.functions.setProperty(globals.form.customerdetails, {
+          visible: true
+        });
+
+        console.log("Moved to customer details");
+      }
     })
-
     .catch((err) => {
-
       console.error("OTP VERIFY ERROR", err);
-
     });
 
   return "OTP verify request sent";
