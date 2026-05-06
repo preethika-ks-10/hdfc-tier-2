@@ -427,20 +427,23 @@ function validateOTP(globals) {
     const form = globals.form;
     const otpPanel = form.otp_page;
 
-    const msgField = "success failure msg";
-
     const otp = String(
       otpPanel.otp_code?.value ||
       otpPanel.otp_code?.$value ||
       ""
     ).trim();
 
-    console.log("Entered OTP:", otp);
+    console.log("OTP ENTERED:", otp);
 
-    // ✅ Block 4, 5, 7 digits
     if (!/^\d{6}$/.test(otp)) {
-      setTextValue(globals, msgField, "Enter valid 6-digit OTP");
-      return false;
+      globals.functions.setProperty(
+        otpPanel["success failure msg"],
+        {
+          value: "Enter valid 6-digit OTP",
+          visible: true
+        }
+      );
+      return;
     }
 
     if (window.otpTryCount === undefined) {
@@ -448,18 +451,30 @@ function validateOTP(globals) {
     }
 
     if (window.otpTryCount >= 3) {
-      setTextValue(globals, msgField, "No attempts left. Please resend OTP.");
-      return false;
+      globals.functions.setProperty(
+        otpPanel["success failure msg"],
+        {
+          value: "No attempts left. Please resend OTP.",
+          visible: true
+        }
+      );
+      return;
     }
 
     const payload = {
-      mobile: getValue(globals, "aadhaar_linked_mobile_number"),
-      pan: getValue(globals, "pan_card_number") || null,
-      dob: getValue(globals, "date_of_birth") || null,
+      mobile: form.personal_loan_offer.aadhaar_linked_mobile_number?.value ||
+              form.personal_loan_offer.aadhaar_linked_mobile_number?.$value ||
+              "",
+      pan: form.personal_loan_offer.pan_card_number?.value ||
+           form.personal_loan_offer.pan_card_number?.$value ||
+           null,
+      dob: form.personal_loan_offer.date_of_birth?.value ||
+           form.personal_loan_offer.date_of_birth?.$value ||
+           null,
       otp: otp
     };
 
-    console.log("VERIFY OTP PAYLOAD:", payload);
+    console.log("VERIFY PAYLOAD:", payload);
 
     fetch(OTP_BASE_URL + "/verify-otp", {
       method: "POST",
@@ -473,68 +488,77 @@ function validateOTP(globals) {
         return res.json();
       })
       .then(function (result) {
-        console.log("VERIFY OTP RESULT:", result);
+        console.log("VERIFY RESULT:", result);
 
         if (result.status === "success") {
-          if (window.otpTimerInterval) {
-            clearInterval(window.otpTimerInterval);
-            window.otpTimerInterval = null;
-          }
+          globals.functions.setProperty(
+            otpPanel["success failure msg"],
+            {
+              value: "OTP validated successfully",
+              visible: true
+            }
+          );
 
-          setTextValue(globals, msgField, "OTP validated successfully");
-          setTextValue(globals, "otp_attempts_left", "Verified");
+          globals.functions.setProperty(
+            otpPanel.otp_attempts_left,
+            {
+              value: "Verified",
+              visible: true
+            }
+          );
 
-          setButtonState(globals, "otp_submit", false);
-          setButtonState(globals, "otp_resend_icon", false);
+          globals.functions.setProperty(form.otp_page, {
+            visible: false
+          });
 
-          // ✅ SHOW CUSTOMER DETAILS PANEL
           globals.functions.setProperty(form.customerdetails, {
             visible: true,
             enabled: true
           });
 
-          // ✅ HIDE OTP PANEL
-          globals.functions.setProperty(form.otp_page, {
-            visible: false
-          });
-
           return;
         }
 
-        // ❌ INVALID OTP - DO NOT MOVE
         window.otpTryCount++;
 
         const remaining = 3 - window.otpTryCount;
 
-        setTextValue(
-          globals,
-          "otp_attempts_left",
-          remaining > 0
-            ? remaining + "/3 attempt(s) left"
-            : "No attempts left"
+        globals.functions.setProperty(
+          otpPanel.otp_attempts_left,
+          {
+            value:
+              remaining > 0
+                ? remaining + "/3 attempt(s) left"
+                : "No attempts left",
+            visible: true
+          }
         );
 
-        setTextValue(
-          globals,
-          msgField,
-          remaining > 0
-            ? "Invalid OTP"
-            : "No attempts left. Please resend OTP."
+        globals.functions.setProperty(
+          otpPanel["success failure msg"],
+          {
+            value:
+              remaining > 0
+                ? "Invalid OTP"
+                : "No attempts left. Please resend OTP.",
+            visible: true
+          }
         );
-
-        return;
       })
       .catch(function (err) {
-        console.error("Verify OTP API Error:", err);
-        setTextValue(globals, msgField, "Verify OTP API Error");
-      });
+        console.error("VERIFY ERROR:", err);
 
-    // ✅ Always block automatic next-page movement
-    return false;
+        globals.functions.setProperty(
+          otpPanel["success failure msg"],
+          {
+            value: "Verify OTP API Error",
+            visible: true
+          }
+        );
+      });
 
   } catch (e) {
     console.error("validateOTP Error:", e);
-    return false;
   }
 }
 // 
