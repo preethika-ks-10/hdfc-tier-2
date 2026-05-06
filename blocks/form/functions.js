@@ -52,6 +52,27 @@ function getLoanAmount(globals) {
 }
 
 
+function getSnappedTenure(rawTenure) {
+  const allowedTenures = [12, 24, 36, 48, 60, 72, 84];
+
+  rawTenure = Number(rawTenure) || 12;
+
+  return allowedTenures.reduce((prev, curr) => {
+    return Math.abs(curr - rawTenure) < Math.abs(prev - rawTenure)
+      ? curr
+      : prev;
+  });
+}
+
+function updateTenureDisplay(globals) {
+  const data = globals.functions.exportData();
+
+  const rawTenure = getNumber(data["Loan Tenure"]);
+  const tenure = getSnappedTenure(rawTenure);
+
+  return tenure + " months";
+}
+
 function updateLoanDisplay(globals) {
   const loanAmount = getLoanAmount(globals);
 
@@ -64,8 +85,12 @@ function updateLoanDetails(globals) {
   const data = globals.functions.exportData();
 
   const loanAmount = getLoanAmount(globals);
+
+  // Get slider value
   const rawTenure = getNumber(data["Loan Tenure"]);
-  const tenure = rawTenure <= 7 ? rawTenure * 12 : rawTenure;
+
+  // Snap to nearest valid tenure
+  const tenure = getSnappedTenure(rawTenure);
 
   const rate = 10.97;
   const monthlyRate = rate / (12 * 100);
@@ -92,7 +117,6 @@ function getRate() {
 function getTax() {
   return "₹4,000";
 }
-
 function initSalaryBankUI() {
   const panel = document.querySelector(".field-salary-bank-selection");
   const dropdownWrapper = document.querySelector(".drop-down-wrapper.field-salary-bank");
@@ -625,6 +649,8 @@ export {
   maskMobileNumber,
   updateLoanDetails,
   updateLoanDisplay,
+  updateTenureDisplay,
+  getSnappedTenure,
   getRate,
   getTax,
   initSalaryBankUI,
