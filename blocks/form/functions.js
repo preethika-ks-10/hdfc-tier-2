@@ -562,16 +562,19 @@ function validateOTP(globals) {
 }
 // 
 function resendOTP(globals) {
-
   try {
+    const otpPanel = globals.field.$parent;
 
-    const otpPanel = globals.form.otp_page;
+    if (!otpPanel) {
+      console.error("OTP panel not found");
+      return "";
+    }
 
-    window.otpResendAttempts =
-      window.otpResendAttempts || 3;
+    if (window.otpResendAttempts === undefined) {
+      window.otpResendAttempts = 3;
+    }
 
     if (window.otpResendAttempts <= 0) {
-
       globals.functions.setProperty(
         otpPanel["success failure msg"],
         {
@@ -579,24 +582,18 @@ function resendOTP(globals) {
           visible: true
         }
       );
-
       return "";
     }
 
-    // reduce resend count
     window.otpResendAttempts--;
 
-    // update attempts text
     globals.functions.setProperty(
       otpPanel.otp_attempts_left,
       {
-        value:
-          window.otpResendAttempts +
-          "/3 resend(s) left"
+        value: window.otpResendAttempts + "/3 resend(s) left"
       }
     );
 
-    // clear OTP box
     globals.functions.setProperty(
       otpPanel.otp_code,
       {
@@ -604,7 +601,6 @@ function resendOTP(globals) {
       }
     );
 
-    // clear old message
     globals.functions.setProperty(
       otpPanel["success failure msg"],
       {
@@ -613,20 +609,17 @@ function resendOTP(globals) {
       }
     );
 
-    // call OTP generation API again
     generateOTP(globals);
 
     console.log("OTP resent");
 
     return "";
-
   } catch (e) {
-
     console.error("resendOTP Error:", e);
-
     return "";
   }
 }
+
 export {
   getFullName,
   days,
