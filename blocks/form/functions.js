@@ -64,8 +64,14 @@ function updateLoanDetails(globals) {
 
   const loanAmount = getLoanAmount(globals);
   const rawTenure = getNumber(data["Loan Tenure"]);
-  const tenure = rawTenure <= 7 ? rawTenure * 12 : rawTenure;
 
+const allowedTenures = [12, 24, 36, 48, 60, 72, 84];
+
+const tenure = allowedTenures.reduce((prev, curr) => {
+  return Math.abs(curr - rawTenure) < Math.abs(prev - rawTenure)
+    ? curr
+    : prev;
+});
   const rate = 10.97;
   const monthlyRate = rate / (12 * 100);
 
