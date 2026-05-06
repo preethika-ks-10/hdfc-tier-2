@@ -54,8 +54,6 @@ function getLoanAmount(globals) {
 function getSnappedTenure(rawTenure) {
   const allowedTenures = [12, 24, 36, 48, 60, 72, 84];
 
-  rawTenure = Number(rawTenure) || 12;
-
   return allowedTenures.reduce((prev, curr) => {
     return Math.abs(curr - rawTenure) < Math.abs(prev - rawTenure)
       ? curr
@@ -63,22 +61,28 @@ function getSnappedTenure(rawTenure) {
   });
 }
 
-function getCurrentTenureValue() {
-  const el = document.querySelector('input[name="Loan Tenure"]');
+function updateLoanDisplay(globals) {
+  const loanAmount = getLoanAmount(globals);
 
-  return el ? Number(el.value) : 12;
+  return loanAmount > 0
+    ? "₹" + loanAmount.toLocaleString("en-IN")
+    : "";
 }
 
 function updateTenureDisplay(globals) {
-  const rawTenure = getCurrentTenureValue();
+  const data = globals.functions.exportData();
+
+  const rawTenure = getNumber(data["Loan Tenure"]);
   const tenure = getSnappedTenure(rawTenure);
 
   return tenure + " months";
 }
 
 function updateLoanDetails(globals) {
+  const data = globals.functions.exportData();
+
   const loanAmount = getLoanAmount(globals);
-  const rawTenure = getCurrentTenureValue();
+  const rawTenure = getNumber(data["Loan Tenure"]);
   const tenure = getSnappedTenure(rawTenure);
 
   const rate = 10.97;
@@ -94,7 +98,9 @@ function updateLoanDetails(globals) {
     emi = Math.round(emi);
   }
 
-  return emi > 0 ? "₹" + emi.toLocaleString("en-IN") : "";
+  return emi > 0
+    ? "₹" + emi.toLocaleString("en-IN")
+    : "";
 }
 
 function getRate() {
