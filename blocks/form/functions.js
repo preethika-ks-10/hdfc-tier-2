@@ -625,7 +625,6 @@ export {
   maskMobileNumber,
   updateLoanDetails,
   updateLoanDisplay,
-  updateTenureDisplay,
   getRate,
   getTax,
   initSalaryBankUI,
