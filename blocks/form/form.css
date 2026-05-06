@@ -2129,260 +2129,174 @@ body {
 
 
 
-/* ===== OTP PANEL FINAL CLEAN VERSION ===== */
-
-#panelcontainer-0fa7951f12 {
-  position: relative !important;
-  width: 100% !important;
-  min-height: 520px !important;
-  margin: 0 !important;
-  padding: 56px 0 120px 56px !important;
-  background: #fff !important;
-  font-family: Arial, sans-serif !important;
-  box-sizing: border-box !important;
-  overflow: visible !important;
+/* OTP page only */
+#panelcontainer-0fa7951f2,
+.panel-container-0fa7951f2 {
+  width: 520px;
+  margin: 48px 0 0 72px;
+  padding: 0 0 56px;
+  font-family: Inter, Arial, sans-serif;
+  color: #111827;
 }
 
-/* TITLE */
-#panelcontainer-0fa7951f12 > legend {
-  font-size: 20px !important;
-  font-weight: 800 !important;
-  color: #111827 !important;
-  margin-bottom: 22px !important;
+/* Remove default fieldset look */
+#panelcontainer-0fa7951f2 {
+  border: 0;
 }
 
-/* INSTRUCTION TEXT */
-#panelcontainer-0fa7951f12 .field-otp-instructions {
-  margin-bottom: 40px !important;
+/* Title */
+#panelcontainer-0fa7951f2 > legend {
+  display: block;
+  margin-bottom: 24px;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
 }
 
-#panelcontainer-0fa7951f12 .field-otp-instructions p {
-  font-size: 16px !important;
-  color: #111827 !important;
+/* Change title text visually */
+#panelcontainer-0fa7951f2 > legend {
+  font-size: 0;
 }
 
-#panelcontainer-0fa7951f12 .field-otp-instructions a {
-  color: #0057ff !important;
-  text-decoration: underline !important;
+#panelcontainer-0fa7951f2 > legend::before {
+  content: "Help us confirm this is you!";
+  font-size: 20px;
+  font-weight: 800;
 }
 
-/* OTP INPUT */
-#panelcontainer-0fa7951f12 .field-otp-code {
-  position: relative !important;
-  width: 504px !important;
+/* Hide success/failure hidden input row */
+#panelcontainer-0fa7951f2 .field-success-failure-msg {
+  display: none;
 }
 
-#panelcontainer-0fa7951f12 .field-otp-code input {
-  width: 504px !important;
-  height: 48px !important;
-  border: 1px solid #dcdfe6 !important;
-  border-radius: 8px !important;
-  padding: 0 52px 0 18px !important;
-  font-size: 18px !important;
-  letter-spacing: 28px !important;
+/* Instruction text */
+#panelcontainer-0fa7951f2 .field-otp-instructions {
+  margin-bottom: 28px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #111827;
 }
 
-/* EYE ICON */
-/* EYE ICON - correct */
-#panelcontainer-0fa7951f12 .field-otp-code::after {
-  content: "" !important;
-  position: absolute !important;
-  right: 18px !important;
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  font-size: 16px !important;
-  line-height: 1 !important;
-  opacity: 0.75 !important;
-  pointer-events: none !important;
+#panelcontainer-0fa7951f2 .field-otp-instructions p,
+#panelcontainer-0fa7951f2 .field-otp-instructions p p {
+  margin: 0;
 }
 
-/* TIMER */
-#panelcontainer-0fa7951f12 .field-description {
-  margin-top: 6px !important;
-  font-size: 13px !important;
-  color: #6b7280 !important;
+#panelcontainer-0fa7951f2 .field-otp-instructions b {
+  display: none;
 }
 
-/* ATTEMPTS (RIGHT SIDE) */
-#panelcontainer-0fa7951f12 .field-otp-attempts {
-  position: absolute !important;
-  right: 80px !important;
-  top: 245px !important;
-  font-size: 16px !important;
-  color: #4b5563 !important;
+#panelcontainer-0fa7951f2 .field-otp-instructions u {
+  color: #2563eb;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
-/* REMOVE WRAPPER EFFECT */
-#panelcontainer-0fa7951f12 .submit-wrapper {
-  display: block !important;
+/* OTP input */
+#panelcontainer-0fa7951f2 .field-otp-code {
+  width: 448px;
+  margin-bottom: 4px;
+  position: relative;
 }
 
-/* ===== BUTTONS CORRECTED ===== */
-
-#panelcontainer-0fa7951f12 {
-  position: relative !important;
+#panelcontainer-0fa7951f2 input[name="otp_code"] {
+  width: 100%;
+  height: 44px;
+  box-sizing: border-box;
+  border: 1px solid #d8dde8;
+  border-radius: 8px;
+  padding: 0 44px 0 14px;
+  font-size: 16px;
+  outline: none;
 }
 
-/* reset wrapper */
-#panelcontainer-0fa7951f12 .submit-wrapper {
-  display: block !important;
-  margin: 0 !important;
-  padding: 0 !important;
+#panelcontainer-0fa7951f2 input[name="otp_code"]:focus {
+  border-color: #5b6ff5;
+  box-shadow: 0 0 0 3px rgba(91, 111, 245, 0.12);
 }
 
-/* RESEND LEFT */
-#panelcontainer-0fa7951f12 .field-otp-resend-icon {
-  position: absolute !important;
-  left: 56px !important;
-  top: 340px !important;
-  width: 130px !important;
-  height: 50px !important;
-  margin: 0 !important;
-  padding: 0 !important;
+/* Eye icon look */
+#panelcontainer-0fa7951f2 .field-otp-code::after {
+  content: "◉";
+  position: absolute;
+  right: 14px;
+  top: 13px;
+  font-size: 16px;
+  color: #111827;
+  transform: rotate(-20deg);
 }
 
-/* SUBMIT RIGHT */
-#panelcontainer-0fa7951f12 .field-otp-submit {
-  position: absolute !important;
-  left: 276px !important;
-  top: 340px !important;
-  width: 130px !important;
-  height: 50px !important;
-  margin: 0 !important;
-  padding: 0 !important;
+/* Timer */
+#panelcontainer-0fa7951f2 .field-otp-resend-timer {
+  margin-bottom: 44px;
+  font-size: 12px;
+  color: #6b7280;
 }
 
-/* button style */
-#panelcontainer-0fa7951f12 .field-otp-resend-icon button,
-#panelcontainer-0fa7951f12 .field-otp-submit button,
-#panelcontainer-0fa7951f12 input[type="submit"] {
-  width: 130px !important;
-  min-width: 130px !important;
-  height: 50px !important;
-  min-height: 50px !important;
-  border-radius: 8px !important;
-  background: #5d74f2 !important;
-  color: #fff !important;
-  border: none !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  cursor: pointer !important;
-  white-space: nowrap !important;
-  overflow: visible !important;
-  text-overflow: unset !important;
-  padding: 0 !important;
-  box-sizing: border-box !important;
-}
-/* FINAL SMALL IMPROVEMENTS */
-
-/* reduce gap between text and input */
-#panelcontainer-0fa7951f12 .field-otp-instructions {
-  margin-bottom: 30px !important;
+#panelcontainer-0fa7951f2 .field-otp-resend-timer::before {
+  content: "Resend OTP in: ";
 }
 
-/* make edit mobile number blue */
-#panelcontainer-0fa7951f12 .field-otp-instructions a,
-#panelcontainer-0fa7951f12 .field-otp-instructions u {
-  color: #0057ff !important;
-  text-decoration: underline !important;
-  font-weight: 500 !important;
+#panelcontainer-0fa7951f2 .field-otp-resend-timer div {
+  display: inline;
 }
 
-/* move input slightly closer */
-#panelcontainer-0fa7951f12 .field-otp-code {
-  margin-top: 0 !important;
-}
-/* slightly align timer like second image */
-#panelcontainer-0fa7951f12 .field-description {
-  margin-top: 3px !important;
-}
-/* ===== FINAL FIX: CENTER + STOP TEXT OVERLAP ===== */
-
-/* center full page/card properly */
-#panelcontainer-bdf4fed7d3,
-#panelcontainer-a600059c18 {
-  width: 1350px !important;
-  max-width: 1350px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  left: 0 !important;
-  right: 0 !important;
-  transform: none !important;
+/* Hide attempts field */
+#panelcontainer-0fa7951f2 .field-otp-attempts-left {
+  display: none;
 }
 
-/* mobile field: keep value separate from flag/+91/placeholder */
-#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number input {
-  padding-left: 150px !important;
-  padding-right: 16px !important;
-  font-size: 14px !important;
-  line-height: 48px !important;
+/* Button layout */
+#panelcontainer-0fa7951f2 .field-otp-resend-icon,
+#panelcontainer-0fa7951f2 .field-otp-submit {
+  display: inline-block;
+  vertical-align: top;
 }
 
-/* show +91 separately */
-#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::after {
-  content: "+91  Enter Aadhaar Linked Mobile Number" !important;
-  left: 48px !important;
-  top: 24px !important;
-  font-size: 16px !important;
-  font-weight: 700 !important;
-  color: #9ca3af !important;
-  z-index: 1 !important;
+/* Resend OTP button */
+#panelcontainer-0fa7951f2 button[name="otp_resend_icon"] {
+  width: 112px;
+  height: 44px;
+  border: 0;
+  border-radius: 8px;
+  background: #5b6ff5;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-/* input value should appear above placeholder layer */
-#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number input {
-  position: relative !important;
-  z-index: 2 !important;
-  background: transparent !important;
+#panelcontainer-0fa7951f2 button[name="otp_resend_icon"] {
+  font-size: 0;
 }
 
-/* DOB field: move value away from placeholder */
-#panelcontainer-bdf4fed7d3 .field-date-of-birth input {
-  padding-left: 230px !important;
-  padding-right: 44px !important;
-  font-size: 14px !important;
-  line-height: 48px !important;
-  position: relative !important;
-  z-index: 2 !important;
-  background: transparent !important;
+#panelcontainer-0fa7951f2 button[name="otp_resend_icon"]::before {
+  content: "Resend OTP";
+  font-size: 14px;
 }
 
-#panelcontainer-bdf4fed7d3 .field-date-of-birth::before {
-  left: 20px !important;
-  top: 24px !important;
-  font-size: 16px !important;
-  z-index: 1 !important;
+/* Submit button */
+#panelcontainer-0fa7951f2 .field-otp-submit {
+  margin-left: 240px;
 }
 
-/* keep calendar icon visible */
-#panelcontainer-bdf4fed7d3 .field-date-of-birth::after {
-  z-index: 3 !important;
+#panelcontainer-0fa7951f2 button[name="otp_submit"] {
+  width: 78px;
+  height: 44px;
+  border: 0;
+  border-radius: 8px;
+  background: #5b6ff5;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-/* make sure parent wrapper is centered, not pushed right */
-body,
-html {
-  overflow-x: hidden !important;
+/* Hide labels */
+#panelcontainer-0fa7951f2 label {
+  display: none;
 }
-#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number::after {
-  content: "+91" !important;
-  left: 48px !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-date-of-birth::before {
-  content: "" !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-aadhaar-linked-mobile-number input {
-  padding-left: 150px !important;
-}
-
-#panelcontainer-bdf4fed7d3 .field-date-of-birth input {
-  padding-left: 20px !important;
-}
-
-
-
 /* MAIN OFFER PANEL */
 /* MAIN OFFER PANEL */
 #panelcontainer-ad67391f5f {
