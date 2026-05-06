@@ -562,21 +562,16 @@ function validateOTP(globals) {
 }
 // 
 function resendOTP(globals) {
-  try {
-    const otpPanel =
-      globals.form.otp_page ||
-      globals.form?.otp_verification_panel ||
-      globals.form?.Enter_OTP;
 
-    if (!otpPanel) {
-      console.error("otp_page panel not found");
-      return "";
-    }
+  try {
+
+    const otpPanel = globals.form.otp_page;
 
     window.otpResendAttempts =
-      window.otpResendAttempts === undefined ? 3 : window.otpResendAttempts;
+      window.otpResendAttempts || 3;
 
     if (window.otpResendAttempts <= 0) {
+
       globals.functions.setProperty(
         otpPanel["success failure msg"],
         {
@@ -584,18 +579,32 @@ function resendOTP(globals) {
           visible: true
         }
       );
+
       return "";
     }
 
+    // reduce resend count
     window.otpResendAttempts--;
 
+    // update attempts text
     globals.functions.setProperty(
       otpPanel.otp_attempts_left,
       {
-        value: window.otpResendAttempts + "/3 resend(s) left"
+        value:
+          window.otpResendAttempts +
+          "/3 resend(s) left"
       }
     );
 
+    // clear OTP box
+    globals.functions.setProperty(
+      otpPanel.otp_code,
+      {
+        value: ""
+      }
+    );
+
+    // clear old message
     globals.functions.setProperty(
       otpPanel["success failure msg"],
       {
@@ -604,22 +613,20 @@ function resendOTP(globals) {
       }
     );
 
-    globals.functions.setProperty(
-      otpPanel.otp_code,
-      {
-        value: ""
-      }
-    );
-
+    // call OTP generation API again
     generateOTP(globals);
 
+    console.log("OTP resent");
+
     return "";
+
   } catch (e) {
+
     console.error("resendOTP Error:", e);
+
     return "";
   }
 }
-
 export {
   getFullName,
   days,
