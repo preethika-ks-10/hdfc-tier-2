@@ -2127,75 +2127,70 @@ body {
 
 
 
-
-
-/* OTP PAGE ONLY */
+/* OTP PAGE */
 #panelcontainer-0fa7951f12 {
-  width: 560px;
-  margin: 48px 0 0 68px;
-  padding: 0 0 48px;
-  border: 0;
+  width: 700px;
+  margin: 48px auto;
   font-family: Inter, Arial, sans-serif;
-  background: #ffffff;
   color: #111827;
+  background: #ffffff;
 }
 
 /* TITLE */
 #panelcontainer-0fa7951f12 > legend {
-  display: block;
-  padding: 0;
-  margin: 0 0 56px;
   font-size: 34px;
   font-weight: 800;
+  margin-bottom: 42px;
   color: #0f172a;
-}
-
-/* HIDE EXTRA HIDDEN TEXT FIELD */
-#panelcontainer-0fa7951f12 .field-success-failure-msg {
-  display: none !important;
 }
 
 /* INSTRUCTION */
 #panelcontainer-0fa7951f12 .field-otp-instructions {
-  margin-bottom: 56px;
+  margin-bottom: 28px;
 }
 
 #panelcontainer-0fa7951f12 .field-otp-instructions p {
   margin: 0;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 25px;
   color: #111827;
-}
-
-#panelcontainer-0fa7951f12 .field-otp-instructions b {
-  font-weight: 800;
 }
 
 #panelcontainer-0fa7951f12 .field-otp-instructions u {
   color: #2563eb;
   text-decoration: none;
   cursor: pointer;
+  font-weight: 500;
+}
+
+/* OTP + SUCCESS ROW */
+#panelcontainer-0fa7951f12 .field-otp-code,
+#panelcontainer-0fa7951f12 .field-success-failure-msg {
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* OTP FIELD */
+#panelcontainer-0fa7951f12 .field-otp-code {
+  width: 390px;
+  margin-right: 18px;
+  position: relative;
 }
 
 /* OTP INPUT */
-#panelcontainer-0fa7951f12 .field-otp-code {
-  width: 505px;
-  position: relative;
-  margin-bottom: 28px;
-}
-
 #panelcontainer-0fa7951f12 input[name="otp_code"] {
   width: 100%;
-  height: 48px;
+  height: 52px;
+  border: 1px solid #d4d8e5;
+  border-radius: 10px;
+  padding: 0 50px 0 16px;
   box-sizing: border-box;
-  border: 1px solid #d1d5db;
-  border-radius: 9px;
-  padding: 0 48px 0 14px;
   font-size: 18px;
+  background: #fff;
   outline: none;
-  background: #ffffff;
 }
 
+/* OTP FOCUS */
 #panelcontainer-0fa7951f12 input[name="otp_code"]:focus {
   border-color: #5b6ff5;
   box-shadow: 0 0 0 3px rgba(91, 111, 245, 0.12);
@@ -2203,35 +2198,75 @@ body {
 
 /* EYE ICON */
 #panelcontainer-0fa7951f12 .field-otp-code::after {
-  content: "◉";
+  content: "👁";
   position: absolute;
   right: 16px;
-  top: 14px;
-  font-size: 16px;
-  color: #6b7280;
-  transform: rotate(-20deg);
+  top: 13px;
+  font-size: 18px;
+  opacity: 0.7;
+}
+
+/* SUCCESS / FAILURE FIELD */
+#panelcontainer-0fa7951f12 .field-success-failure-msg {
+  width: 260px;
+}
+
+#panelcontainer-0fa7951f12 input[name="success_failure_msg"] {
+  width: 100%;
+  height: 52px;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #dc2626;
+  border-radius: 10px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* REMOVE LABELS */
+#panelcontainer-0fa7951f12 .field-otp-code label,
+#panelcontainer-0fa7951f12 .field-success-failure-msg label {
+  display: none;
+}
+
+/* ATTEMPTS FIELD */
+#panelcontainer-0fa7951f12 .field-otp-attempts-left {
+  width: 220px;
+  margin-top: 20px;
+  margin-bottom: 28px;
+}
+
+#panelcontainer-0fa7951f12 .field-otp-attempts-left label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+#panelcontainer-0fa7951f12 input[name="otp_attempts_left"] {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #dbe1ea;
+  border-radius: 8px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  background: #f8fafc;
+  font-size: 14px;
+  color: #0f172a;
+  font-weight: 600;
 }
 
 /* TIMER */
 #panelcontainer-0fa7951f12 .field-otp-resend-timer {
-  margin: 0 0 42px;
-  font-size: 16px;
-  color: #475569;
+  margin-bottom: 34px;
 }
 
-#panelcontainer-0fa7951f12 .field-otp-resend-timer::before {
-  content: "Resend OTP in: ";
-}
-
-#panelcontainer-0fa7951f12 .field-otp-resend-timer div,
 #panelcontainer-0fa7951f12 .field-otp-resend-timer p {
-  display: inline;
   margin: 0;
-}
-
-/* HIDE ATTEMPTS */
-#panelcontainer-0fa7951f12 .field-otp-attempts-left {
-  display: none !important;
+  font-size: 15px;
+  color: #64748b;
 }
 
 /* BUTTON ROW */
@@ -2242,11 +2277,15 @@ body {
 }
 
 /* SUBMIT BUTTON */
+#panelcontainer-0fa7951f12 .field-otp-submit {
+  margin-right: 18px;
+}
+
 #panelcontainer-0fa7951f12 button[name="otp_submit"] {
-  width: 180px;
-  height: 54px;
+  width: 190px;
+  height: 52px;
   border: 0;
-  border-radius: 9px;
+  border-radius: 10px;
   background: #5b6ff5;
   color: #ffffff;
   font-size: 15px;
@@ -2255,15 +2294,11 @@ body {
 }
 
 /* RESEND BUTTON */
-#panelcontainer-0fa7951f12 .field-otp-resend-icon {
-  margin-left: 12px;
-}
-
 #panelcontainer-0fa7951f12 button[name="otp_resend_icon"] {
-  width: 180px;
-  height: 54px;
+  width: 190px;
+  height: 52px;
   border: 0;
-  border-radius: 9px;
+  border-radius: 10px;
   background: #5b6ff5;
   color: #ffffff;
   font-size: 15px;
@@ -2271,23 +2306,9 @@ body {
   cursor: pointer;
 }
 
+/* HOVER */
 #panelcontainer-0fa7951f12 button:hover {
   background: #4b5de6;
-}
-
-/* HIDE LABELS */
-#panelcontainer-0fa7951f12 label {
-  display: none;
-}
-
-/* REMOVE DEFAULT COLUMN WIDTH EFFECTS */
-#panelcontainer-0fa7951f12 .col-2,
-#panelcontainer-0fa7951f12 .col-6,
-#panelcontainer-0fa7951f12 .col-10,
-#panelcontainer-0fa7951f12 .col-12 {
-  width: auto;
-  max-width: none;
-  flex: none;
 }
 
 
