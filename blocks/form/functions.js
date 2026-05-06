@@ -427,10 +427,19 @@ function validateOTP(globals) {
     const form = globals.form;
     const otpPanel = form.otp_page;
 
-    const otp = String(otpPanel.otp_code?.value || otpPanel.otp_code?.$value || "").trim();
+    const msgField = "success failure msg";
 
+    const otp = String(
+      otpPanel.otp_code?.value ||
+      otpPanel.otp_code?.$value ||
+      ""
+    ).trim();
+
+    console.log("Entered OTP:", otp);
+
+    // ✅ Block 4, 5, 7 digits
     if (!/^\d{6}$/.test(otp)) {
-      setTextValue(globals, "success failure msg", "Enter valid 6-digit OTP");
+      setTextValue(globals, msgField, "Enter valid 6-digit OTP");
       return false;
     }
 
@@ -439,7 +448,7 @@ function validateOTP(globals) {
     }
 
     if (window.otpTryCount >= 3) {
-      setTextValue(globals, "success failure msg", "No attempts left. Please resend OTP.");
+      setTextValue(globals, msgField, "No attempts left. Please resend OTP.");
       return false;
     }
 
@@ -450,6 +459,8 @@ function validateOTP(globals) {
       otp: otp
     };
 
+    console.log("VERIFY OTP PAYLOAD:", payload);
+
     fetch(OTP_BASE_URL + "/verify-otp", {
       method: "POST",
       headers: {
@@ -458,39 +469,69 @@ function validateOTP(globals) {
       },
       body: JSON.stringify(payload)
     })
-      .then(res => res.json())
-      .then(result => {
+      .then(function (res) {
+        return res.json();
+      })
+      .then(function (result) {
+        console.log("VERIFY OTP RESULT:", result);
+
         if (result.status === "success") {
-          setTextValue(globals, "success failure msg", "OTP validated successfully");
+          if (window.otpTimerInterval) {
+            clearInterval(window.otpTimerInterval);
+            window.otpTimerInterval = null;
+          }
+
+          setTextValue(globals, msgField, "OTP validated successfully");
           setTextValue(globals, "otp_attempts_left", "Verified");
 
-          // Move next page ONLY here
-          // globals.functions.navigateTo("YOUR_NEXT_PAGE");
+          setButtonState(globals, "otp_submit", false);
+          setButtonState(globals, "otp_resend_icon", false);
 
-        } else {
-          window.otpTryCount++;
+          // ✅ SHOW CUSTOMER DETAILS PANEL
+          globals.functions.setProperty(form.customerdetails, {
+            visible: true,
+            enabled: true
+          });
 
-          const remaining = 3 - window.otpTryCount;
+          // ✅ HIDE OTP PANEL
+          globals.functions.setProperty(form.otp_page, {
+            visible: false
+          });
 
-          setTextValue(
-            globals,
-            "otp_attempts_left",
-            remaining > 0 ? remaining + "/3 attempt(s) left" : "No attempts left"
-          );
-
-          setTextValue(
-            globals,
-            "success failure msg",
-            remaining > 0 ? "Invalid OTP" : "No attempts left. Please resend OTP."
-          );
+          return;
         }
+
+        // ❌ INVALID OTP - DO NOT MOVE
+        window.otpTryCount++;
+
+        const remaining = 3 - window.otpTryCount;
+
+        setTextValue(
+          globals,
+          "otp_attempts_left",
+          remaining > 0
+            ? remaining + "/3 attempt(s) left"
+            : "No attempts left"
+        );
+
+        setTextValue(
+          globals,
+          msgField,
+          remaining > 0
+            ? "Invalid OTP"
+            : "No attempts left. Please resend OTP."
+        );
+
+        return;
       })
-      .catch(err => {
+      .catch(function (err) {
         console.error("Verify OTP API Error:", err);
-        setTextValue(globals, "success failure msg", "Verify OTP API Error");
+        setTextValue(globals, msgField, "Verify OTP API Error");
       });
 
+    // ✅ Always block automatic next-page movement
     return false;
+
   } catch (e) {
     console.error("validateOTP Error:", e);
     return false;
