@@ -422,144 +422,124 @@ function setButtonState(globals, fieldName, enabled) {
   }
 }
 // 
+/**
+ * Verify OTP API call
+ * @param {scope} globals
+ * @returns {string}
+ */
 function validateOTP(globals) {
-  try {
-    const form = globals.form;
-    const otpPanel = form.otp_page;
 
-    const otp = String(
-      otpPanel.otp_code?.value ||
-      otpPanel.otp_code?.$value ||
-      ""
-    ).trim();
+  debugger;
 
-    console.log("OTP ENTERED:", otp);
+  const otpPanel = globals.form.otp_page;
 
-    if (!/^\d{6}$/.test(otp)) {
-      globals.functions.setProperty(
-        otpPanel["success failure msg"],
-        {
-          value: "Enter valid 6-digit OTP",
-          visible: true
-        }
-      );
-      return;
-    }
+  const mobile =
+    document.querySelector('input[name="aadhaar_linked_mobile_number"]')?.value || "";
 
-    if (window.otpTryCount === undefined) {
-      window.otpTryCount = 0;
-    }
+  const otp =
+    document.querySelector('input[name="otp_code"]')?.value || "";
 
-    if (window.otpTryCount >= 3) {
-      globals.functions.setProperty(
-        otpPanel["success failure msg"],
-        {
-          value: "No attempts left. Please resend OTP.",
-          visible: true
-        }
-      );
-      return;
-    }
+  fetch("https://writing-dimly-spout.ngrok-free.dev/verify-otp", {
 
-    const payload = {
-      mobile: form.personal_loan_offer.aadhaar_linked_mobile_number?.value ||
-              form.personal_loan_offer.aadhaar_linked_mobile_number?.$value ||
-              "",
-      pan: form.personal_loan_offer.pan_card_number?.value ||
-           form.personal_loan_offer.pan_card_number?.$value ||
-           null,
-      dob: form.personal_loan_offer.date_of_birth?.value ||
-           form.personal_loan_offer.date_of_birth?.$value ||
-           null,
-      otp: otp
-    };
+    method: "POST",
 
-    console.log("VERIFY PAYLOAD:", payload);
+    headers: {
+      "Content-Type": "application/json"
+    },
 
-    fetch(OTP_BASE_URL + "/verify-otp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "ngrok-skip-browser-warning": "true"
-      },
-      body: JSON.stringify(payload)
+    body: JSON.stringify({
+      mobile,
+      otp,
+      pan: "ABCDE1234F"
     })
-      .then(function (res) {
-        return res.json();
-      })
-      .then(function (result) {
-        console.log("VERIFY RESULT:", result);
 
-        if (result.status === "success") {
-          globals.functions.setProperty(
-            otpPanel["success failure msg"],
-            {
-              value: "OTP validated successfully",
-              visible: true
-            }
-          );
+  })
 
-          globals.functions.setProperty(
-            otpPanel.otp_attempts_left,
-            {
-              value: "Verified",
-              visible: true
-            }
-          );
+    .then((res) => res.json())
 
-          globals.functions.setProperty(form.otp_page, {
-            visible: false
-          });
+    .then((response) => {
 
-          globals.functions.setProperty(form.customerdetails, {
-            visible: true,
-            enabled: true
-          });
+      console.log("VERIFY RESPONSE", response);
 
-          return;
+      // Success / Failure Message
+      globals.functions.setProperty(
+        otpPanel.success_failure_msg,
+        {
+          value: response.message || "",
+          visible: true
         }
+      );
 
-        window.otpTryCount++;
+      if (response.success === true) {
 
-        const remaining = 3 - window.otpTryCount;
+        stopOtpTimer(globals);
 
+        const customer = response.customer;
+
+        console.log("CUSTOMER DATA", customer);
+
+        /* =========================
+           CUSTOMER DETAILS
+        ========================= */
+
+        // Full Name
         globals.functions.setProperty(
-          otpPanel.otp_attempts_left,
+          globals.form.customerdetails.customer_details.full_name_pan_display,
           {
-            value:
-              remaining > 0
-                ? remaining + "/3 attempt(s) left"
-                : "No attempts left",
+            value: customer.fullName || ""
+          }
+        );
+        // Address
+        globals.functions.setProperty(
+          globals.form.customerdetails.address_details.aadhaar_address_display,
+          {
+            value: customer.address || ""
+          }
+        );
+
+        // PAN Number
+        globals.functions.setProperty(
+          globals.form.customerdetails.personal_details.pan_number,
+          {
+            value: customer.pan || ""
+          }
+        );
+
+        // Email
+        globals.functions.setProperty(
+          globals.form.customerdetails.personal_details.personal_email_id,
+          {
+            value: customer.email || ""
+          }
+        );
+
+        // Hide OTP Page
+        globals.functions.setProperty(
+          globals.form.otp_page,
+          {
+            visible: false
+          }
+        );
+
+        // Show Customer Details Panel
+        globals.functions.setProperty(
+          globals.form.customerdetails,
+          {
             visible: true
           }
         );
 
-        globals.functions.setProperty(
-          otpPanel["success failure msg"],
-          {
-            value:
-              remaining > 0
-                ? "Invalid OTP"
-                : "No attempts left. Please resend OTP.",
-            visible: true
-          }
-        );
-      })
-      .catch(function (err) {
-        console.error("VERIFY ERROR:", err);
+      }
 
-        globals.functions.setProperty(
-          otpPanel["success failure msg"],
-          {
-            value: "Verify OTP API Error",
-            visible: true
-          }
-        );
-      });
+    })
 
-  } catch (e) {
-    console.error("validateOTP Error:", e);
-  }
+    .catch((err) => {
+
+      console.error("OTP VERIFY ERROR", err);
+
+    });
+
+  return "OTP verify request sent";
 }
 // 
 function resendOTP(globals) {
