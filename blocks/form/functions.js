@@ -563,10 +563,13 @@ function validateOTP(globals) {
 // 
 function resendOTP(globals) {
   try {
-    const otpPanel = globals.form.otp_page || globals.form["otp_page"];
+    const form = globals.form || globals;
+    const otpPanel = form.otp_page;
 
     if (!otpPanel) {
-      console.error("otp_page not found. Available form keys:", Object.keys(globals.form));
+      console.error("otp_page not found");
+      console.log("globals:", globals);
+      console.log("form:", form);
       return "";
     }
 
@@ -607,7 +610,6 @@ function resendOTP(globals) {
     return "";
   }
 }
-
 export {
   getFullName,
   days,
