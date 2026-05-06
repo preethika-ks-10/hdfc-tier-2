@@ -290,7 +290,7 @@ function runOtpCountdown(globals) {
   try {
     console.log("Timer started");
 
-    let seconds = 21;
+    let seconds = 10;
 
     if (window.otpTimerInterval) {
       clearInterval(window.otpTimerInterval);
@@ -318,7 +318,7 @@ function runOtpCountdown(globals) {
       }
     }
 
-    updateTimerText("Resend OTP in: 21 secs");
+    updateTimerText("Resend OTP in: 10 secs");
 
     window.otpTimerInterval = setInterval(function () {
       updateTimerText("Resend OTP in: " + seconds + " secs");
@@ -372,8 +372,6 @@ function generateOTP(globals) {
           window.otpTryCount = 0;
 
           setOtpValue(globals, String(result.otp));
-          setTextValue(globals, "otp_attempts_left", "3/3 attempt(s) left");
-
           setTimeout(function () {
   runOtpCountdown(globals);
 }, 500);
