@@ -63,34 +63,12 @@ function getSnappedTenure(rawTenure) {
   });
 }
 
-function getSnappedTenure(rawTenure) {
-  const allowedTenures = [12, 24, 36, 48, 60, 72, 84];
-
-  rawTenure = Number(rawTenure) || 12;
-
-  return allowedTenures.reduce((prev, curr) => {
-    return Math.abs(curr - rawTenure) < Math.abs(prev - rawTenure)
-      ? curr
-      : prev;
-  });
-}
-
 function getCurrentTenureValue() {
   const el = document.querySelector('input[name="Loan Tenure"]');
 
   return el ? Number(el.value) : 12;
 }
 
-/* LOAN AMOUNT DISPLAY */
-function updateLoanDisplay(globals) {
-  const loanAmount = getLoanAmount(globals);
-
-  return loanAmount > 0
-    ? "₹" + loanAmount.toLocaleString("en-IN")
-    : "";
-}
-
-/* TENURE DISPLAY */
 function updateTenureDisplay(globals) {
   const rawTenure = getCurrentTenureValue();
   const tenure = getSnappedTenure(rawTenure);
@@ -98,10 +76,8 @@ function updateTenureDisplay(globals) {
   return tenure + " months";
 }
 
-/* EMI CALCULATION */
 function updateLoanDetails(globals) {
   const loanAmount = getLoanAmount(globals);
-
   const rawTenure = getCurrentTenureValue();
   const tenure = getSnappedTenure(rawTenure);
 
@@ -118,9 +94,7 @@ function updateLoanDetails(globals) {
     emi = Math.round(emi);
   }
 
-  return emi > 0
-    ? "₹" + emi.toLocaleString("en-IN")
-    : "";
+  return emi > 0 ? "₹" + emi.toLocaleString("en-IN") : "";
 }
 
 function getRate() {
