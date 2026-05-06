@@ -561,44 +561,53 @@ function validateOTP(globals) {
   return "";
 }
 // 
+/**
+ * Resend OTP
+ * @param {scope} globals
+ * @returns {string}
+ */
 function resendOTP(globals) {
   try {
-    const form = globals.form || globals;
-    const otpPanel = form.otp_page;
-
-    if (!otpPanel) {
-      console.error("otp_page not found");
-      console.log("globals:", globals);
-      console.log("form:", form);
-      return "";
-    }
+    const otpPanel = globals.form.otp_page;
 
     if (window.otpResendAttempts === undefined) {
       window.otpResendAttempts = 3;
     }
 
     if (window.otpResendAttempts <= 0) {
-      globals.functions.setProperty(otpPanel["success failure msg"], {
-        value: "Maximum resend attempts reached",
-        visible: true
-      });
+      globals.functions.setProperty(
+        otpPanel["success failure msg"],
+        {
+          value: "Maximum resend attempts reached",
+          visible: true
+        }
+      );
       return "";
     }
 
     window.otpResendAttempts--;
 
-    globals.functions.setProperty(otpPanel.otp_attempts_left, {
-      value: window.otpResendAttempts + "/3 resend(s) left"
-    });
+    globals.functions.setProperty(
+      otpPanel.otp_attempts_left,
+      {
+        value: window.otpResendAttempts + "/3 resend(s) left"
+      }
+    );
 
-    globals.functions.setProperty(otpPanel.otp_code, {
-      value: ""
-    });
+    globals.functions.setProperty(
+      otpPanel.otp_code,
+      {
+        value: ""
+      }
+    );
 
-    globals.functions.setProperty(otpPanel["success failure msg"], {
-      value: "",
-      visible: true
-    });
+    globals.functions.setProperty(
+      otpPanel["success failure msg"],
+      {
+        value: "",
+        visible: true
+      }
+    );
 
     generateOTP(globals);
 
