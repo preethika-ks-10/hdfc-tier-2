@@ -784,30 +784,30 @@ function fetchReviewDetailsAPI(globals) {
         }
       );
 
-      /* =========================
-         SALARY ACCOUNT DETAILS
-      ========================= */
+     /* =========================
+   SALARY ACCOUNT DETAILS
+========================= */
 
-      globals.functions.setProperty(
-        review.salary_account_details.salary_a_c_no,
-        {
-          value: data.salaryAccountNumber
-        }
-      );
+globals.functions.setProperty(
+  review.salary_account_details_panel.salary_a_c_no,
+  {
+    value: data.salaryAccountNumber
+  }
+);
 
-      globals.functions.setProperty(
-        review.salary_account_details.ifsc,
-        {
-          value: data.ifsc
-        }
-      );
+globals.functions.setProperty(
+  review.salary_account_details_panel.ifsc,
+  {
+    value: data.ifsc
+  }
+);
 
-      globals.functions.setProperty(
-        review.salary_account_details.bank_name,
-        {
-          value: data.bankName
-        }
-      );
+globals.functions.setProperty(
+  review.salary_account_details_panel.bank_name,
+  {
+    value: data.bankName
+  }
+);
 
       /* =========================
          OFFICE ADDRESS
