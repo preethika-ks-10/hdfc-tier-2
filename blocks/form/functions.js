@@ -73,30 +73,35 @@ function fixTenureSlider() {
     document.querySelector('input[name="Loan Tenure"]') ||
     document.querySelector('input[name="loan_tenure"]');
 
-  if (!input) return "";
+  if (!input) {
+    return "";
+  }
 
   input.min = 12;
   input.max = 84;
   input.step = 12;
 
-  let value = Number(input.value) || 12;
-
   const allowedTenures = [12, 24, 36, 48, 60, 72, 84];
 
-  const snapped = allowedTenures.reduce((prev, curr) =>
-    Math.abs(curr - value) < Math.abs(prev - value)
+  let value = Number(input.value);
+
+  if (isNaN(value)) {
+    value = 12;
+  }
+
+  const snapped = allowedTenures.reduce((prev, curr) => {
+    return Math.abs(curr - value) < Math.abs(prev - value)
       ? curr
-      : prev
-  );
+      : prev;
+  });
 
   input.value = snapped;
 
-  input.dispatchEvent(new Event("input", { bubbles: true }));
-  input.dispatchEvent(new Event("change", { bubbles: true }));
+input.dispatchEvent(new Event("input", { bubbles: true }));
+input.dispatchEvent(new Event("change", { bubbles: true }));
 
-  return snapped + " months";
+return snapped;
 }
-
 function updateTenureDisplay(globals) {
 
   if (!globals || !globals.functions || !globals.functions.exportData) {
