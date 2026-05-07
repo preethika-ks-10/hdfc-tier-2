@@ -658,7 +658,7 @@ function fetchReviewDetailsAPI(globals) {
     )?.value || "";
 
   fetch(
-    " https://writing-dimly-spout.ngrok-free.dev/review-details",
+    "https://writing-dimly-spout.ngrok-free.dev/review-details",
     {
 
       method: "POST",
@@ -837,6 +837,12 @@ globals.functions.setProperty(
           value: data.referenceMobile
         }
       );
+      globals.functions.setProperty(
+  globals.form.loan_application_summary["Loan Application Number"],
+  {
+    value: data.loanApplicationNumber
+  }
+);
 
       console.log(
         "Review details populated successfully"
