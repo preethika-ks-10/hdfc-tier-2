@@ -4500,6 +4500,14 @@ input[type="text"][placeholder="M/d/YY"] {
   pointer-events: none;
   appearance: none;
 }
+.field-reference-details-panel .field-wrapper,
+.field-reference-details-panel input,
+.field-reference-details-panel textarea,
+.field-reference-details-panel select {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  box-shadow: none !important;
+}
 
 @media (max-width: 480px) {
   .field-reference-details-panel {
