@@ -4934,11 +4934,47 @@ input[type="text"][placeholder="M/d/YY"] {
 .field-loan-application-contact-note p {
   margin: 0 !important;
 }
-.field-wrapper .field-label {
-  display: block;
-  margin-bottom: 6px;
+/* Loan Application Number block */
+.field-loan-application-number {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-left: 14px;
+  border-left: 2px solid #8ea9ff;
+  margin-top: 12px;
+}
+
+/* Label */
+.field-loan-application-number label {
   font-size: 11px;
   font-weight: 500;
   color: #9ca3af;
+  margin-bottom: 4px;
   line-height: 1;
+}
+
+/* Input */
+.field-loan-application-number input {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+
+  font-size: 32px;
+  font-weight: 700;
+  color: #1f2937;
+
+  height: auto !important;
+  min-height: auto !important;
+  line-height: 1.2;
+
+  pointer-events: none;
+}
+
+/* Remove default browser field style */
+.field-loan-application-number input::-webkit-outer-spin-button,
+.field-loan-application-number input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
