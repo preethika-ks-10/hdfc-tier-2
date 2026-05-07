@@ -2980,15 +2980,20 @@ fieldset.field-personal-details .field-wrapper {
 
 /* Email row */
 
-fieldset.field-personal-details .field-personal-email-id {
-
-  width: calc(50% - 10px);
+fieldset.field-personal-details {
+  display: flex;
+  gap: 20px;
 }
 
+fieldset.field-personal-details .field-personal-email-id,
 fieldset.field-personal-details .field-personal-email-verify {
-
-  width: 0;
+  width: calc(50% - 10px);
   position: relative;
+}
+
+fieldset.field-personal-details input {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 
@@ -4178,54 +4183,61 @@ fieldset.field-income-verification-method .radio-wrapper label::after {
 .field-personal-details > .accordion-legend::before {
   content: "👤";
   position: absolute;
-  left: 8px;
+  left: 12px;
 }
 
 .field-personal-details > .accordion-legend::after {
   content: "⌃";
   margin-left: auto;
-  font-size: 20px;
+  font-size: 18px;
   color: #4f6df5;
 }
 
-/* Field blocks */
+/* All field wrappers */
 .field-personal-details > .field-wrapper {
   padding: 14px 18px;
-  margin: 10px 0;
   border-left: 2px solid #9cbcff;
-  min-height: 50px;
+  background: #fff !important;
+  min-height: 65px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Remove purple backgrounds everywhere */
+.field-personal-details input,
+.field-personal-details textarea,
+.field-personal-details select {
+  width: 100%;
+  border: 0 !important;
+  outline: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  appearance: none;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  padding: 0;
 }
 
 /* Labels */
 .field-personal-details label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   font-size: 11px;
   font-weight: 500;
   color: #6b7280;
 }
 
-/* Values */
-.field-personal-details input {
-  width: 100%;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  font-size: 13px;
-  font-weight: 700;
-  color: #111827;
-  pointer-events: none;
-}
-
-/* Full width rows (Address, Residence Type) */
+/* Full-width fields */
 .field-personal-details .col-12 {
   grid-column: 1 / -1;
 }
 
-/* Slight spacing tweak for long text */
+/* Address field spacing */
 .field-personal-details .field-current-address input {
-  font-weight: 600;
   line-height: 1.4;
+  font-weight: 600;
 }
 
 /* Mobile */
