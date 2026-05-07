@@ -51,20 +51,54 @@ function getLoanAmount(globals) {
   return Math.round(raw);
 }
 
-/*EMI calculations*/ 
+/* EMI calculations */
+
 function getSnappedTenure(rawTenure) {
   const allowedTenures = [12, 24, 36, 48, 60, 72, 84];
- 
+
   rawTenure = Number(rawTenure) || 12;
- 
+
   return allowedTenures.reduce((prev, curr) => {
     return Math.abs(curr - rawTenure) < Math.abs(prev - rawTenure)
       ? curr
       : prev;
   });
 }
- 
+
+/* ADD THIS NEW FUNCTION HERE */
+
+function fixTenureSlider() {
+
+  const input =
+    document.querySelector('input[name="Loan Tenure"]') ||
+    document.querySelector('input[name="loan_tenure"]');
+
+  if (!input) return "";
+
+  input.min = 12;
+  input.max = 84;
+  input.step = 12;
+
+  let value = Number(input.value) || 12;
+
+  const allowedTenures = [12, 24, 36, 48, 60, 72, 84];
+
+  const snapped = allowedTenures.reduce((prev, curr) =>
+    Math.abs(curr - value) < Math.abs(prev - value)
+      ? curr
+      : prev
+  );
+
+  input.value = snapped;
+
+  input.dispatchEvent(new Event("input", { bubbles: true }));
+  input.dispatchEvent(new Event("change", { bubbles: true }));
+
+  return snapped + " months";
+}
+
 function updateTenureDisplay(globals) {
+
   if (!globals || !globals.functions || !globals.functions.exportData) {
     return "12 months";
   }
@@ -77,48 +111,50 @@ function updateTenureDisplay(globals) {
 
   return tenure + " months";
 }
- 
+
 function updateLoanDisplay(globals) {
+
   const loanAmount = getLoanAmount(globals);
- 
+
   return loanAmount > 0
     ? "₹" + loanAmount.toLocaleString("en-IN")
     : "";
 }
- 
+
 function updateLoanDetails(globals) {
+
   const data = globals.functions.exportData();
- 
+
   const loanAmount = getLoanAmount(globals);
- 
-  // Get slider value
+
   const rawTenure = getNumber(data["Loan Tenure"]);
- 
-  // Snap to nearest valid tenure
+
   const tenure = getSnappedTenure(rawTenure);
- 
+
   const rate = 10.97;
+
   const monthlyRate = rate / (12 * 100);
- 
+
   let emi = 0;
- 
+
   if (loanAmount > 0 && tenure > 0) {
+
     emi =
       (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, tenure)) /
       (Math.pow(1 + monthlyRate, tenure) - 1);
- 
+
     emi = Math.round(emi);
   }
- 
+
   return emi > 0
     ? "₹" + emi.toLocaleString("en-IN")
     : "";
 }
- 
+
 function getRate() {
   return "10.97%";
 }
- 
+
 function getTax() {
   return "₹4,000";
 }
@@ -878,6 +914,7 @@ export {
   updateTenureDisplay,
   updateLoanDisplay,
   getSnappedTenure,
+  fixTenureSlider,
   getRate,
   getTax,
   initSalaryBankUI,
