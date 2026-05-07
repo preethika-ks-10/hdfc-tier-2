@@ -2983,6 +2983,7 @@ fieldset.field-personal-details .field-wrapper {
 fieldset.field-personal-details {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 fieldset.field-personal-details .field-personal-email-id,
@@ -2994,6 +2995,10 @@ fieldset.field-personal-details .field-personal-email-verify {
 fieldset.field-personal-details input {
   width: 100%;
   box-sizing: border-box;
+  pointer-events: auto !important;
+  background: transparent !important;
+  border: 0;
+  outline: none;
 }
 
 
