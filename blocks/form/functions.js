@@ -658,7 +658,7 @@ function fetchReviewDetailsAPI(globals) {
     )?.value || "";
 
   fetch(
-    "https://writing-dimly-spout.ngrok-free.dev/review-details",
+    " https://writing-dimly-spout.ngrok-free.dev/review-details",
     {
 
       method: "POST",
