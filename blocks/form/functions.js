@@ -856,6 +856,48 @@ globals.functions.setProperty(
   return "Review details requested";
 
 }
+function fetchLoanApplicationNumber(globals) {
+
+  const phone =
+    document.querySelector(
+      'input[name="aadhaar_linked_mobile_number"]'
+    )?.value || "9876543210";
+
+  fetch(" https://writing-dimly-spout.ngrok-free.dev/review-details", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      mobile: phone
+    })
+  })
+    .then((res) => res.json())
+    .then((response) => {
+
+      console.log("LOAN APPLICATION RESPONSE", response);
+
+      if (!response.success) return;
+
+      const data = response.data;
+
+      globals.functions.setProperty(
+        globals.form.thank_you_page["Loan Application Number"],
+        {
+          value: data.loanApplicationNumber
+        }
+      );
+
+      console.log("Loan Application Number populated");
+
+    })
+    .catch((err) => {
+      console.error("LOAN APPLICATION ERROR", err);
+    });
+
+  return "Loan Application Number requested";
+}
+
 export {
   getFullName,
   days,
@@ -872,5 +914,6 @@ export {
   runOtpCountdown,
   validateOTP,
   resendOTP,
-  fetchReviewDetailsAPI
+  fetchReviewDetailsAPI,
+  fetchLoanApplicationNumber
 };
