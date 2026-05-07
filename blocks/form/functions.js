@@ -54,16 +54,21 @@ function getLoanAmount(globals) {
 /*EMI calculations*/ 
 function getSnappedTenure(rawTenure) {
   const allowedTenures = [12, 24, 36, 48, 60, 72, 84];
-
+ 
   rawTenure = Number(rawTenure) || 12;
-
-  return allowedTenures.reduce((prev, curr) =>
-    Math.abs(curr - rawTenure) < Math.abs(prev - rawTenure)
+ 
+  return allowedTenures.reduce((prev, curr) => {
+    return Math.abs(curr - rawTenure) < Math.abs(prev - rawTenure)
       ? curr
-      : prev
-  );
+      : prev;
+  });
 }
+ 
 function updateTenureDisplay(globals) {
+  if (!globals || !globals.functions || !globals.functions.exportData) {
+    return "12 months";
+  }
+
   const data = globals.functions.exportData();
 
   const rawTenure = getNumber(data["Loan Tenure"]);
@@ -72,38 +77,48 @@ function updateTenureDisplay(globals) {
 
   return tenure + " months";
 }
-
+ 
+function updateLoanDisplay(globals) {
+  const loanAmount = getLoanAmount(globals);
+ 
+  return loanAmount > 0
+    ? "₹" + loanAmount.toLocaleString("en-IN")
+    : "";
+}
+ 
 function updateLoanDetails(globals) {
   const data = globals.functions.exportData();
-
+ 
   const loanAmount = getLoanAmount(globals);
-
+ 
+  // Get slider value
   const rawTenure = getNumber(data["Loan Tenure"]);
-
+ 
+  // Snap to nearest valid tenure
   const tenure = getSnappedTenure(rawTenure);
-
+ 
   const rate = 10.97;
   const monthlyRate = rate / (12 * 100);
-
+ 
   let emi = 0;
-
+ 
   if (loanAmount > 0 && tenure > 0) {
     emi =
       (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, tenure)) /
       (Math.pow(1 + monthlyRate, tenure) - 1);
-
+ 
     emi = Math.round(emi);
   }
-
+ 
   return emi > 0
     ? "₹" + emi.toLocaleString("en-IN")
     : "";
 }
-
+ 
 function getRate() {
   return "10.97%";
 }
-
+ 
 function getTax() {
   return "₹4,000";
 }
@@ -861,6 +876,7 @@ export {
   maskMobileNumber,
   updateLoanDetails,
   updateTenureDisplay,
+  updateLoanDisplay,
   getSnappedTenure,
   getRate,
   getTax,
