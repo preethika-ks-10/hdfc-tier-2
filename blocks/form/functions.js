@@ -651,7 +651,7 @@ function resendOTP(globals) {
 function fetchReviewDetailsAPI(globals) {
 
   const phone =
-    document.querySelector('input[name="mobile"]')
+    document.querySelector('input[name="aadhaar_linked_mobile_number"]')
       ?.value || "";
 
   fetch(
