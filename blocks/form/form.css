@@ -4934,14 +4934,34 @@ input[type="text"][placeholder="M/d/YY"] {
 .field-loan-application-contact-note p {
   margin: 0 !important;
 }
-/* Loan Application Number block */
+/* Main card block */
 .field-loan-application-number {
   display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 0;
+}
+
+/* Purple icon circle */
+.field-loan-application-number::before {
+  content: "📄";
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 50%;
+  background: #f3ecff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+}
+
+/* Wrapper for label + value */
+.field-loan-application-number .field-wrapper {
+  display: flex;
   flex-direction: column;
-  position: relative;
-  padding-left: 14px;
-  border-left: 2px solid #8ea9ff;
-  margin-top: 12px;
 }
 
 /* Label */
@@ -4949,32 +4969,35 @@ input[type="text"][placeholder="M/d/YY"] {
   font-size: 11px;
   font-weight: 500;
   color: #9ca3af;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   line-height: 1;
 }
 
-/* Input */
+/* Value */
 .field-loan-application-number input {
   border: none !important;
   outline: none !important;
   background: transparent !important;
   box-shadow: none !important;
+
   padding: 0 !important;
+  margin: 0 !important;
 
-  font-size: 32px;
-  font-weight: 700;
-  color: #1f2937;
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  color: #1f2937 !important;
 
-  height: auto !important;
-  min-height: auto !important;
-  line-height: 1.2;
+  line-height: 1.1;
+  width: auto !important;
 
   pointer-events: none;
 }
 
-/* Remove default browser field style */
-.field-loan-application-number input::-webkit-outer-spin-button,
-.field-loan-application-number input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+/* Bottom text */
+.loan-subtext {
+  margin-left: 56px;
+  margin-top: 6px;
+
+  font-size: 13px;
+  color: #6b7280;
 }
