@@ -642,6 +642,154 @@ function resendOTP(globals) {
     return "";
   }
 }
+/**
+ * Fetch Review Details API
+ * @param {scope} globals
+ * @returns {string}
+ */
+
+function fetchReviewDetailsAPI(globals) {
+
+  const phone =
+    document.querySelector('input[name="mobile"]')
+      ?.value || "";
+
+  fetch(
+    " https://writing-dimly-spout.ngrok-free.dev/review-details",
+    {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        mobile: phone
+      })
+
+    }
+  )
+
+    .then((res) => res.json())
+
+    .then((response) => {
+
+      console.log(
+        "REVIEW DETAILS RESPONSE",
+        response
+      );
+
+      if (!response.success) {
+        return;
+      }
+
+      const data = response.data;
+
+      /* =========================
+         LOAN DETAILS
+      ========================= */
+
+      globals.functions.setProperty(
+        globals.form.review_details.loan_details.processing_fee,
+        {
+          value: data.processingFees
+        }
+      );
+
+      globals.functions.setProperty(
+        globals.form.review_details.loan_details.rate,
+        {
+          value: data.rateOfInterest
+        }
+      );
+
+      globals.functions.setProperty(
+        globals.form.review_details.loan_details.employer_name,
+        {
+          value: data.employerName
+        }
+      );
+
+      globals.functions.setProperty(
+        globals.form.review_details.loan_details.schedule_of_charges,
+        {
+          value: data.scheduleOfCharges
+        }
+      );
+
+      globals.functions.setProperty(
+        globals.form.review_details.loan_details.type_of_loan,
+        {
+          value: data.typeOfLoan
+        }
+      );
+
+      /* =========================
+         PERSONAL DETAILS
+      ========================= */
+
+      globals.functions.setProperty(
+        globals.form.review_details.personal_details.full_name,
+        {
+          value: data.name
+        }
+      );
+
+      globals.functions.setProperty(
+        globals.form.review_details.personal_details.mobile_number,
+        {
+          value: data.mobileNumber
+        }
+      );
+
+      globals.functions.setProperty(
+        globals.form.review_details.personal_details.date_of_birth,
+        {
+          value: data.dob
+        }
+      );
+
+      globals.functions.setProperty(
+        globals.form.review_details.personal_details.pan,
+        {
+          value: data.pan
+        }
+      );
+
+      globals.functions.setProperty(
+        globals.form.review_details.personal_details.current_address,
+        {
+          value: data.currentAddress
+        }
+      );
+
+      globals.functions.setProperty(
+        globals.form.review_details.personal_details.residence_type,
+        {
+          value: data.residenceType
+        }
+      );
+
+      console.log(
+        "Review details populated successfully"
+      );
+
+    })
+
+    .catch((err) => {
+
+      console.error(
+        "REVIEW DETAILS ERROR",
+        err
+      );
+
+    });
+
+  return "Review details requested";
+
+}
+
 export {
   getFullName,
   days,
@@ -658,4 +806,5 @@ export {
   runOtpCountdown,
   validateOTP,
   resendOTP,
+  fetchReviewDetailsAPI
 };
