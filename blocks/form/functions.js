@@ -51,34 +51,31 @@ function getLoanAmount(globals) {
   return Math.round(raw);
 }
 
+/*EMI calculations*/ 
+function getNumber(value) {
+  if (!value) return 0;
+  return Number(String(value).replace(/[^\d.]/g, ""));
+}
 
 function getSnappedTenure(rawTenure) {
   const allowedTenures = [12, 24, 36, 48, 60, 72, 84];
 
   rawTenure = Number(rawTenure) || 12;
 
-  return allowedTenures.reduce((prev, curr) => {
-    return Math.abs(curr - rawTenure) < Math.abs(prev - rawTenure)
+  return allowedTenures.reduce((prev, curr) =>
+    Math.abs(curr - rawTenure) < Math.abs(prev - rawTenure)
       ? curr
-      : prev;
-  });
+      : prev
+  );
 }
-
 function updateTenureDisplay(globals) {
   const data = globals.functions.exportData();
 
   const rawTenure = getNumber(data["Loan Tenure"]);
+
   const tenure = getSnappedTenure(rawTenure);
 
   return tenure + " months";
-}
-
-function updateLoanDisplay(globals) {
-  const loanAmount = getLoanAmount(globals);
-
-  return loanAmount > 0
-    ? "₹" + loanAmount.toLocaleString("en-IN")
-    : "";
 }
 
 function updateLoanDetails(globals) {
@@ -86,10 +83,8 @@ function updateLoanDetails(globals) {
 
   const loanAmount = getLoanAmount(globals);
 
-  // Get slider value
   const rawTenure = getNumber(data["Loan Tenure"]);
 
-  // Snap to nearest valid tenure
   const tenure = getSnappedTenure(rawTenure);
 
   const rate = 10.97;
@@ -117,6 +112,7 @@ function getRate() {
 function getTax() {
   return "₹4,000";
 }
+
 function initSalaryBankUI() {
   const panel = document.querySelector(".field-salary-bank-selection");
   const dropdownWrapper = document.querySelector(".drop-down-wrapper.field-salary-bank");
@@ -869,7 +865,6 @@ export {
   submitFormArrayToString,
   maskMobileNumber,
   updateLoanDetails,
-  updateLoanDisplay,
   updateTenureDisplay,
   getSnappedTenure,
   getRate,
