@@ -52,11 +52,6 @@ function getLoanAmount(globals) {
 }
 
 /*EMI calculations*/ 
-function getNumber(value) {
-  if (!value) return 0;
-  return Number(String(value).replace(/[^\d.]/g, ""));
-}
-
 function getSnappedTenure(rawTenure) {
   const allowedTenures = [12, 24, 36, 48, 60, 72, 84];
 
