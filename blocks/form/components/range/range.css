@@ -53,3 +53,75 @@ main .form .range-widget-wrapper.decorated input[type="range"]:focus {
 
 
 /* RANGE BAR*/
+.range-widget-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 32px;
+  padding-bottom: 34px;
+}
+
+.range-widget-wrapper input[type="range"] {
+  width: 100%;
+  height: 6px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: linear-gradient(
+    to right,
+    #ff9f1c 0%,
+    #ff9f1c var(--range-progress, 100%),
+    #f0f0f0 var(--range-progress, 100%),
+    #f0f0f0 100%
+  );
+  border-radius: 8px;
+  outline: none;
+}
+
+.range-widget-wrapper input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  background: #2454ff;
+  border: 4px solid #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.range-bubble {
+  position: absolute;
+  top: -54px;
+  transform: translateX(-50%);
+  background: #ffffff;
+  color: #07132f;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+}
+
+.custom-range-labels {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  width: 100%;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.custom-range-labels span {
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.custom-range-labels span:first-child {
+  text-align: left;
+}
+
+.custom-range-labels span:last-child {
+  text-align: right;
+}
