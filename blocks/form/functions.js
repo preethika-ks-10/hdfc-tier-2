@@ -873,6 +873,5 @@ export {
   runOtpCountdown,
   validateOTP,
   resendOTP,
-  fetchReviewDetailsAPI,
-  fetchLoanApplicationNumber
+  fetchReviewDetailsAPI
 };
