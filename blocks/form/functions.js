@@ -650,9 +650,12 @@ function resendOTP(globals) {
 
 function fetchReviewDetailsAPI(globals) {
 
+  const form = globals.form;
+
   const phone =
-    document.querySelector('input[name="aadhaar_linked_mobile_number"]')
-      ?.value || "";
+    document.querySelector(
+      'input[name="aadhaar_linked_mobile_number"]'
+    )?.value || "9876543210";
 
   fetch(
     " https://writing-dimly-spout.ngrok-free.dev/review-details",
@@ -681,45 +684,55 @@ function fetchReviewDetailsAPI(globals) {
       );
 
       if (!response.success) {
+        console.error(
+          "User not found"
+        );
         return;
       }
 
       const data = response.data;
 
       /* =========================
+         ACCORDION REFERENCE
+      ========================= */
+
+      const review =
+        form.review_details.form_accordion1776850397637;
+
+      /* =========================
          LOAN DETAILS
       ========================= */
 
       globals.functions.setProperty(
-        globals.form.review_details.loan_details.processing_fee,
+        review.loan_details.processing_fee,
         {
           value: data.processingFees
         }
       );
 
       globals.functions.setProperty(
-        globals.form.review_details.loan_details.rate,
+        review.loan_details.rate,
         {
           value: data.rateOfInterest
         }
       );
 
       globals.functions.setProperty(
-        globals.form.review_details.loan_details.employer_name,
+        review.loan_details.employer_name,
         {
           value: data.employerName
         }
       );
 
       globals.functions.setProperty(
-        globals.form.review_details.loan_details.schedule_of_charges,
+        review.loan_details.schedule_of_charges,
         {
           value: data.scheduleOfCharges
         }
       );
 
       globals.functions.setProperty(
-        globals.form.review_details.loan_details.type_of_loan,
+        review.loan_details.type_of_loan,
         {
           value: data.typeOfLoan
         }
@@ -730,44 +743,98 @@ function fetchReviewDetailsAPI(globals) {
       ========================= */
 
       globals.functions.setProperty(
-        globals.form.review_details.personal_details.full_name,
+        review.personal_details.full_name_pan_display,
         {
           value: data.name
         }
       );
 
       globals.functions.setProperty(
-        globals.form.review_details.personal_details.mobile_number,
+        review.personal_details.aadhaar_linked_mobile_number,
         {
           value: data.mobileNumber
         }
       );
 
       globals.functions.setProperty(
-        globals.form.review_details.personal_details.date_of_birth,
+        review.personal_details.date_of_birth,
         {
           value: data.dob
         }
       );
 
       globals.functions.setProperty(
-        globals.form.review_details.personal_details.pan,
+        review.personal_details.pan,
         {
           value: data.pan
         }
       );
 
       globals.functions.setProperty(
-        globals.form.review_details.personal_details.current_address,
+        review.personal_details.aadhaar_address_display,
         {
           value: data.currentAddress
         }
       );
 
       globals.functions.setProperty(
-        globals.form.review_details.personal_details.residence_type,
+        review.personal_details.residence_type,
         {
           value: data.residenceType
+        }
+      );
+
+      /* =========================
+         SALARY ACCOUNT DETAILS
+      ========================= */
+
+      globals.functions.setProperty(
+        review.salary_account_details.salary_a_c_no,
+        {
+          value: data.salaryAccountNumber
+        }
+      );
+
+      globals.functions.setProperty(
+        review.salary_account_details.ifsc,
+        {
+          value: data.ifsc
+        }
+      );
+
+      globals.functions.setProperty(
+        review.salary_account_details.bank_name,
+        {
+          value: data.bankName
+        }
+      );
+
+      /* =========================
+         OFFICE ADDRESS
+      ========================= */
+
+      globals.functions.setProperty(
+        review.office_address_panel.aadhaar_address_display,
+        {
+          value: data.officeAddress
+        }
+      );
+
+      /* =========================
+         REFERENCE DETAILS
+      ========================= */
+
+      globals.functions.setProperty(
+        review.reference_details_panel.full_name_pan_display,
+        {
+          value: data.referenceName
+        }
+      );
+
+      globals.functions.setProperty(
+        review.reference_details_panel.aadhaar_linked_mobile_number,
+        {
+          value: data.referenceMobile
         }
       );
 
@@ -789,7 +856,6 @@ function fetchReviewDetailsAPI(globals) {
   return "Review details requested";
 
 }
-
 export {
   getFullName,
   days,
