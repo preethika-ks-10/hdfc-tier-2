@@ -855,6 +855,345 @@ globals.functions.setProperty(
   return "Review details requested";
 
 }
+ /* =========================
+      EMAIL VERIFICATION
+      ========================= */
+      /**
+ * Generate Email OTP
+ */
+function generateEmailOtp(globals) {
+
+  const otpField =
+    globals.form.customerdetails
+      .personal_details.email_otp;
+
+  const submitButton =
+    globals.form.customerdetails
+      .personal_details.email_submit;
+
+  const responseField =
+    globals.form.customerdetails
+      .personal_details.email_response;
+
+  /* VERIFIED CHECK */
+
+  if (window.emailVerified === true) {
+
+    globals.functions.setProperty(
+      responseField,
+      {
+        visible: true,
+        value: "Email already verified"
+      }
+    );
+
+    return false;
+  }
+
+  /* ATTEMPT COUNT */
+
+  window.emailOtpAttempts =
+    window.emailOtpAttempts || 0;
+
+  if (window.emailOtpAttempts >= 3) {
+
+    globals.functions.setProperty(
+      responseField,
+      {
+        visible: true,
+        value: "Maximum OTP attempts reached"
+      }
+    );
+
+    return false;
+  }
+
+  window.emailOtpAttempts++;
+
+  const email =
+    document.querySelector(
+      'input[name="personal_email_id"]'
+    )?.value || "";
+
+  const mobile =
+    document.querySelector(
+      'input[name="aadhaar_linked_mobile_number"]'
+    )?.value || "";
+
+  fetch(
+    "https://writing-dimly-spout.ngrok-free.dev/generate-email-otp",
+    {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        email,
+        mobile
+      })
+    }
+  )
+
+  .then((res) => res.json())
+
+  .then((response) => {
+
+    console.log(
+      "EMAIL OTP RESPONSE",
+      response
+    );
+
+    if (response.success === true) {
+
+      globals.functions.setProperty(
+        otpField,
+        {
+          visible: true
+        }
+      );
+
+      globals.functions.setProperty(
+        submitButton,
+        {
+          visible: true
+        }
+      );
+
+      globals.functions.setProperty(
+        responseField,
+        {
+          visible: true,
+          value:
+            `OTP Sent Successfully (${3 - window.emailOtpAttempts} attempt(s) left)`
+        }
+      );
+
+      setTimeout(() => {
+
+        const otpInput =
+          document.querySelector(
+            'input[name="email_otp"]'
+          );
+
+        if (otpInput) {
+
+          otpInput.value =
+            response.otp || "";
+
+          otpInput.dispatchEvent(
+            new Event(
+              "input",
+              { bubbles: true }
+            )
+          );
+
+        }
+
+      }, 300);
+
+    }
+
+    else {
+
+      globals.functions.setProperty(
+        responseField,
+        {
+          visible: true,
+          value:
+            response.message ||
+            "OTP generation failed"
+        }
+      );
+
+    }
+
+  })
+
+  .catch((err) => {
+
+    console.error(
+      "EMAIL OTP ERROR",
+      err
+    );
+
+    globals.functions.setProperty(
+      responseField,
+      {
+        visible: true,
+        value: "Something went wrong"
+      }
+    );
+
+  });
+
+  return true;
+}
+
+
+
+/**
+ * Verify Email OTP
+ */
+function verifyEmailOtp(globals) {
+
+  const otpField =
+    globals.form.customerdetails
+      .personal_details.email_otp;
+
+  const submitButton =
+    globals.form.customerdetails
+      .personal_details.email_submit;
+
+  const responseField =
+    globals.form.customerdetails
+      .personal_details.email_response;
+
+  const enteredOtp =
+    document.querySelector(
+      'input[name="email_otp"]'
+    )?.value || "";
+
+  if (!enteredOtp.trim()) {
+
+    globals.functions.setProperty(
+      responseField,
+      {
+        visible: true,
+        value: "Please enter OTP"
+      }
+    );
+
+    return false;
+  }
+
+  const mobile =
+    document.querySelector(
+      'input[name="aadhaar_linked_mobile_number"]'
+    )?.value || "";
+
+  fetch(
+    "https://writing-dimly-spout.ngrok-free.dev/verify-email-otp",
+    {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        mobile,
+        otp: enteredOtp
+      })
+    }
+  )
+
+  .then((res) => res.json())
+
+  .then((response) => {
+
+    console.log(
+      "VERIFY EMAIL OTP",
+      response
+    );
+
+    if (response.success === true) {
+
+      window.emailVerified = true;
+
+      globals.functions.setProperty(
+        otpField,
+        {
+          visible: false
+        }
+      );
+
+      globals.functions.setProperty(
+        submitButton,
+        {
+          visible: false
+        }
+      );
+
+      globals.functions.setProperty(
+        responseField,
+        {
+          visible: true,
+          value:
+            "Email verified successfully"
+        }
+      );
+
+      setTimeout(() => {
+
+        const verifyButton =
+          document.querySelector(
+            'button[name="verify_email"]'
+          );
+
+        if (verifyButton) {
+
+          verifyButton.innerText =
+            "Verified";
+
+          verifyButton.disabled =
+            true;
+
+          verifyButton.style.pointerEvents =
+            "none";
+
+          verifyButton.style.opacity =
+            "1";
+
+          verifyButton.style.background =
+            "#4CAF50";
+
+          verifyButton.style.color =
+            "#fff";
+
+        }
+
+      }, 300);
+
+    }
+
+    else {
+
+      globals.functions.setProperty(
+        responseField,
+        {
+          visible: true,
+          value:
+            response.message ||
+            "Invalid OTP"
+        }
+      );
+
+    }
+
+  })
+
+  .catch((err) => {
+
+    console.error(
+      "VERIFY EMAIL OTP ERROR",
+      err
+    );
+
+    globals.functions.setProperty(
+      responseField,
+      {
+        visible: true,
+        value:
+          "OTP verification failed"
+      }
+    );
+
+  });
+
+  return true;
+}
 
 export {
   getFullName,
@@ -871,5 +1210,7 @@ export {
   runOtpCountdown,
   validateOTP,
   resendOTP,
-  fetchReviewDetailsAPI
+  fetchReviewDetailsAPI,
+  generateEmailOtp,
+  verifyEmailOtp
 };
