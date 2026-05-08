@@ -1194,6 +1194,15 @@ function verifyEmailOtp(globals) {
 
   return true;
 }
+/**
+ * @param {scope} globals
+ */
+function debugForm(globals) {
+  window.myForm = globals.form;
+  // eslint-disable-next-line no-console
+  console.log('myForm', window.myForm);
+  return '';
+}
 
 export {
   getFullName,
@@ -1212,5 +1221,6 @@ export {
   resendOTP,
   fetchReviewDetailsAPI,
   generateEmailOtp,
-  verifyEmailOtp
+  verifyEmailOtp,
+  debugForm
 };
