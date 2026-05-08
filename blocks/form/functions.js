@@ -858,350 +858,173 @@ globals.functions.setProperty(
  /* =========================
       EMAIL VERIFICATION
       ========================= */
-      /**
- * Generate Email OTP
- */
-function generateEmailOtp(globals) {
 
-  const otpField =
-    globals.form.customerdetails
-      .personal_details.email_otp;
+ function showField(fieldName, visible) {
+  const field =
+    document.querySelector(`[name="${fieldName}"]`) ||
+    document.querySelector(`.field-${fieldName}`);
 
-  const submitButton =
-    globals.form.customerdetails
-      .personal_details.email_submit;
+  const wrapper =
+    document.querySelector(`.field-${fieldName}`) ||
+    field?.closest(".field-wrapper");
 
-  const responseField =
-    globals.form.customerdetails
-      .personal_details.email_response;
-
-  /* VERIFIED CHECK */
-
-  if (window.emailVerified === true) {
-
-    globals.functions.setProperty(
-      responseField,
-      {
-        visible: true,
-        value: "Email already verified"
-      }
-    );
-
-    return false;
+  if (wrapper) {
+    wrapper.style.display = visible ? "" : "none";
   }
 
-  /* ATTEMPT COUNT */
-
-  window.emailOtpAttempts =
-    window.emailOtpAttempts || 0;
-
-  if (window.emailOtpAttempts >= 3) {
-
-    globals.functions.setProperty(
-      responseField,
-      {
-        visible: true,
-        value: "Maximum OTP attempts reached"
-      }
-    );
-
-    return false;
+  if (field) {
+    field.style.display = visible ? "" : "none";
   }
+}
 
-  window.emailOtpAttempts++;
+function setEmailResponse(message) {
+  const response =
+    document.querySelector('[name="email_response"]') ||
+    document.querySelector('.field-email_response');
 
-  const email =
-    document.querySelector(
-      'input[name="personal_email_id"]'
-    )?.value || "";
+  if (response) {
+    response.value = message;
+    response.textContent = message;
+    response.dispatchEvent(new Event("input", { bubbles: true }));
+    response.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+}
+ 
+ /**
+ * generate Email OTP
+ */     
+function generateEmailOtp() {
+  try {
+    if (window.emailVerified === true) {
+      setEmailResponse("Email already verified");
+      return false;
+    }
 
-  const mobile =
-    document.querySelector(
-      'input[name="aadhaar_linked_mobile_number"]'
-    )?.value || "";
+    window.emailOtpAttempts = window.emailOtpAttempts || 0;
 
-  fetch(
-    "https://writing-dimly-spout.ngrok-free.dev/generate-email-otp",
-    {
+    if (window.emailOtpAttempts >= 3) {
+      setEmailResponse("Maximum OTP attempts reached");
+      return false;
+    }
+
+    const email =
+      document.querySelector('input[name="personal_email_id"]')?.value || "";
+
+    const mobile =
+      document.querySelector('input[name="aadhaar_linked_mobile_number"]')?.value || "";
+
+    if (!email || !mobile) {
+      setEmailResponse("Email and mobile are required");
+      return false;
+    }
+
+    window.emailOtpAttempts++;
+
+    fetch("https://writing-dimly-spout.ngrok-free.dev/generate-email-otp", {
       method: "POST",
-
       headers: {
         "Content-Type": "application/json"
       },
+      body: JSON.stringify({ email, mobile })
+    })
+      .then(res => res.json())
+      .then(response => {
+        console.log("EMAIL OTP RESPONSE", response);
 
-      body: JSON.stringify({
-        email,
-        mobile
-      })
-    }
-  )
+        if (response.success === true) {
+          showField("email_otp", true);
+          showField("email_submit", true);
 
-  .then((res) => res.json())
-
-  .then((response) => {
-
-    console.log(
-      "EMAIL OTP RESPONSE",
-      response
-    );
-
-    if (response.success === true) {
-
-      globals.functions.setProperty(
-        otpField,
-        {
-          visible: true
-        }
-      );
-
-      globals.functions.setProperty(
-        submitButton,
-        {
-          visible: true
-        }
-      );
-
-      globals.functions.setProperty(
-        responseField,
-        {
-          visible: true,
-          value:
+          setEmailResponse(
             `OTP Sent Successfully (${3 - window.emailOtpAttempts} attempt(s) left)`
-        }
-      );
-
-      setTimeout(() => {
-
-        const otpInput =
-          document.querySelector(
-            'input[name="email_otp"]'
           );
 
-        if (otpInput) {
-
-          otpInput.value =
-            response.otp || "";
-
-          otpInput.dispatchEvent(
-            new Event(
-              "input",
-              { bubbles: true }
-            )
-          );
-
+          const otpInput = document.querySelector('input[name="email_otp"]');
+          if (otpInput) {
+            otpInput.value = response.otp || "";
+            otpInput.dispatchEvent(new Event("input", { bubbles: true }));
+            otpInput.dispatchEvent(new Event("change", { bubbles: true }));
+          }
+        } else {
+          setEmailResponse(response.message || "OTP generation failed");
         }
+      })
+      .catch(err => {
+        console.error("EMAIL OTP ERROR", err);
+        setEmailResponse("Something went wrong");
+      });
 
-      }, 300);
-
-    }
-
-    else {
-
-      globals.functions.setProperty(
-        responseField,
-        {
-          visible: true,
-          value:
-            response.message ||
-            "OTP generation failed"
-        }
-      );
-
-    }
-
-  })
-
-  .catch((err) => {
-
-    console.error(
-      "EMAIL OTP ERROR",
-      err
-    );
-
-    globals.functions.setProperty(
-      responseField,
-      {
-        visible: true,
-        value: "Something went wrong"
-      }
-    );
-
-  });
-
-  return true;
+    return true;
+  } catch (e) {
+    console.error("generateEmailOtp error:", e);
+    return false;
+  }
 }
-
-
 
 /**
  * Verify Email OTP
  */
-function verifyEmailOtp(globals) {
+function verifyEmailOtp() {
+  try {
+    const enteredOtp =
+      document.querySelector('input[name="email_otp"]')?.value || "";
 
-  const otpField =
-    globals.form.customerdetails
-      .personal_details.email_otp;
+    if (!enteredOtp.trim()) {
+      setEmailResponse("Please enter OTP");
+      return false;
+    }
 
-  const submitButton =
-    globals.form.customerdetails
-      .personal_details.email_submit;
+    const mobile =
+      document.querySelector('input[name="aadhaar_linked_mobile_number"]')?.value || "";
 
-  const responseField =
-    globals.form.customerdetails
-      .personal_details.email_response;
-
-  const enteredOtp =
-    document.querySelector(
-      'input[name="email_otp"]'
-    )?.value || "";
-
-  if (!enteredOtp.trim()) {
-
-    globals.functions.setProperty(
-      responseField,
-      {
-        visible: true,
-        value: "Please enter OTP"
-      }
-    );
-
-    return false;
-  }
-
-  const mobile =
-    document.querySelector(
-      'input[name="aadhaar_linked_mobile_number"]'
-    )?.value || "";
-
-  fetch(
-    "https://writing-dimly-spout.ngrok-free.dev/verify-email-otp",
-    {
+    fetch("https://writing-dimly-spout.ngrok-free.dev/verify-email-otp", {
       method: "POST",
-
       headers: {
         "Content-Type": "application/json"
       },
-
       body: JSON.stringify({
         mobile,
         otp: enteredOtp
       })
-    }
-  )
+    })
+      .then(res => res.json())
+      .then(response => {
+        console.log("VERIFY EMAIL OTP", response);
 
-  .then((res) => res.json())
+        if (response.success === true) {
+          window.emailVerified = true;
 
-  .then((response) => {
+          showField("email_otp", false);
+          showField("email_submit", false);
 
-    console.log(
-      "VERIFY EMAIL OTP",
-      response
-    );
+          setEmailResponse("Email verified successfully");
 
-    if (response.success === true) {
+          const verifyButton =
+            document.querySelector('button[name="verify_email"]') ||
+            document.querySelector('[name="verify_email"]');
 
-      window.emailVerified = true;
-
-      globals.functions.setProperty(
-        otpField,
-        {
-          visible: false
+          if (verifyButton) {
+            verifyButton.innerText = "Verified";
+            verifyButton.disabled = true;
+            verifyButton.style.pointerEvents = "none";
+            verifyButton.style.opacity = "1";
+            verifyButton.style.background = "#4CAF50";
+            verifyButton.style.color = "#fff";
+          }
+        } else {
+          setEmailResponse(response.message || "Invalid OTP");
         }
-      );
+      })
+      .catch(err => {
+        console.error("VERIFY EMAIL OTP ERROR", err);
+        setEmailResponse("OTP verification failed");
+      });
 
-      globals.functions.setProperty(
-        submitButton,
-        {
-          visible: false
-        }
-      );
-
-      globals.functions.setProperty(
-        responseField,
-        {
-          visible: true,
-          value:
-            "Email verified successfully"
-        }
-      );
-
-      setTimeout(() => {
-
-        const verifyButton =
-          document.querySelector(
-            'button[name="verify_email"]'
-          );
-
-        if (verifyButton) {
-
-          verifyButton.innerText =
-            "Verified";
-
-          verifyButton.disabled =
-            true;
-
-          verifyButton.style.pointerEvents =
-            "none";
-
-          verifyButton.style.opacity =
-            "1";
-
-          verifyButton.style.background =
-            "#4CAF50";
-
-          verifyButton.style.color =
-            "#fff";
-
-        }
-
-      }, 300);
-
-    }
-
-    else {
-
-      globals.functions.setProperty(
-        responseField,
-        {
-          visible: true,
-          value:
-            response.message ||
-            "Invalid OTP"
-        }
-      );
-
-    }
-
-  })
-
-  .catch((err) => {
-
-    console.error(
-      "VERIFY EMAIL OTP ERROR",
-      err
-    );
-
-    globals.functions.setProperty(
-      responseField,
-      {
-        visible: true,
-        value:
-          "OTP verification failed"
-      }
-    );
-
-  });
-
-  return true;
-}
-/**
- * @param {scope} globals
- */
-function debugForm(globals) {
-  window.myForm = globals.form;
-  // eslint-disable-next-line no-console
-  console.log('myForm', window.myForm);
-  return '';
+    return true;
+  } catch (e) {
+    console.error("verifyEmailOtp error:", e);
+    return false;
+  }
 }
 
 export {
@@ -1221,6 +1044,5 @@ export {
   resendOTP,
   fetchReviewDetailsAPI,
   generateEmailOtp,
-  verifyEmailOtp,
-  debugForm
+  verifyEmailOtp
 };
