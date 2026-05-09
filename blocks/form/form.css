@@ -4133,3 +4133,106 @@ fieldset#panelcontainer-a4cb4a61ee select {
   font-size: 13px;
   color: #6b7280;
 }
+
+
+/* =====================================================
+   FIX GLOBAL FIELD CSS INSIDE REVIEW ACCORDIONS ONLY
+   Add this at END of CSS file
+===================================================== */
+
+/* reset bad global loan-offer styles inside review accordions */
+#panelcontainer-af56840b32 .field-aadhaar-linked-mobile-number,
+#panelcontainer-af56840b32 .field-date-of-birth,
+#panelcontainer-af56840b32 .field-pan,
+#panelcontainer-af56840b32 .field-aadhaar-address-display,
+#panelcontainer-af56840b32 .field-residence-type,
+#panelcontainer-a4cb4a61ee .field-aadhaar-linked-mobile-number,
+#panelcontainer-a4cb4a61ee .field-full-name-pan-display {
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  float: left !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* remove +91 flag injected by old mobile CSS */
+#panelcontainer-af56840b32 .field-aadhaar-linked-mobile-number::before,
+#panelcontainer-af56840b32 .field-aadhaar-linked-mobile-number::after,
+#panelcontainer-a4cb4a61ee .field-aadhaar-linked-mobile-number::before,
+#panelcontainer-a4cb4a61ee .field-aadhaar-linked-mobile-number::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* show labels again */
+#panelcontainer-af56840b32 label,
+#panelcontainer-a4cb4a61ee label {
+  display: block !important;
+}
+
+/* reset inputs */
+#panelcontainer-af56840b32 input,
+#panelcontainer-af56840b32 select,
+#panelcontainer-af56840b32 textarea,
+#panelcontainer-a4cb4a61ee input,
+#panelcontainer-a4cb4a61ee select,
+#panelcontainer-a4cb4a61ee textarea {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  pointer-events: auto !important;
+}
+
+/* personal details layout */
+#panelcontainer-af56840b32 > .field-wrapper {
+  width: 25% !important;
+  min-height: 74px !important;
+  padding: 14px 18px !important;
+  border-left: 2px solid #9cbcff !important;
+}
+
+#panelcontainer-af56840b32 .field-aadhaar-address-display,
+#panelcontainer-af56840b32 .field-residence-type {
+  width: 100% !important;
+  border-top: 1px dashed #e1e6f2 !important;
+}
+
+/* reference details layout */
+#panelcontainer-a4cb4a61ee > .field-wrapper {
+  width: 50% !important;
+  min-height: 74px !important;
+  padding: 28px 18px 12px !important;
+  border-left: 3px solid #8ea8ff !important;
+}
+
+/* clearfix */
+#panelcontainer-af56840b32::after,
+#panelcontainer-a4cb4a61ee::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  #panelcontainer-af56840b32 > .field-wrapper {
+    width: 50% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #panelcontainer-af56840b32 > .field-wrapper,
+  #panelcontainer-a4cb4a61ee > .field-wrapper {
+    width: 100% !important;
+    float: none !important;
+  }
+}
