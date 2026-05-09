@@ -3293,11 +3293,6 @@ fieldset.field-income-verification-method .radio-wrapper label::after {
 
 /* PAN review personal details ONLY */
 fieldset#panelcontainer-af56840b32 {
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  column-gap: 0 !important;
-  row-gap: 0 !important;
-
   width: 100% !important;
   margin: 8px 0 24px !important;
   padding: 0 !important;
@@ -3305,14 +3300,13 @@ fieldset#panelcontainer-af56840b32 {
   border: 1px solid #edf1ff !important;
   border-radius: 14px !important;
   background: #fff !important;
-  overflow: visible !important;
+  overflow: hidden !important;
   box-shadow: 0 4px 14px rgba(32, 78, 180, 0.06) !important;
   box-sizing: border-box !important;
 }
 
 /* header */
 fieldset#panelcontainer-af56840b32 > legend.accordion-legend {
-  grid-column: 1 / -1 !important;
   width: 100% !important;
   margin: 0 !important;
   padding: 14px 18px 14px 44px !important;
@@ -3325,8 +3319,6 @@ fieldset#panelcontainer-af56840b32 > legend.accordion-legend {
   position: relative !important;
   box-sizing: border-box !important;
   cursor: pointer !important;
-  pointer-events: auto !important;
-  z-index: 20 !important;
 }
 
 fieldset#panelcontainer-af56840b32 > legend.accordion-legend::before {
@@ -3336,19 +3328,15 @@ fieldset#panelcontainer-af56840b32 > legend.accordion-legend::before {
   pointer-events: none !important;
 }
 
-/* IMPORTANT: do not replace accordion arrow */
+/* DO NOT TOUCH AEM ACCORDION ARROW */
 fieldset#panelcontainer-af56840b32 > legend.accordion-legend::after {
-  pointer-events: none !important;
+  pointer-events: auto !important;
 }
 
-/* fields */
+/* fields - 4 column layout without grid */
 fieldset#panelcontainer-af56840b32 > .field-wrapper {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-
-  width: auto !important;
-  min-width: 0 !important;
+  float: left !important;
+  width: 25% !important;
   min-height: 74px !important;
 
   margin: 0 !important;
@@ -3358,44 +3346,29 @@ fieldset#panelcontainer-af56840b32 > .field-wrapper {
   border-left: 2px solid #9cbcff !important;
   background: #fff !important;
 
-  position: static !important;
   box-sizing: border-box !important;
 }
 
-/* coordinates */
-fieldset#panelcontainer-af56840b32 .field-full-name-pan-display {
-  grid-column: 1 !important;
-  grid-row: 2 !important;
-}
-
-fieldset#panelcontainer-af56840b32 .field-aadhaar-linked-mobile-number {
-  grid-column: 2 !important;
-  grid-row: 2 !important;
-}
-
-fieldset#panelcontainer-af56840b32 .field-date-of-birth {
-  grid-column: 3 !important;
-  grid-row: 2 !important;
-}
-
-fieldset#panelcontainer-af56840b32 .field-pan {
-  grid-column: 4 !important;
-  grid-row: 2 !important;
-}
-
+/* full width address */
 fieldset#panelcontainer-af56840b32 .field-aadhaar-address-display {
-  grid-column: 1 / -1 !important;
-  grid-row: 3 !important;
+  width: 100% !important;
   border-top: 1px dashed #e1e6f2 !important;
 }
 
+/* full width residence type */
 fieldset#panelcontainer-af56840b32 .field-residence-type {
-  grid-column: 1 / -1 !important;
-  grid-row: 4 !important;
+  width: 100% !important;
 }
 
 fieldset#panelcontainer-af56840b32 .field-residence-type ~ .field-residence-type {
   display: none !important;
+}
+
+/* clear floats */
+fieldset#panelcontainer-af56840b32::after {
+  content: "";
+  display: block;
+  clear: both;
 }
 
 /* label */
@@ -3440,19 +3413,20 @@ fieldset#panelcontainer-af56840b32 textarea {
 
 /* responsive */
 @media (max-width: 768px) {
-  fieldset#panelcontainer-af56840b32 {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  fieldset#panelcontainer-af56840b32 > .field-wrapper {
+    width: 50% !important;
+  }
+
+  fieldset#panelcontainer-af56840b32 .field-aadhaar-address-display,
+  fieldset#panelcontainer-af56840b32 .field-residence-type {
+    width: 100% !important;
   }
 }
 
 @media (max-width: 480px) {
-  fieldset#panelcontainer-af56840b32 {
-    grid-template-columns: 1fr !important;
-  }
-
   fieldset#panelcontainer-af56840b32 > .field-wrapper {
-    grid-column: 1 / -1 !important;
-    grid-row: auto !important;
+    width: 100% !important;
+    float: none !important;
   }
 }
 
@@ -3563,52 +3537,37 @@ fieldset#panelcontainer-af56840b32 textarea {
     grid-template-columns: 1fr;
   }
 }
-
 /* ===============================
-   REFERENCE DETAILS ONLY
+   REFERENCE DETAILS - AEM ACCORDION SAFE
 ================================ */
 
 fieldset#panelcontainer-a4cb4a61ee {
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  column-gap: 0 !important;
-  row-gap: 0 !important;
-
   width: 100% !important;
   margin: 8px 0 18px !important;
   padding: 0 0 18px !important;
-
   border: 1px solid #edf1ff !important;
   border-radius: 14px !important;
   background: #fff !important;
-  overflow: visible !important;
+  overflow: hidden !important;
   box-shadow: 0 4px 14px rgba(32, 78, 180, 0.06) !important;
   box-sizing: border-box !important;
 }
 
 /* header */
 fieldset#panelcontainer-a4cb4a61ee > legend.accordion-legend {
-  grid-column: 1 / -1 !important;
-
   display: flex !important;
   align-items: center !important;
-
   width: 100% !important;
   min-height: 64px !important;
   margin: 0 !important;
   padding: 0 18px 0 44px !important;
-
   background: #eaf1ff !important;
   color: #1f2937 !important;
-
   font-size: 18px !important;
   font-weight: 700 !important;
-
   position: relative !important;
   box-sizing: border-box !important;
   cursor: pointer !important;
-  pointer-events: auto !important;
-  z-index: 10 !important;
 }
 
 fieldset#panelcontainer-a4cb4a61ee > legend.accordion-legend::before {
@@ -3616,48 +3575,33 @@ fieldset#panelcontainer-a4cb4a61ee > legend.accordion-legend::before {
   position: absolute;
   left: 16px;
   font-size: 16px;
-  pointer-events: none !important;
+  pointer-events: none;
 }
 
-/* keep original accordion arrow clickable */
+/* DO NOT override AEM accordion arrow/click */
 fieldset#panelcontainer-a4cb4a61ee > legend.accordion-legend::after {
-  pointer-events: none !important;
+  pointer-events: auto;
 }
 
 /* fields */
 fieldset#panelcontainer-a4cb4a61ee > .field-wrapper {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: flex-start !important;
-
-  width: auto !important;
-  min-width: 0 !important;
+  float: left !important;
+  width: 50% !important;
   min-height: 74px !important;
-
   margin: 0 !important;
   padding: 28px 18px 12px 18px !important;
-
   border: 0 !important;
   border-left: 3px solid #8ea8ff !important;
   background: #fff !important;
-
-  position: static !important;
-  transform: none !important;
   box-shadow: none !important;
   box-sizing: border-box !important;
 }
 
-/* exact placement */
-fieldset#panelcontainer-a4cb4a61ee
-.field-full-name-pan-display.field-wrapper.col-6 {
-  grid-column: 1 !important;
-  grid-row: 2 !important;
-}
-
-fieldset#panelcontainer-a4cb4a61ee
-.field-aadhaar-linked-mobile-number.field-wrapper.col-6 {
-  grid-column: 2 !important;
-  grid-row: 2 !important;
+/* clear floats */
+fieldset#panelcontainer-a4cb4a61ee::after {
+  content: "";
+  display: block;
+  clear: both;
 }
 
 /* labels */
@@ -3665,14 +3609,10 @@ fieldset#panelcontainer-a4cb4a61ee label.field-label {
   display: block !important;
   margin: 0 0 10px !important;
   padding: 0 !important;
-
   color: #667085 !important;
   font-size: 12px !important;
   font-weight: 500 !important;
   line-height: 1.2 !important;
-
-  position: static !important;
-  transform: none !important;
   white-space: nowrap !important;
 }
 
@@ -3681,44 +3621,28 @@ fieldset#panelcontainer-a4cb4a61ee input,
 fieldset#panelcontainer-a4cb4a61ee textarea,
 fieldset#panelcontainer-a4cb4a61ee select {
   display: block !important;
-
   width: 100% !important;
   min-width: 0 !important;
   height: auto !important;
-
   margin: 0 !important;
   padding: 0 !important;
-
   border: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
   outline: none !important;
-
   color: #111827 !important;
   font-size: 13px !important;
   font-weight: 700 !important;
   line-height: 1.4 !important;
-
-  pointer-events: auto !important;
-  appearance: none !important;
-  position: static !important;
-  transform: none !important;
   box-sizing: border-box !important;
 }
 
 /* mobile */
 @media (max-width: 480px) {
-  fieldset#panelcontainer-a4cb4a61ee {
-    grid-template-columns: 1fr !important;
-  }
-
-  fieldset#panelcontainer-a4cb4a61ee
-  .field-full-name-pan-display.field-wrapper.col-6,
-  fieldset#panelcontainer-a4cb4a61ee
-  .field-aadhaar-linked-mobile-number.field-wrapper.col-6 {
-    grid-column: 1 !important;
-    grid-row: auto !important;
+  fieldset#panelcontainer-a4cb4a61ee > .field-wrapper {
+    width: 100% !important;
+    float: none !important;
   }
 }
 
