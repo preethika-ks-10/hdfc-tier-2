@@ -3291,165 +3291,156 @@ fieldset.field-income-verification-method .radio-wrapper label::after {
   }
 }
 
-/*PERSONAL DETAILS*/
-.field-personal-details {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  background: #fff;
-  border: 1px solid #edf1ff;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 4px 14px rgba(32, 78, 180, 0.06);
-  font-family: Inter, Arial, sans-serif;
+/* ==========================================
+   PAN DETAILS SECTION ONLY
+   TARGETED SAFE CSS
+========================================== */
+
+fieldset#panelcontainer-af56840b32 {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 0 !important;
+
+  background: #fff !important;
+  border: 1px solid #edf1ff !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+
+  box-shadow: 0 4px 14px rgba(32, 78, 180, 0.06) !important;
+  font-family: Inter, Arial, sans-serif !important;
 }
 
-/* Header */
-.field-personal-details > .accordion-legend {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 18px 0 44px;
-  margin: 0;
-  background: #eaf1ff;
-  font-size: 13px;
-  font-weight: 700;
-  color: #1f2937;
-  position: relative;
+/* HEADER */
+fieldset#panelcontainer-af56840b32
+> legend.accordion-legend {
+  grid-column: 1 / -1 !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  min-height: 44px !important;
+  margin: 0 !important;
+  padding: 0 18px 0 44px !important;
+
+  background: #eaf1ff !important;
+
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #1f2937 !important;
+
+  position: relative !important;
 }
 
-.field-personal-details > .accordion-legend::before {
+fieldset#panelcontainer-af56840b32
+> legend.accordion-legend::before {
   content: "👤";
   position: absolute;
   left: 12px;
 }
 
-.field-personal-details > .accordion-legend::after {
+fieldset#panelcontainer-af56840b32
+> legend.accordion-legend::after {
   content: "⌃";
   margin-left: auto;
   font-size: 18px;
   color: #4f6df5;
 }
 
-/* All field wrappers */
-.field-personal-details > .field-wrapper {
-  padding: 14px 18px;
-  border-left: 2px solid #9cbcff;
+/* FIELD WRAPPERS */
+fieldset#panelcontainer-af56840b32
+> .field-wrapper {
+  padding: 14px 18px !important;
+
+  border-left: 2px solid #9cbcff !important;
+
   background: #fff !important;
-  min-height: 65px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+
+  min-height: 65px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+
+  box-sizing: border-box !important;
 }
 
-/* Remove purple backgrounds everywhere */
-.field-personal-details input,
-.field-personal-details textarea,
-.field-personal-details select {
-  width: 100%;
+/* FULL WIDTH FIELDS */
+fieldset#panelcontainer-af56840b32
+.col-12 {
+  grid-column: 1 / -1 !important;
+}
+
+/* LABELS */
+fieldset#panelcontainer-af56840b32 label {
+  display: block !important;
+
+  margin-bottom: 6px !important;
+
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: #6b7280 !important;
+}
+
+/* INPUTS */
+fieldset#panelcontainer-af56840b32 input,
+fieldset#panelcontainer-af56840b32 textarea,
+fieldset#panelcontainer-af56840b32 select {
+  width: 100% !important;
+
   border: 0 !important;
   outline: none !important;
   background: transparent !important;
   box-shadow: none !important;
-  appearance: none;
-  font-size: 13px;
-  font-weight: 700;
-  color: #111827;
-  padding: 0;
-}
 
-/* Labels */
-.field-personal-details label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 11px;
-  font-weight: 500;
-  color: #6b7280;
-}
+  appearance: none !important;
 
-/* Full-width fields */
-.field-personal-details .col-12 {
-  grid-column: 1 / -1;
-}
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
 
-/* Address field spacing */
-.field-personal-details .field-current-address input {
-  line-height: 1.4;
-  font-weight: 600;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .field-personal-details {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-/* REMOVE input box UI completely */
-.field-personal-details input,
-.field-loan-details input {
-  border: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  outline: none !important;
   padding: 0 !important;
+  margin: 0 !important;
 
-  /* make it look like text */
-  font-size: 13px;
-  font-weight: 600;
-  color: #111827;
-
-  pointer-events: none; /* disables editing */
-  appearance: none;
-}
-
-/* REMOVE rounded box look (this is your main issue) */
-.field-personal-details input[type="text"],
-.field-loan-details input[type="text"] {
   border-radius: 0 !important;
 }
 
-/* REMOVE placeholder box styling */
-.field-personal-details input::placeholder,
-.field-loan-details input::placeholder {
-  color: #111827;
-  opacity: 1;
+/* ADDRESS FIELD */
+fieldset#panelcontainer-af56840b32
+.field-aadhaar-address-display input {
+  line-height: 1.4 !important;
+  font-weight: 600 !important;
 }
 
-/* REMOVE background from date fields specifically */
-input[type="text"][placeholder="M/d/YY"] {
-  background: transparent !important;
+/* REMOVE DUPLICATE RESIDENCE FIELD */
+fieldset#panelcontainer-af56840b32
+.field-residence-type
++ .field-residence-type {
+  display: none !important;
 }
 
-/* Fix spacing so it aligns like label + value */
-.field-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+/* MOBILE */
+@media (max-width: 768px) {
 
-/* Labels */
-.field-wrapper label {
-  font-size: 11px;
-  color: #6b7280;
-  margin-bottom: 4px;
-}
+  fieldset#panelcontainer-af56840b32 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 
-/* VALUE LOOK (like screenshot) */
-.field-wrapper input {
-  line-height: 1.4;
 }
 
 @media (max-width: 480px) {
-  .field-personal-details {
-    grid-template-columns: 1fr;
+
+  fieldset#panelcontainer-af56840b32 {
+    grid-template-columns: 1fr !important;
   }
 
-  .field-personal-details > .field-wrapper,
-  .field-personal-details .col-12 {
-    grid-column: 1 / -1;
+  fieldset#panelcontainer-af56840b32
+  > .field-wrapper,
+  fieldset#panelcontainer-af56840b32
+  .col-12 {
+    grid-column: 1 / -1 !important;
   }
+
 }
-
 
 /*SALARY & OFFICE ACCORDISAN*/
 /* Salary Account + Office Address cards */
