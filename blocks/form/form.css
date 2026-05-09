@@ -4265,3 +4265,110 @@ fieldset#panelcontainer-a4cb4a61ee select {
   padding: 0 !important;
   overflow: visible !important;
 }
+/* =====================================================
+   REVIEW ACCORDION UNIFORM ALIGNMENT FIX
+   Add at VERY BOTTOM
+===================================================== */
+
+.field-loan-details,
+#panelcontainer-af56840b32,
+.field-salary-account-details-panel,
+.field-office-address-panel,
+#panelcontainer-a4cb4a61ee,
+.field-verify-email-id-panel {
+  width: 100% !important;
+  margin: 8px 0 18px 0 !important;
+  padding: 0 !important;
+  border: 1px solid #edf1ff !important;
+  border-radius: 14px !important;
+  background: #fff !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 14px rgba(32, 78, 180, 0.06) !important;
+  box-sizing: border-box !important;
+}
+
+/* same header style for all accordions */
+.field-loan-details > legend.accordion-legend,
+#panelcontainer-af56840b32 > legend.accordion-legend,
+.field-salary-account-details-panel > legend.accordion-legend,
+.field-office-address-panel > legend.accordion-legend,
+#panelcontainer-a4cb4a61ee > legend.accordion-legend,
+.field-verify-email-id-panel > legend.accordion-legend {
+  width: 100% !important;
+  min-height: 48px !important;
+  height: 48px !important;
+  margin: 0 !important;
+  padding: 0 44px 0 44px !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  background: #eaf1ff !important;
+  color: #1f2937 !important;
+
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  line-height: 48px !important;
+
+  border: 0 !important;
+  border-radius: 14px 14px 0 0 !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  cursor: pointer !important;
+}
+
+/* same icon position */
+.field-loan-details > legend.accordion-legend::before,
+#panelcontainer-af56840b32 > legend.accordion-legend::before,
+.field-salary-account-details-panel > legend.accordion-legend::before,
+.field-office-address-panel > legend.accordion-legend::before,
+#panelcontainer-a4cb4a61ee > legend.accordion-legend::before,
+.field-verify-email-id-panel > legend.accordion-legend::before {
+  position: absolute !important;
+  left: 16px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  pointer-events: none !important;
+}
+
+/* keep AEM arrow clickable/aligned */
+.field-loan-details > legend.accordion-legend::after,
+#panelcontainer-af56840b32 > legend.accordion-legend::after,
+.field-salary-account-details-panel > legend.accordion-legend::after,
+.field-office-address-panel > legend.accordion-legend::after,
+#panelcontainer-a4cb4a61ee > legend.accordion-legend::after,
+.field-verify-email-id-panel > legend.accordion-legend::after {
+  margin-left: auto !important;
+  position: static !important;
+  color: #315cf6 !important;
+  font-size: 18px !important;
+  pointer-events: auto !important;
+}
+
+/* same content background */
+.field-loan-details > .field-wrapper,
+#panelcontainer-af56840b32 > .field-wrapper,
+.field-salary-account-details-panel > .field-wrapper,
+.field-office-address-panel > .field-wrapper,
+#panelcontainer-a4cb4a61ee > .field-wrapper,
+.field-verify-email-id-panel > .field-wrapper {
+  background: #fff !important;
+  box-sizing: border-box !important;
+}
+
+/* remove extra bottom gap from reference panel */
+#panelcontainer-a4cb4a61ee {
+  padding-bottom: 0 !important;
+}
+
+/* wrapper alignment if parent is adding spacing */
+main .form form .field-loan-details,
+main .form form #panelcontainer-af56840b32,
+main .form form .field-salary-account-details-panel,
+main .form form .field-office-address-panel,
+main .form form #panelcontainer-a4cb4a61ee,
+main .form form .field-verify-email-id-panel {
+  grid-column: span 12 !important;
+}
