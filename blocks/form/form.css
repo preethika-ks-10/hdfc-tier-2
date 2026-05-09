@@ -3680,16 +3680,19 @@ fieldset#panelcontainer-af56840b32 input[type="text"][name="date_of_birth"] {
   background-color: #ffffff !important;
   box-shadow: none !important;
 }
-fieldset#panelcontainer-af56840b32 .field-full-name-pan-display {
+/* Full Name */
+fieldset#panelcontainer-af56840b32 
+.field-full-name-pan-display.field-wrapper.col-6 {
   grid-column: 1 !important;
   grid-row: 2 !important;
 }
 
-fieldset#panelcontainer-af56840b32 .field-aadhaar-linked-mobile-number {
+/* Mobile Number */
+fieldset#panelcontainer-af56840b32 
+.field-aadhaar-linked-mobile-number.field-wrapper.col-6 {
   grid-column: 2 !important;
   grid-row: 2 !important;
 }
-
 @media (max-width: 480px) {
   .field-reference-details-panel {
     grid-template-columns: 1fr;
