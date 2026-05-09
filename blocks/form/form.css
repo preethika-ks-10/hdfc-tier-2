@@ -2099,7 +2099,6 @@ fieldset.field-personal-details.panel-wrapper {
 
 fieldset.field-personal-details.panel-wrapper > legend.field-label {
   grid-column: 1 / -1 !important;
-
   width: calc(100% + 36px) !important;
   margin: 0 0 20px -18px !important;
   padding: 18px 20px !important;
@@ -2118,7 +2117,8 @@ fieldset.field-personal-details .field-wrapper {
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
-  position: static !important;
+  position: relative !important;
+  z-index: 1 !important;
   box-sizing: border-box !important;
 }
 
@@ -2136,11 +2136,14 @@ fieldset.field-personal-details .field-pan-number {
 fieldset.field-personal-details .field-personal-email-id {
   grid-column: 1 !important;
   grid-row: 3 !important;
+  z-index: 10 !important;
+  pointer-events: auto !important;
 }
 
 fieldset.field-personal-details .field-verify-email {
   grid-column: 2 !important;
   grid-row: 3 !important;
+  z-index: 2 !important;
 }
 
 fieldset.field-personal-details .field-email-otp {
@@ -2198,6 +2201,9 @@ fieldset.field-personal-details select {
 
   outline: none !important;
   box-sizing: border-box !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 20 !important;
 }
 
 fieldset.field-personal-details input::placeholder {
@@ -2227,6 +2233,9 @@ fieldset.field-personal-details button.button {
   font-weight: 700 !important;
 
   cursor: pointer !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 20 !important;
 }
 
 fieldset.field-personal-details .field-email-submit button.button {
@@ -2250,7 +2259,6 @@ fieldset.field-personal-details .field-email-submit button.button {
     max-width: 100% !important;
   }
 }
-
 
 /*ADDRES PANEL 4TH*/
 /* ADDRESS PANEL ONLY — does not color accordion */
