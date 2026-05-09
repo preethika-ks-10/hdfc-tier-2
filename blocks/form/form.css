@@ -2078,16 +2078,20 @@ body:has(input[name="pan_card_or_dob_choice"][value="date_of_birth"]:checked)
    PERSONAL DETAILS PANEL
 =========================== */
 
-.panel-wrapper {
+/* exact target from your HTML */
+fieldset#panelcontainer-9bdb30ee5 {
   border: 1px solid #e3e8f4;
   border-radius: 14px 14px 0 0;
+  margin: 10px 22px;
   padding: 0 18px 30px;
-  margin: 8px 20px;
+  box-sizing: border-box;
 }
 
-.panel-wrapper legend {
+fieldset#panelcontainer-9bdb30ee5 > legend {
+  display: block;
   width: calc(100% + 36px);
   margin-left: -18px;
+  margin-bottom: 20px;
   padding: 18px 20px;
   box-sizing: border-box;
   background: #eaf1ff;
@@ -2097,75 +2101,79 @@ body:has(input[name="pan_card_or_dob_choice"][value="date_of_birth"]:checked)
   font-weight: 700;
 }
 
-#panelcontainer-9bdb30ee5 {
+/* layout */
+fieldset#panelcontainer-9bdb30ee5 {
   display: grid;
   grid-template-columns: 280px 70px 280px 1fr;
   column-gap: 30px;
   row-gap: 30px;
   align-items: end;
-  padding-top: 22px;
 }
 
-.field-wrapper {
-  margin: 0;
-  padding: 0;
+fieldset#panelcontainer-9bdb30ee5 > legend {
+  grid-column: 1 / -1;
 }
 
-.field-gender {
+fieldset#panelcontainer-9bdb30ee5 .field-gender {
   grid-column: 1;
-  grid-row: 1;
+  grid-row: 2;
 }
 
-.field-pan-number {
+fieldset#panelcontainer-9bdb30ee5 .field-pan-number {
   grid-column: 3;
-  grid-row: 1;
-}
-
-.field-personal-email-id {
-  grid-column: 1;
   grid-row: 2;
 }
 
-.field-verify-email {
+fieldset#panelcontainer-9bdb30ee5 .field-personal-email-id {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+fieldset#panelcontainer-9bdb30ee5 .field-verify-email {
   grid-column: 2;
-  grid-row: 2;
+  grid-row: 3;
 }
 
-.field-email-otp {
+fieldset#panelcontainer-9bdb30ee5 .field-email-otp {
   grid-column: 1;
-  grid-row: 3;
+  grid-row: 4;
 }
 
-.field-email-submit {
+fieldset#panelcontainer-9bdb30ee5 .field-email-submit {
   grid-column: 2 / 4;
-  grid-row: 3;
+  grid-row: 4;
 }
 
-.field-email-response {
+fieldset#panelcontainer-9bdb30ee5 .field-email-response {
   display: none;
 }
 
-.field-label {
+/* reset wrappers */
+fieldset#panelcontainer-9bdb30ee5 .field-wrapper {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* labels */
+fieldset#panelcontainer-9bdb30ee5 .field-label {
   display: block;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
   color: #344054;
   font-size: 14px;
   font-weight: 500;
 }
 
-.field-label::after {
+fieldset#panelcontainer-9bdb30ee5 .field-gender .field-label::after,
+fieldset#panelcontainer-9bdb30ee5 .field-pan-number .field-label::after,
+fieldset#panelcontainer-9bdb30ee5 .field-personal-email-id .field-label::after {
   content: " *";
   color: #ff4d4f;
 }
 
-.field-email-otp .field-label::after,
-.field-email-response .field-label::after {
-  content: "";
-}
-
-input[type="text"],
-input[type="email"],
-select {
+/* inputs */
+fieldset#panelcontainer-9bdb30ee5 input,
+fieldset#panelcontainer-9bdb30ee5 select {
   width: 280px;
   height: 42px;
   box-sizing: border-box;
@@ -2173,18 +2181,19 @@ select {
   border: 1px solid #cbd5e1;
   border-radius: 7px;
   background: #fff;
+  color: #111827;
   font-size: 14px;
   outline: none;
 }
 
-input::placeholder {
+fieldset#panelcontainer-9bdb30ee5 input::placeholder {
   color: #8a94a6;
   font-weight: 600;
 }
 
-button.button {
+/* buttons */
+fieldset#panelcontainer-9bdb30ee5 button.button {
   height: 44px;
-  min-width: 72px;
   padding: 0 18px;
   border: 0;
   border-radius: 8px;
@@ -2195,20 +2204,9 @@ button.button {
   cursor: pointer;
 }
 
-.field-email-submit button.button {
+fieldset#panelcontainer-9bdb30ee5 .field-email-submit button.button {
   width: 102px;
 }
-
-@media (max-width: 768px) {
-  #panelcontainer-9bdb30ee5 {
-    display: block;
-  }
-
-  .field-wrapper {
-    margin-bottom: 22px;
-  }
-}
-
 
 /*ADDRES PANEL 4TH*/
 /* ADDRESS PANEL ONLY — does not color accordion */
