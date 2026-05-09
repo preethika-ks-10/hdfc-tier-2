@@ -3305,7 +3305,7 @@ fieldset#panelcontainer-af56840b32 {
   border: 1px solid #edf1ff !important;
   border-radius: 14px !important;
   background: #fff !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   box-shadow: 0 4px 14px rgba(32, 78, 180, 0.06) !important;
   box-sizing: border-box !important;
 }
@@ -3324,22 +3324,24 @@ fieldset#panelcontainer-af56840b32 > legend.accordion-legend {
 
   position: relative !important;
   box-sizing: border-box !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  z-index: 20 !important;
 }
 
 fieldset#panelcontainer-af56840b32 > legend.accordion-legend::before {
   content: "👤";
   position: absolute;
   left: 14px;
+  pointer-events: none !important;
 }
 
+/* IMPORTANT: do not replace accordion arrow */
 fieldset#panelcontainer-af56840b32 > legend.accordion-legend::after {
-  content: "⌃";
-  float: right;
-  color: #4f6df5;
-  font-size: 18px;
+  pointer-events: none !important;
 }
 
-/* reset all fields inside this panel */
+/* fields */
 fieldset#panelcontainer-af56840b32 > .field-wrapper {
   display: flex !important;
   flex-direction: column !important;
@@ -3360,7 +3362,7 @@ fieldset#panelcontainer-af56840b32 > .field-wrapper {
   box-sizing: border-box !important;
 }
 
-/* exact coordinates */
+/* coordinates */
 fieldset#panelcontainer-af56840b32 .field-full-name-pan-display {
   grid-column: 1 !important;
   grid-row: 2 !important;
@@ -3392,7 +3394,6 @@ fieldset#panelcontainer-af56840b32 .field-residence-type {
   grid-row: 4 !important;
 }
 
-/* hide duplicate Residence Type */
 fieldset#panelcontainer-af56840b32 .field-residence-type ~ .field-residence-type {
   display: none !important;
 }
@@ -3410,7 +3411,7 @@ fieldset#panelcontainer-af56840b32 label.field-label {
   white-space: nowrap !important;
 }
 
-/* input value style */
+/* input */
 fieldset#panelcontainer-af56840b32 input,
 fieldset#panelcontainer-af56840b32 select,
 fieldset#panelcontainer-af56840b32 textarea {
@@ -3437,45 +3438,10 @@ fieldset#panelcontainer-af56840b32 textarea {
   box-sizing: border-box !important;
 }
 
-/* remove browser date box style */
-fieldset#panelcontainer-af56840b32 input[type="text"][name="date_of_birth"] {
-  appearance: none !important;
-}
-
 /* responsive */
 @media (max-width: 768px) {
   fieldset#panelcontainer-af56840b32 {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-
-  fieldset#panelcontainer-af56840b32 .field-full-name-pan-display {
-    grid-column: 1 !important;
-    grid-row: 2 !important;
-  }
-
-  fieldset#panelcontainer-af56840b32 .field-aadhaar-linked-mobile-number {
-    grid-column: 2 !important;
-    grid-row: 2 !important;
-  }
-
-  fieldset#panelcontainer-af56840b32 .field-date-of-birth {
-    grid-column: 1 !important;
-    grid-row: 3 !important;
-  }
-
-  fieldset#panelcontainer-af56840b32 .field-pan {
-    grid-column: 2 !important;
-    grid-row: 3 !important;
-  }
-
-  fieldset#panelcontainer-af56840b32 .field-aadhaar-address-display {
-    grid-column: 1 / -1 !important;
-    grid-row: 4 !important;
-  }
-
-  fieldset#panelcontainer-af56840b32 .field-residence-type {
-    grid-column: 1 / -1 !important;
-    grid-row: 5 !important;
   }
 }
 
@@ -3615,7 +3581,7 @@ fieldset#panelcontainer-a4cb4a61ee {
   border: 1px solid #edf1ff !important;
   border-radius: 14px !important;
   background: #fff !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   box-shadow: 0 4px 14px rgba(32, 78, 180, 0.06) !important;
   box-sizing: border-box !important;
 }
@@ -3640,6 +3606,9 @@ fieldset#panelcontainer-a4cb4a61ee > legend.accordion-legend {
 
   position: relative !important;
   box-sizing: border-box !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  z-index: 10 !important;
 }
 
 fieldset#panelcontainer-a4cb4a61ee > legend.accordion-legend::before {
@@ -3647,16 +3616,15 @@ fieldset#panelcontainer-a4cb4a61ee > legend.accordion-legend::before {
   position: absolute;
   left: 16px;
   font-size: 16px;
+  pointer-events: none !important;
 }
 
+/* keep original accordion arrow clickable */
 fieldset#panelcontainer-a4cb4a61ee > legend.accordion-legend::after {
-  content: "⌄";
-  margin-left: auto;
-  color: #4f6df5;
-  font-size: 20px;
+  pointer-events: none !important;
 }
 
-/* reset fields only inside this panel */
+/* fields */
 fieldset#panelcontainer-a4cb4a61ee > .field-wrapper {
   display: flex !important;
   flex-direction: column !important;
@@ -3692,7 +3660,7 @@ fieldset#panelcontainer-a4cb4a61ee
   grid-row: 2 !important;
 }
 
-/* label */
+/* labels */
 fieldset#panelcontainer-a4cb4a61ee label.field-label {
   display: block !important;
   margin: 0 0 10px !important;
@@ -3708,7 +3676,7 @@ fieldset#panelcontainer-a4cb4a61ee label.field-label {
   white-space: nowrap !important;
 }
 
-/* inputs as plain text */
+/* inputs */
 fieldset#panelcontainer-a4cb4a61ee input,
 fieldset#panelcontainer-a4cb4a61ee textarea,
 fieldset#panelcontainer-a4cb4a61ee select {
@@ -3753,6 +3721,7 @@ fieldset#panelcontainer-a4cb4a61ee select {
     grid-row: auto !important;
   }
 }
+
 /* VERIFIED  EMAIL*/
 .field-verify-email-id-panel {
   display: grid;
