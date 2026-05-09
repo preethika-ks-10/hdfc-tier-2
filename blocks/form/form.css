@@ -802,9 +802,9 @@ main div.form-wrapper {
   row-gap: 12px !important;
 }
 
-/* Title */
 .field-personal-loan-offer > legend {
   grid-column: 1 / 4 !important;
+  grid-row: 1 !important;
   font-size: 18px !important;
   font-weight: 700 !important;
   color: #071b45 !important;
@@ -855,7 +855,7 @@ main div.form-wrapper {
   content: "";
   position: absolute;
   left: 14px;
-  top: 13px;
+  top: 19px;
   width: 22px;
   height: 15px;
   background: url("https://flagcdn.com/w40/in.png") center / cover no-repeat;
@@ -866,7 +866,7 @@ main div.form-wrapper {
   content: "+91";
   position: absolute;
   left: 40px;
-  top: 11px;
+  top: 19px;
   font-size: 13px;
   color: #071b45;
   z-index: 9;
@@ -928,38 +928,59 @@ body:has(input[name="pan_card_or_dob_choice"][value="date_of_birth"]:checked)
   display: none !important;
 }
 
-/* Source of income */
+/* SOURCE OF INCOME */
 .field-source-of-income {
   grid-column: 3 !important;
   grid-row: 2 / 5 !important;
+
   width: 360px !important;
+
   margin: 0 !important;
   padding: 0 !important;
 }
 
+/* heading */
 .field-source-of-income legend {
   font-size: 15px !important;
   font-weight: 700 !important;
   color: #071b45 !important;
-  margin: 0 0 16px 0 !important;
+
+  margin: 0 0 18px 0 !important;
 }
 
+/* each radio row */
 .field-source-of-income .radio-wrapper {
-  display: grid !important;
-  grid-template-columns: 18px auto !important;
+  display: flex !important;
   align-items: center !important;
-  column-gap: 12px !important;
-  margin-bottom: 16px !important;
+
+  gap: 12px !important;
+
+  margin: 0 0 18px 0 !important;
+  padding: 0 !important;
+
+  width: 100% !important;
 }
 
-.field-source-of-income .radio-wrapper input {
+/* radio button */
+.field-source-of-income .radio-wrapper input[type="radio"] {
   margin: 0 !important;
+
   width: 16px !important;
   height: 16px !important;
+
+  flex-shrink: 0 !important;
 }
 
+/* label */
 .field-source-of-income .radio-wrapper label {
   margin: 0 !important;
+  padding: 0 !important;
+
+  font-size: 14px !important;
+  line-height: 20px !important;
+
+  color: #4b5563 !important;
+
   white-space: nowrap !important;
 }
 
@@ -977,7 +998,7 @@ body:has(input[name="pan_card_or_dob_choice"][value="date_of_birth"]:checked)
   display: none !important;
 }
 
-/* Consents */
+/* Consent */
 .field-consent-processing-data {
   grid-column: 1 / 4 !important;
   grid-row: 5 !important;
@@ -1035,20 +1056,18 @@ body:has(input[name="pan_card_or_dob_choice"][value="date_of_birth"]:checked)
 }
 
 .field-view-loan-eligibility button {
-  width: 190px !important;
-  height: 44px !important;
+  width: 290px !important;
+  height: 54px !important;
   border: 0 !important;
   border-radius: 7px !important;
   background: #5c6ff5 !important;
   color: #fff !important;
   font-weight: 700 !important;
-  white-space: nowrap !important;
 }
 
 .field-view-loan-eligibility button:disabled {
   background: #ecebe6 !important;
   color: #9ca0aa !important;
-  cursor: not-allowed !important;
 }
 
 .field-view-loan-eligibility::after {
@@ -1059,71 +1078,179 @@ body:has(input[name="pan_card_or_dob_choice"][value="date_of_birth"]:checked)
   margin-top: 32px;
 }
 
-/* Important link line */
-.field-product-features-text,
-.field-important-links,
-.field-help-links,
-.field-product-links-note {
-  grid-column: 1 / 4 !important;
+/* IMPORTANT LINKS TEXT POSITION */
+.field-plain-text {
+  width: 100% !important;
   text-align: center !important;
-  font-size: 12px !important;
-  margin-top: 8px !important;
+  font-size: 13px !important;
+  color: #5c5c5c !important;
+
+  margin-top: 14px !important;
+  margin-bottom: 22px !important;
+
+  display: block !important;
+  clear: both !important;
 }
 
-/* Essentials */
+/* ensure essentials comes BELOW it */
+.field-essentials-for-the-journey {
+  margin-top: 0 !important;
+  padding-top: 10px !important;
+}
+.field-plain-text.field-wrapper.col-12 {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  right: auto !important;
+
+  grid-column: 1 / -1 !important;
+}
+
+/* =========================
+   ESSENTIALS FORCE EXACT
+========================= */
+
 .field-essentials-for-the-journey {
   grid-column: 1 / 4 !important;
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  column-gap: 40px !important;
-  margin-top: 24px !important;
+  position: relative !important;
   width: 100% !important;
+  height: 100px !important;
+  margin-top: 24px !important;
+  padding: 0 !important;
+  display: block !important;
 }
 
-.field-essentials-for-the-journey legend {
-  grid-column: 1 / 5 !important;
+.field-essentials-for-the-journey > legend {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
   font-size: 18px !important;
   font-weight: 700 !important;
   color: #071b45 !important;
-  margin-bottom: 22px !important;
 }
 
+/* common item style */
 .field-essentials-for-the-journey .plain-text-wrapper {
+  position: absolute !important;
+  top: 52px !important;
   display: flex !important;
   align-items: center !important;
   gap: 10px !important;
   width: auto !important;
   margin: 0 !important;
+  padding: 0 !important;
   white-space: nowrap !important;
 }
 
 .field-essentials-for-the-journey .plain-text-wrapper p {
   margin: 0 !important;
-  white-space: nowrap !important;
+  padding: 0 !important;
   font-size: 14px !important;
   color: #071b45 !important;
+  white-space: nowrap !important;
 }
 
-.field-essentials-for-the-journey .plain-text-wrapper:nth-of-type(1)::before {
+/* exact horizontal positions */
+.field-essential-mobile-phone {
+  left: 0 !important;
+}
+
+.field-essential-pan-card {
+  left: 280px !important;
+}
+
+.field-essential-date-of-birth {
+  left: 560px !important;
+}
+
+.field-essential-cheque-book-bank-account-details {
+  left: 840px !important;
+}
+
+/* icons */
+.field-essential-mobile-phone::before {
   content: "☎";
 }
 
-.field-essentials-for-the-journey .plain-text-wrapper:nth-of-type(2)::before {
+.field-essential-pan-card::before {
   content: "▣";
 }
 
-.field-essentials-for-the-journey .plain-text-wrapper:nth-of-type(3)::before {
+.field-essential-date-of-birth::before {
   content: "▦";
 }
 
-.field-essentials-for-the-journey .plain-text-wrapper:nth-of-type(4)::before {
+.field-essential-cheque-book-bank-account-details::before {
   content: "▤";
 }
 
 .field-essentials-for-the-journey .plain-text-wrapper::before {
-  font-size: 15px !important;
+  font-size: 14px !important;
   color: #777 !important;
 }
+/* Move important links BELOW button divider */
+.field-personal-loan-offer > .field-plain-text {
+  grid-column: 1 / 4 !important;
+  grid-row: 9 !important;
+
+  display: block !important;
+  width: 100% !important;
+
+  text-align: center !important;
+  font-size: 2px !important;
+  color: #071b45 !important;
+
+  margin: 8px 0 22px 0 !important;
+  padding: 0 !important;
+
+  position: static !important;
+  float: none !important;
+  clear: both !important;
+}
+
+.field-personal-loan-offer > .field-plain-text p {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Essentials must come after important links */
+.field-personal-loan-offer > .field-essentials-for-the-journey {
+  grid-column: 1 / 4 !important;
+  grid-row: 10 !important;
+  margin-top: 0 !important;
+}
+/* IMPORTANT LINKS TEXT */
+.field-plain-text.field-wrapper.col-12 {
+  grid-column: 1 / -1 !important;
+
+  width: 100% !important;
+
+  text-align: center !important;
+
+  margin-top: 10px !important;
+  margin-bottom: 34px !important;
+
+  padding: 0 !important;
+
+  position: static !important;
+  display: block !important;
+}
+
+/* actual text */
+.field-plain-text.field-wrapper.col-12 p {
+  margin: 0 auto !important;
+
+  max-width: 980px !important;
+
+  font-size: 12px !important;
+  line-height: 20px !important;
+
+  color: #5f6368 !important;
+
+  text-align: center !important;
+}
+
 
 
 /* ===== OTP PAGE TARGET DESIGN ===== */
