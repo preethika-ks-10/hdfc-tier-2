@@ -4134,7 +4134,65 @@ fieldset#panelcontainer-a4cb4a61ee select {
   color: #6b7280;
 }
 
+/* =========================================
+   FIX LOAN APPLICATION NUMBER ALIGNMENT
+========================================= */
 
+.field-loan-application-number {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  margin: 0 53px 28px !important;
+  padding: 0 !important;
+}
+
+/* icon */
+.field-loan-application-number::before {
+  margin-top: 2px !important;
+}
+
+/* remove AEM nested wrapper breaking layout */
+.field-loan-application-number .field-wrapper {
+  display: block !important;
+  width: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: auto !important;
+  border: 0 !important;
+}
+
+/* label */
+.field-loan-application-number label {
+  display: block !important;
+  margin: 0 0 4px 0 !important;
+
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+  font-weight: 500 !important;
+  color: #9ca3af !important;
+}
+
+/* number */
+.field-loan-application-number input {
+  display: block !important;
+
+  width: auto !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+
+  font-size: 22px !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  color: #1f2937 !important;
+
+  text-align: left !important;
+}
 /* =====================================================
    FIX GLOBAL FIELD CSS INSIDE REVIEW ACCORDIONS ONLY
    Add this at END of CSS file
