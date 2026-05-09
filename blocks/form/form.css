@@ -4236,3 +4236,32 @@ fieldset#panelcontainer-a4cb4a61ee select {
     float: none !important;
   }
 }
+/* fix clipped review values */
+#panelcontainer-af56840b32 .field-wrapper,
+#panelcontainer-a4cb4a61ee .field-wrapper {
+  overflow: visible !important;
+  min-height: 104px !important;
+}
+
+#panelcontainer-af56840b32 input,
+#panelcontainer-a4cb4a61ee input {
+  height: 22px !important;
+  line-height: 22px !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+  text-overflow: clip !important;
+  display: block !important;
+}
+
+/* specifically undo old fixed-width clipping */
+#panelcontainer-af56840b32 .field-aadhaar-linked-mobile-number input,
+#panelcontainer-af56840b32 .field-pan input,
+#panelcontainer-a4cb4a61ee .field-aadhaar-linked-mobile-number input {
+  width: 100% !important;
+  min-width: 120px !important;
+  max-width: none !important;
+  height: 24px !important;
+  line-height: 24px !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
