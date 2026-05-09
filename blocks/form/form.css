@@ -4134,63 +4134,65 @@ fieldset#panelcontainer-a4cb4a61ee select {
   color: #6b7280;
 }
 
-/* =========================================
-   FIX LOAN APPLICATION NUMBER ALIGNMENT
-========================================= */
-
+/* FINAL FIX - Loan Application Number target alignment */
 .field-loan-application-number {
-  display: flex !important;
-  align-items: center !important;
-  gap: 16px !important;
+  position: relative !important;
+  display: block !important;
   margin: 0 53px 28px !important;
-  padding: 0 !important;
+  padding: 0 0 0 56px !important;
+  min-height: 44px !important;
 }
 
 /* icon */
 .field-loan-application-number::before {
-  margin-top: 2px !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+
+  margin: 0 !important;
 }
 
-/* remove AEM nested wrapper breaking layout */
-.field-loan-application-number .field-wrapper {
+/* reset all wrappers */
+.field-loan-application-number .field-wrapper,
+.field-loan-application-number.text-wrapper {
   display: block !important;
   width: auto !important;
   margin: 0 !important;
   padding: 0 !important;
-  min-height: auto !important;
-  border: 0 !important;
 }
 
-/* label */
+/* label above */
 .field-loan-application-number label {
   display: block !important;
-  margin: 0 0 4px 0 !important;
+  margin: 0 0 6px 0 !important;
 
   font-size: 11px !important;
-  line-height: 1.2 !important;
+  line-height: 12px !important;
   font-weight: 500 !important;
   color: #9ca3af !important;
 }
 
-/* number */
+/* number below label */
 .field-loan-application-number input {
   display: block !important;
-
   width: auto !important;
-  min-width: 0 !important;
+  max-width: none !important;
 
   margin: 0 !important;
   padding: 0 !important;
 
-  border: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-
   font-size: 22px !important;
-  line-height: 1 !important;
+  line-height: 24px !important;
   font-weight: 800 !important;
   color: #1f2937 !important;
 
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
   text-align: left !important;
 }
 /* =====================================================
