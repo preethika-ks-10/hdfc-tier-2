@@ -161,15 +161,10 @@ function initSalaryBankUI() {
     <option value="other_bank">Other Bank</option>
   `;
 
-  function renderCards(type) {
+  function renderCards(selectedType) {
     cardContainer.innerHTML = "";
 
-    const list =
-      type === "hdfc_bank"
-        ? banks.filter((bank) => bank.value === "hdfc_bank")
-        : banks;
-
-    list.forEach((bank) => {
+    banks.forEach((bank) => {
       const card = document.createElement("div");
       card.className = "bank-card";
       card.dataset.value = bank.value;
@@ -179,17 +174,21 @@ function initSalaryBankUI() {
         <span>${bank.text}</span>
       `;
 
-      if (bank.value === "hdfc_bank") {
+      /* HDFC selected */
+      if (
+        selectedType === "hdfc_bank" &&
+        bank.value === "hdfc_bank"
+      ) {
         card.classList.add("active");
       }
 
-      card.addEventListener("click", function () {
-        document.querySelectorAll(".bank-card").forEach((item) => {
-          item.classList.remove("active");
-        });
-
+      /* Other Bank selected */
+      if (
+        selectedType === "other_bank" &&
+        bank.value !== "hdfc_bank"
+      ) {
         card.classList.add("active");
-      });
+      }
 
       cardContainer.appendChild(card);
     });
@@ -218,6 +217,7 @@ if (typeof window !== "undefined") {
   setTimeout(initSalaryBankUI, 1500);
   setTimeout(initSalaryBankUI, 3000);
 }
+
 /*GENERATE OTP*/
 /**
  * @param {scope} globals
