@@ -2942,7 +2942,7 @@ fieldset.field-type-of-loan select {
   cursor: pointer;
 }
 
-
+/* salary bank */
 
 .field-salary-bank-selection {
   position: relative !important;
@@ -4463,4 +4463,141 @@ main .form form .field-office-address-panel,
 main .form form #panelcontainer-a4cb4a61ee,
 main .form form .field-verify-email-id-panel {
   grid-column: span 12 !important;
+}
+
+/*  ALL OVERRIDES */
+/* ================================================= */
+/* FINAL GLOBAL ALIGNMENT OVERRIDE - PUT AT VERY END */
+/* ================================================= */
+
+/* Same outer width for all main sections */
+fieldset.field-personal-details.panel-wrapper,
+fieldset.field-address-details.panel-wrapper,
+fieldset.field-employer-details.panel-wrapper,
+fieldset.field-work-email-id.panel-wrapper,
+fieldset.field-income-details.panel-wrapper,
+fieldset.field-type-of-loan.panel-wrapper,
+.field-full-name-pan-display,
+.field-full-name-as-per-pan.panel-wrapper {
+  width: calc(100% - 48px) !important;
+  max-width: calc(100% - 48px) !important;
+  margin-left: 24px !important;
+  margin-right: 24px !important;
+  box-sizing: border-box !important;
+}
+
+/* Same accordion header width/alignment */
+fieldset.field-employer-details.panel-wrapper > legend.accordion-legend,
+fieldset.field-work-email-id.panel-wrapper > legend.accordion-legend,
+fieldset.field-income-details.panel-wrapper > legend.accordion-legend,
+fieldset.field-type-of-loan.panel-wrapper > legend.accordion-legend {
+  width: calc(100% + 44px) !important;
+  margin-left: -22px !important;
+  margin-right: -22px !important;
+  padding-left: 22px !important;
+  padding-right: 22px !important;
+  box-sizing: border-box !important;
+}
+
+/* Personal Details header alignment */
+fieldset.field-personal-details.panel-wrapper > legend.field-label {
+  width: calc(100% + 36px) !important;
+  margin-left: -18px !important;
+  margin-right: -18px !important;
+}
+
+/* Address section alignment */
+fieldset.field-address-details.panel-wrapper {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+/* Work Email clean layout */
+fieldset.field-work-email-id.panel-wrapper {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-end !important;
+  column-gap: 28px !important;
+  row-gap: 16px !important;
+  padding: 0 22px 22px !important;
+  overflow: hidden !important;
+}
+
+/* Work Email order */
+fieldset.field-work-email-id .field-work-email {
+  order: 1 !important;
+  flex: 0 0 300px !important;
+  width: 300px !important;
+}
+
+fieldset.field-work-email-id .field-verify-email {
+  order: 2 !important;
+  flex: 0 0 72px !important;
+  width: 72px !important;
+}
+
+fieldset.field-work-email-id .field-work-email-note {
+  order: 3 !important;
+  flex: 0 0 100% !important;
+  width: 100% !important;
+}
+
+fieldset.field-work-email-id .field-work-email-otp {
+  order: 4 !important;
+  flex: 0 0 300px !important;
+  width: 300px !important;
+}
+
+fieldset.field-work-email-id .field-work-email-submit {
+  order: 5 !important;
+  flex: 0 0 102px !important;
+  width: 102px !important;
+}
+
+fieldset.field-work-email-id .field-work-email-response {
+  order: 6 !important;
+  flex: 0 0 300px !important;
+  width: 300px !important;
+}
+
+/* Work Email inputs */
+fieldset.field-work-email-id .field-work-email input,
+fieldset.field-work-email-id .field-work-email-otp input {
+  width: 100% !important;
+  height: 42px !important;
+  border-radius: 7px !important;
+  box-sizing: border-box !important;
+}
+
+/* Work Email buttons */
+fieldset.field-work-email-id .field-verify-email button {
+  width: 72px !important;
+  min-width: 72px !important;
+  height: 44px !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+fieldset.field-work-email-id .field-work-email-submit button {
+  width: 102px !important;
+  min-width: 102px !important;
+  height: 44px !important;
+  padding: 0 !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+/* Remove wrapper spacing conflicts */
+fieldset.field-work-email-id .field-work-email,
+fieldset.field-work-email-id .field-verify-email,
+fieldset.field-work-email-id .field-work-email-note,
+fieldset.field-work-email-id .field-work-email-otp,
+fieldset.field-work-email-id .field-work-email-submit,
+fieldset.field-work-email-id .field-work-email-response {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
 }
