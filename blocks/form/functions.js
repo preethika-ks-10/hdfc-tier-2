@@ -1129,12 +1129,18 @@ function generateWorkEmailOtp() {
   }
 }
 
+/**
+ * Verify Work Email OTP
+ */
 function verifyWorkEmailOtp() {
+
   try {
+
     const enteredOtp =
       document.querySelector('input[name="work_email_otp"]')?.value || "";
 
     if (!enteredOtp.trim()) {
+
       setWorkEmailResponse("Please enter OTP");
       return false;
     }
@@ -1143,10 +1149,13 @@ function verifyWorkEmailOtp() {
       document.querySelector('input[name="aadhaar_linked_mobile_number"]')?.value || "";
 
     fetch("https://writing-dimly-spout.ngrok-free.dev/verify-email-otp", {
+
       method: "POST",
+
       headers: {
         "Content-Type": "application/json"
       },
+
       body: JSON.stringify({
         mobile,
         otp: enteredOtp
@@ -1154,42 +1163,66 @@ function verifyWorkEmailOtp() {
     })
       .then(res => res.json())
       .then(response => {
+
         console.log("VERIFY WORK EMAIL OTP", response);
 
         if (response.success === true) {
+
           window.workEmailVerified = true;
 
+          /* Hide OTP field + submit button */
           showField("work_email_otp", false);
           showField("work_email_submit", false);
 
-          setWorkEmailResponse("Email verified successfully");
+          /* Success message */
+          setWorkEmailResponse(
+            "Email verified successfully"
+          );
+
+          /* Change Verify button to Verified */
+          const verifyButtonWrapper =
+            document.querySelector('.field-verify-email');
 
           const verifyButton =
-            document.querySelector('[name="verify_email"]');
+            verifyButtonWrapper?.querySelector('button');
 
           if (verifyButton) {
+
             verifyButton.textContent = "Verified";
+
             verifyButton.disabled = true;
+
             verifyButton.style.pointerEvents = "none";
+
             verifyButton.style.background = "#4CAF50";
+
             verifyButton.style.color = "#fff";
+
+            verifyButton.style.borderColor = "#4CAF50";
           }
 
         } else {
+
           setWorkEmailResponse(
             response.message || "Invalid OTP"
           );
         }
       })
       .catch(err => {
-        console.error(err);
-        setWorkEmailResponse("OTP verification failed");
+
+        console.error("VERIFY WORK EMAIL OTP ERROR", err);
+
+        setWorkEmailResponse(
+          "OTP verification failed"
+        );
       });
 
     return true;
 
   } catch (e) {
-    console.error(e);
+
+    console.error("verifyWorkEmailOtp error:", e);
+
     return false;
   }
 }
