@@ -1027,6 +1027,181 @@ function verifyEmailOtp() {
   }
 }
 
+/**
+ * WORK Email OTP
+ */
+
+/**
+ * Generate Work Email OTP
+ */
+function generateWorkEmailOtp() {
+  try {
+
+    if (window.workEmailVerified === true) {
+      setWorkEmailResponse("Email already verified");
+      return false;
+    }
+
+    window.workEmailOtpAttempts =
+      window.workEmailOtpAttempts || 0;
+
+    if (window.workEmailOtpAttempts >= 3) {
+      setWorkEmailResponse("Maximum OTP attempts reached");
+      return false;
+    }
+
+    const email =
+      document.querySelector('input[name="work_email"]')?.value || "";
+
+    const mobile =
+      document.querySelector('input[name="aadhaar_linked_mobile_number"]')?.value || "";
+
+    if (!email || !mobile) {
+      setWorkEmailResponse("Email and mobile are required");
+      return false;
+    }
+
+    window.workEmailOtpAttempts++;
+
+    fetch("https://writing-dimly-spout.ngrok-free.dev/generate-email-otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email,
+        mobile
+      })
+    })
+      .then(res => res.json())
+      .then(response => {
+
+        console.log("WORK EMAIL OTP RESPONSE", response);
+
+        if (response.success === true) {
+
+          showField("email_otp", true);
+          showField("email_submit", true);
+
+          setWorkEmailResponse(
+            `OTP Sent Successfully (${3 - window.workEmailOtpAttempts} attempt(s) left)`
+          );
+
+        } else {
+          setWorkEmailResponse(
+            response.message || "OTP generation failed"
+          );
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        setWorkEmailResponse("Something went wrong");
+      });
+
+    return true;
+
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+}
+
+/**
+ * Verify Work Email OTP
+ */
+function verifyWorkEmailOtp() {
+
+  try {
+
+    const enteredOtp =
+      document.querySelector('input[name="email_otp"]')?.value || "";
+
+    if (!enteredOtp.trim()) {
+      setWorkEmailResponse("Please enter OTP");
+      return false;
+    }
+
+    const mobile =
+      document.querySelector('input[name="aadhaar_linked_mobile_number"]')?.value || "";
+
+    fetch("https://writing-dimly-spout.ngrok-free.dev/verify-email-otp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        mobile,
+        otp: enteredOtp
+      })
+    })
+      .then(res => res.json())
+      .then(response => {
+
+        console.log("VERIFY WORK EMAIL OTP", response);
+
+        if (response.success === true) {
+
+          window.workEmailVerified = true;
+
+          showField("email_otp", false);
+          showField("email_submit", false);
+
+          setWorkEmailResponse("Email verified successfully");
+
+          const verifyButton =
+            document.querySelector('[name="verify_email"]');
+
+          if (verifyButton) {
+
+            verifyButton.innerText = "Verified";
+            verifyButton.disabled = true;
+
+            verifyButton.style.pointerEvents = "none";
+            verifyButton.style.background = "#4CAF50";
+            verifyButton.style.color = "#fff";
+          }
+
+        } else {
+
+          setWorkEmailResponse(
+            response.message || "Invalid OTP"
+          );
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        setWorkEmailResponse("OTP verification failed");
+      });
+
+    return true;
+
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+}
+
+/**
+ * Response Setter
+ */
+function setWorkEmailResponse(message) {
+
+  const responseField =
+    document.querySelector('[name="email_response"]');
+
+  if (responseField) {
+
+    responseField.value = message;
+
+    responseField.dispatchEvent(
+      new Event("input", { bubbles: true })
+    );
+
+    responseField.dispatchEvent(
+      new Event("change", { bubbles: true })
+    );
+  }
+}
 export {
   getFullName,
   days,
@@ -1044,5 +1219,8 @@ export {
   resendOTP,
   fetchReviewDetailsAPI,
   generateEmailOtp,
-  verifyEmailOtp
+  verifyEmailOtp,
+  generateWorkEmailOtp,
+  verifyWorkEmailOtp,
+  setWorkEmailResponse
 };
