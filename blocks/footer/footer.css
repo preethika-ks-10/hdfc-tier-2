@@ -18,27 +18,36 @@ footer .footer p {
     padding: 40px 32px 24px;
   }
 }
-/* Main footer styling */
+/* Fixed footer - always stays at bottom */
 footer.footer-wrapper {
-    background-color: #0b1f4a;   /* Dark blue */
-    height: 44px;
+  background-color: #0b1f4a !important;
+  height: 44px !important;
+  width: 100% !important;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 
-    border-top: 1px solid #dcdcdc;
+  border-top: 1px solid #dcdcdc !important;
 
-    position: relative;
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+
+  z-index: 9999 !important;
 }
 
-/* Add copyright text using CSS */
+/* Copyright text */
 footer.footer-wrapper::before {
-    content: "© Copyright HDFC Bank Ltd.";
-    
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 500;
-    
-    font-family: Arial, sans-serif;
+  content: "© Copyright HDFC Bank Ltd.";
+  color: #ffffff !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  font-family: Arial, sans-serif !important;
+}
+
+/* prevent content hiding behind fixed footer */
+body {
+  padding-bottom: 44px !important;
 }
