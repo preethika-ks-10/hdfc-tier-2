@@ -2702,6 +2702,49 @@ fieldset.field-work-email-id .field-work-email-response input {
   color: #4CAF50 !important;
   padding-left: 0 !important;
 }
+/* ========================= */
+/* WORK EMAIL BUTTON OVERRIDE */
+/* ========================= */
+
+fieldset.field-work-email-id .field-verify-email,
+fieldset.field-work-email-id .field-work-email-submit {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: none !important;
+  overflow: visible !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+fieldset.field-work-email-id .field-verify-email button,
+fieldset.field-work-email-id .field-work-email-submit button {
+  width: 72px !important;
+  min-width: 72px !important;
+  max-width: 72px !important;
+
+  height: 42px !important;
+  min-height: 42px !important;
+
+  padding: 0 !important;
+
+  border-radius: 8px !important;
+
+  font-size: 13px !important;
+  font-weight: 700 !important;
+
+  line-height: 42px !important;
+  text-align: center !important;
+
+  white-space: nowrap !important;
+
+  overflow: visible !important;
+  box-sizing: border-box !important;
+}
+
+/* reduce spacing */
+fieldset.field-work-email-id.panel-wrapper {
+  column-gap: 18px !important;
+}
 
 
 /*ACCORDIAN -3 */

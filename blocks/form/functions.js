@@ -1216,6 +1216,16 @@ function verifyWorkEmailOtp() {
     console.error(e);
     return false;
   }
+  const verifyButton =
+  document.querySelector('[name="verify_email"]');
+
+if (verifyButton) {
+  verifyButton.innerText = "Verified";
+  verifyButton.disabled = true;
+  verifyButton.style.pointerEvents = "none";
+  verifyButton.style.background = "#4CAF50";
+  verifyButton.style.color = "#fff";
+}
 }
 
 /**
