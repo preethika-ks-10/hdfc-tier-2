@@ -2700,71 +2700,61 @@ fieldset.field-work-email-id {
   row-gap: 14px !important;
 }
 
-/* Work Email Wrapper */
-.field-work-email-id {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 18px;
+/* Work Email Panel */
+fieldset[name="work_email_id"] {
+  display: grid !important;
+  grid-template-columns: 300px 110px !important;
+  gap: 18px 24px !important;
+  align-items: end !important;
+}
+
+/* Full width rows */
+fieldset[name="work_email_id"] legend,
+fieldset[name="work_email_id"] .field-work-email-note,
+fieldset[name="work_email_id"] .field-work-email-response {
+  grid-column: 1 / -1 !important;
 }
 
 /* Email Input */
-.field-work-email {
-    width: 260px !important;
-}
-
-.field-work-email input {
-    height: 42px !important;
-    border-radius: 6px !important;
+fieldset[name="work_email_id"] .field-work-email input {
+  width: 300px !important;
+  height: 42px !important;
 }
 
 /* Verify Button */
-.field-verify-email {
-    margin-top: 30px !important;
+fieldset[name="work_email_id"] .field-verify-email {
+  margin-top: 22px !important;
 }
 
-.field-verify-email button {
-    width: 100px !important;
-    height: 42px !important;
-    border-radius: 8px !important;
-    font-weight: 600 !important;
+fieldset[name="work_email_id"] .field-verify-email button {
+  width: 100px !important;
+  height: 42px !important;
+  border-radius: 8px !important;
 }
 
-/* OTP Field */
-.field-work-email-otp {
-    width: 260px !important;
-    margin-top: 10px !important;
-}
-
-.field-work-email-otp input {
-    height: 42px !important;
-    border-radius: 6px !important;
+/* OTP Input */
+fieldset[name="work_email_id"] .field-work-email-otp input {
+  width: 300px !important;
+  height: 42px !important;
 }
 
 /* Submit Button */
-.field-work-email-submit {
-    margin-top: 40px !important;
+fieldset[name="work_email_id"] .field-work-email-submit {
+  margin-top: 22px !important;
 }
 
-.field-work-email-submit button {
-    width: 100px !important;
-    height: 42px !important;
-    border-radius: 8px !important;
-    font-weight: 600 !important;
+fieldset[name="work_email_id"] .field-work-email-submit button {
+  width: 100px !important;
+  height: 42px !important;
+  border-radius: 8px !important;
 }
 
-/* Response Message */
-.field-work-email-response {
-    width: 100% !important;
-    margin-top: 10px !important;
-}
-
-.field-work-email-response input {
-    border: none !important;
-    background: transparent !important;
-    color: #4CAF50 !important;
-    font-size: 14px !important;
-    padding-left: 0 !important;
+/* Response */
+fieldset[name="work_email_id"] .field-work-email-response input {
+  border: none !important;
+  background: transparent !important;
+  color: #4CAF50 !important;
+  padding-left: 0 !important;
 }
 
 /* Mobile */
