@@ -2885,6 +2885,26 @@ fieldset.field-work-email-id .field-verify-email button {
   background: #5f7df2 !important;
   color: #fff !important;
 }
+fieldset.field-work-email-id .field-verify-email {
+  order: 2 !important;
+  flex: 0 0 72px !important;
+  width: 72px !important;
+  max-width: 72px !important;
+  min-width: 72px !important;
+
+  padding: 0 !important;
+  margin: 25px 0 18px 72px !important;
+
+  position: static !important;
+  transform: none !important;
+}
+
+fieldset.field-work-email-id .field-verify-email button {
+  position: static !important;
+  width: 72px !important;
+  height: 44px !important;
+  margin: 0 !important;
+}
 
 /* Mobile */
 @media (max-width: 768px) {
