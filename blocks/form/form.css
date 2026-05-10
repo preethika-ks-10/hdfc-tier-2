@@ -2595,65 +2595,75 @@ fieldset.field-employer-details .field-employer-company-name-other {
   margin-top: 6px !important;
 }
 
-/* WORK EMAIL ID - SAFE ACCORDION CSS */
-
+/* WORK EMAIL ACCORDION ALIGNMENT */
 fieldset.field-work-email-id.panel-wrapper {
+  width: calc(100% - 32px) !important;
+  margin: 0 16px 24px !important;
+  padding: 0 22px 22px !important;
+  box-sizing: border-box !important;
+
   display: flex !important;
   flex-wrap: wrap !important;
   align-items: flex-end !important;
   column-gap: 28px !important;
   row-gap: 14px !important;
-  padding: 0 22px 22px !important;
-  box-sizing: border-box !important;
+
+  overflow: visible !important;
 }
 
-/* Keep accordion header safe */
+/* Header same as other accordions */
 fieldset.field-work-email-id.panel-wrapper > legend.accordion-legend {
   order: 0 !important;
   flex: 0 0 100% !important;
+  width: calc(100% + 44px) !important;
+  margin: 0 -22px 18px !important;
+  padding: 18px 22px !important;
+  box-sizing: border-box !important;
 }
 
-/* Row 1 */
+/* Email row */
 fieldset.field-work-email-id .field-work-email {
   order: 1 !important;
   flex: 0 0 300px !important;
   width: 300px !important;
 }
 
+/* Verify button */
 fieldset.field-work-email-id .field-verify-email {
   order: 2 !important;
-  flex: 0 0 100px !important;
-  width: 100px !important;
+  flex: 0 0 120px !important;
+  width: 120px !important;
 }
 
-/* Row 2 */
+/* Note */
 fieldset.field-work-email-id .field-work-email-note {
   order: 3 !important;
   flex: 0 0 100% !important;
   width: 100% !important;
 }
 
-/* Row 3 */
+/* OTP row */
 fieldset.field-work-email-id .field-work-email-otp {
   order: 4 !important;
   flex: 0 0 300px !important;
   width: 300px !important;
 }
 
+/* Submit button */
 fieldset.field-work-email-id .field-work-email-submit {
   order: 5 !important;
-  flex: 0 0 100px !important;
-  width: 100px !important;
+  flex: 0 0 120px !important;
+  width: 120px !important;
 }
 
-/* Row 4 */
+/* Response */
 fieldset.field-work-email-id .field-work-email-response {
   order: 6 !important;
   flex: 0 0 300px !important;
   width: 300px !important;
 }
 
-/* Reset margins */
+/* Reset wrappers */
 fieldset.field-work-email-id .field-work-email,
 fieldset.field-work-email-id .field-verify-email,
 fieldset.field-work-email-id .field-work-email-note,
@@ -2662,12 +2672,12 @@ fieldset.field-work-email-id .field-work-email-submit,
 fieldset.field-work-email-id .field-work-email-response {
   margin: 0 !important;
   padding: 0 !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
 }
 
 /* Inputs */
-fieldset.field-work-email-id .field-work-email input,
-fieldset.field-work-email-id .field-work-email-otp input,
-fieldset.field-work-email-id .field-work-email-response input {
+fieldset.field-work-email-id input {
   width: 100% !important;
   height: 42px !important;
   box-sizing: border-box !important;
@@ -2677,18 +2687,12 @@ fieldset.field-work-email-id .field-work-email-response input {
 /* Buttons */
 fieldset.field-work-email-id .field-verify-email button,
 fieldset.field-work-email-id .field-work-email-submit button {
-  width: 100px !important;
+  width: 110px !important;
+  min-width: 110px !important;
   height: 42px !important;
   border-radius: 8px !important;
   font-weight: 600 !important;
-}
-
-/* Note */
-fieldset.field-work-email-id .field-work-email-note p {
-  margin: 0 !important;
-  color: #8b93a3 !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
+  overflow: visible !important;
 }
 
 /* Response */
