@@ -2870,6 +2870,21 @@ fieldset.field-work-email-id .field-email-response {
   padding: 0 !important;
   margin: 0 !important;
 }
+fieldset.field-work-email-id .field-verify-email {
+  order: 2 !important;
+  width: auto !important;
+  padding: 0 !important;
+  margin: 25px 0 18px 20px !important;
+  align-self: flex-start !important;
+}
+
+fieldset.field-work-email-id .field-verify-email button {
+  width: 72px !important;
+  height: 44px !important;
+  border-radius: 7px !important;
+  background: #5f7df2 !important;
+  color: #fff !important;
+}
 
 /* Mobile */
 @media (max-width: 768px) {
