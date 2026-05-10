@@ -2775,6 +2775,101 @@ fieldset.field-work-email-id .field-email-submit button {
   padding: 0 !important;
   margin: 0 !important;
 }
+/* Make each row separate */
+fieldset.field-work-email-id .field-work-email,
+fieldset.field-work-email-id .field-email-otp {
+  width: 290px !important;
+  min-width: 290px !important;
+  max-width: 290px !important;
+
+  position: relative !important;
+  padding: 0 !important;
+  margin: 0 30px 18px 0 !important;
+}
+
+/* Normal label, not floating */
+fieldset.field-work-email-id .field-work-email > label.field-label,
+fieldset.field-work-email-id .field-email-otp > label.field-label {
+  position: static !important;
+  display: block !important;
+
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 0 10px !important;
+
+  color: #111827 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+/* Inputs */
+fieldset.field-work-email-id .field-work-email input,
+fieldset.field-work-email-id .field-email-otp input {
+  width: 290px !important;
+  height: 42px !important;
+
+  border: 1px solid #cfd8e3 !important;
+  border-radius: 6px !important;
+  background: #fff !important;
+
+  padding: 0 12px !important;
+  box-sizing: border-box !important;
+}
+
+/* Buttons beside inputs */
+fieldset.field-work-email-id .field-verify-email,
+fieldset.field-work-email-id .field-email-submit {
+  width: auto !important;
+  padding: 0 !important;
+  margin: 23px 0 18px 0 !important;
+}
+
+fieldset.field-work-email-id .field-verify-email button,
+fieldset.field-work-email-id .field-email-submit button {
+  width: 72px !important;
+  height: 44px !important;
+
+  border: 0 !important;
+  border-radius: 7px !important;
+  background: #5f7df2 !important;
+
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Force rows like second image */
+fieldset.field-work-email-id .field-work-email-note {
+  width: 100% !important;
+  order: 3;
+}
+
+fieldset.field-work-email-id .field-work-email {
+  order: 1;
+}
+
+fieldset.field-work-email-id .field-verify-email {
+  order: 2;
+}
+
+fieldset.field-work-email-id .field-email-otp {
+  order: 4;
+}
+
+fieldset.field-work-email-id .field-email-submit {
+  order: 5;
+}
+
+fieldset.field-work-email-id .field-email-response {
+  order: 6;
+  width: 360px !important;
+  min-width: 360px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
 
 /* Mobile */
 @media (max-width: 768px) {
