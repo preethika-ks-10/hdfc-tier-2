@@ -2796,6 +2796,105 @@ fieldset.field-work-email-id .field-email-submit button {
   font-size: 13px !important;
   font-weight: 700 !important;
 }
+/* Only inner layout, accordion header untouched */
+fieldset.field-work-email-id.panel-wrapper {
+  display: grid !important;
+  grid-template-columns: 290px 72px !important;
+  column-gap: 30px !important;
+  row-gap: 18px !important;
+  align-items: end !important;
+}
+
+/* Header full width */
+fieldset.field-work-email-id > legend.accordion-legend {
+  grid-column: 1 / -1 !important;
+}
+
+/* Email row */
+fieldset.field-work-email-id .field-work-email {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+}
+
+fieldset.field-work-email-id .field-verify-email {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+}
+
+/* Note row */
+fieldset.field-work-email-id .field-work-email-note {
+  grid-column: 1 / -1 !important;
+  grid-row: 3 !important;
+}
+
+/* OTP row */
+fieldset.field-work-email-id .field-email-otp {
+  grid-column: 1 !important;
+  grid-row: 4 !important;
+}
+
+fieldset.field-work-email-id .field-email-submit {
+  grid-column: 2 !important;
+  grid-row: 4 !important;
+}
+
+/* Email response below */
+fieldset.field-work-email-id .field-email-response {
+  grid-column: 1 !important;
+  grid-row: 5 !important;
+}
+
+/* Reset wrappers */
+fieldset.field-work-email-id .field-work-email,
+fieldset.field-work-email-id .field-email-otp,
+fieldset.field-work-email-id .field-email-response,
+fieldset.field-work-email-id .field-verify-email,
+fieldset.field-work-email-id .field-email-submit {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Labels */
+fieldset.field-work-email-id .field-work-email label,
+fieldset.field-work-email-id .field-email-otp label {
+  position: static !important;
+  display: block !important;
+  margin-bottom: 10px !important;
+  background: transparent !important;
+  padding: 0 !important;
+  color: #111827 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+/* Inputs */
+fieldset.field-work-email-id .field-work-email input,
+fieldset.field-work-email-id .field-email-otp input,
+fieldset.field-work-email-id .field-email-response input {
+  width: 290px !important;
+  height: 42px !important;
+  border: 1px solid #cfd8e3 !important;
+  border-radius: 6px !important;
+  box-sizing: border-box !important;
+}
+
+/* Buttons */
+fieldset.field-work-email-id .field-verify-email button,
+fieldset.field-work-email-id .field-email-submit button {
+  position: static !important;
+  width: 72px !important;
+  height: 44px !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 7px !important;
+  background: #5f7df2 !important;
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
 
 /* Mobile */
 @media (max-width: 768px) {
